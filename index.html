@@ -15,166 +15,46 @@
             background: #2e7d32;
             color: #fff;
             padding: 15px 0;
-        }
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: auto;
-        }
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-        }
-        nav ul li {
-            margin-left: 20px;
-        }
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
+            text-align: center;
         }
         .hero {
             background: #f5f5f5;
-            padding: 60px 0;
+            padding: 50px;
             text-align: center;
-        }
-        .hero h1 {
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
-        .hero p {
-            font-size: 18px;
-            color: #555;
-        }
-        section {
-            padding: 50px 0;
-        }
-        h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #2e7d32;
-        }
-        .about, .export, .contact {
-            background: #fafafa;
-        }
-        .products ul {
-            max-width: 600px;
-            margin: auto;
-            list-style: square;
-            font-size: 18px;
-        }
-        .export-box {
-            max-width: 700px;
-            margin: auto;
-            font-size: 17px;
-        }
-        .contact-box {
-            max-width: 600px;
-            margin: auto;
-            text-align: center;
-            font-size: 17px;
         }
         footer {
-            background: #2e7d32;
+            background: #222;
             color: #fff;
+            padding: 20px;
             text-align: center;
-            padding: 15px 0;
-            margin-top: 30px;
         }
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-            }
-            nav ul {
-                margin-top: 10px;
-            }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            padding: 14px 16px;
+            font-size: 22px;
+            text-decoration: none;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            z-index: 9999;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="container">
-        <nav>
-            <h2>Sun Spices India</h2>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#export">Export</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </div>
+    <h1>Sun Spices India</h1>
+    <p>Your Trusted Export Partner</p>
 </header>
 
-<div class="hero" id="home">
-    <div class="container">
-        <h1>Sun Spices India</h1>
-        <p><strong>Sun Spices: Your Trusted Export Partner.</strong></p>
-        <p>Premium Indian Cardamom Exporters | B2B Wholesale</p>
-    </div>
-</div>
-
-<section class="about" id="about">
-    <div class="container">
-        <h2>About Us</h2>
-        <p>
-            Sun Spices India is a trusted exporter of premium quality Indian spices,
-            specializing in whole cardamom. Based in Vandanmedu, Kerala — one of the
-            finest spice-growing regions of India — we focus on delivering consistent
-            quality to international B2B buyers.
-        </p>
-        <p>
-            We work closely with farmers and processors to ensure natural aroma,
-            rich flavor, and export-grade standards.
-        </p>
-    </div>
-</section>
-
-<section class="products" id="products">
-    <div class="container">
-        <h2>Our Products</h2>
-        <ul>
-            <li>Green Cardamom (Whole Spices)</li>
-            <li>Export Quality Cardamom</li>
-            <li>Bulk Cardamom for B2B Buyers</li>
-        </ul>
-    </div>
-</section>
-
-<section class="export" id="export">
-    <div class="container">
-        <h2>Export Information</h2>
-        <div class="export-box">
-            <p><strong>Business Type:</strong> B2B Export Only</p>
-            <p><strong>Packaging:</strong> 25 KG & 50 KG Bags</p>
-            <p><strong>Export Markets:</strong> Saudi Arabia, UAE, Malaysia</p>
-            <p><strong>Port of Shipment:</strong> Cochin Port, India</p>
-            <p><strong>Certifications:</strong> Not yet (Available on request basis)</p>
-        </div>
-    </div>
-</section>
-
-<section class="contact" id="contact">
-    <div class="container">
-        <h2>Contact Us</h2>
-        <div class="contact-box">
-            <p><strong>Email:</strong> sunspices.exports.in@gmail.com</p>
-            <p><strong>Phone / WhatsApp:</strong> +91 7207396427</p>
-            <p><strong>Location:</strong> Vandanmedu, Kerala, India</p>
-            <p>
-                For bulk inquiries, partnership, and export orders,
-                please contact us via email or phone.
-            </p>
-        </div>
-    </div>
+<section class="hero">
+    <h2>Cardamom & Whole Spices Export</h2>
+    <p>B2B Export: 25kg and 50kg Packing | Destinations: Saudi, UAE, Malaysia | Port: Cochin</p>
 </section>
 
 <footer>
@@ -184,22 +64,7 @@
 <!-- WhatsApp Floating Button -->
 <a href="https://wa.me/917207396427" target="_blank" class="whatsapp-float">💬</a>
 
-<style>
-.whatsapp-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #25D366;
-  color: white;
-  font-size: 28px;
-  padding: 14px 16px;
-  border-radius: 50%;
-  text-decoration: none;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  z-index: 1000;
-}
-</style>
-
 </body>
 </html>
+
 
