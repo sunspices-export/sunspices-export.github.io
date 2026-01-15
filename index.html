@@ -6,10 +6,10 @@
 
 <meta name="google-site-verification" content="googlec6d6398320193d04" />
 
-<title>Sun Spices India | Cardamom & Whole Spices Exporter</title>
+<title>Sun Spices India | Cardamom & Turmeric Exporter</title>
 
-<meta name="description" content="Sun Spices India is a Merchant Exporter of Indian Green Cardamom and Whole Spices from Kerala. We supply B2B buyers worldwide with competitive pricing and reliable sourcing.">
-<meta name="keywords" content="Sun Spices India, Cardamom Exporter, Indian Spices Exporter, Green Cardamom Kerala, B2B Spices Export, Merchant Exporter India">
+<meta name="description" content="Sun Spices India is a Merchant Exporter of Indian Green Cardamom, Turmeric Powder and Whole Spices from Kerala.">
+<meta name="keywords" content="Cardamom Exporter India, Turmeric Powder Exporter, Whole Spices B2B">
 
 <style>
 body{
@@ -22,7 +22,7 @@ body{
 header{
   background:#1b1b2f;
   color:#fff;
-  padding:50px 20px;
+  padding:40px 20px;
   text-align:center;
 }
 
@@ -32,76 +32,140 @@ header img{
 }
 
 .section{
-  padding:60px 20px;
-  max-width:1200px;
-  margin:auto;
+  padding:60px 0;
 }
 
-.section h2{
+h2{
   text-align:center;
-  margin-bottom:30px;
   font-size:30px;
+  margin-bottom:30px;
 }
 
-/* ===== IMAGE GALLERY ===== */
+/* FULL SCREEN IMAGE GALLERY */
 .gallery{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:30px;
 }
 
-.gallery-box{
+.gallery-item{
   position:relative;
-  height:320px;
+  height:100vh;
   overflow:hidden;
-  border-radius:18px;
-  box-shadow:0 15px 35px rgba(0,0,0,0.25);
-  opacity:0;
-  transform:translateY(40px);
-  transition:all 0.8s ease;
 }
 
-.gallery-box.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-.gallery-box img{
+.gallery-item img{
   width:100%;
   height:100%;
   object-fit:cover;
-  transition:transform 0.6s ease;
-}
-
-.gallery-box:hover img{
   transform:scale(1.1);
+  transition:transform 1s ease;
 }
 
-.gallery-text{
+.gallery-item:hover img{
+  transform:scale(1);
+}
+
+.gallery-title{
   position:absolute;
   bottom:0;
   width:100%;
-  padding:18px;
+  padding:20px;
+  background:rgba(0,0,0,0.55);
   color:#fff;
-  font-size:18px;
+  font-size:22px;
   font-weight:bold;
-  background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);
 }
 
-/* Existing sections */
-.countries{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;}
-.card{background:#fff;padding:22px;border-radius:10px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.1);font-weight:bold;}
-.export-box{background:#fff;padding:35px;border-radius:12px;text-align:center;box-shadow:0 4px 15px rgba(0,0,0,0.1);}
-.contact-form{text-align:center;}
-.contact-form input,.contact-form textarea{width:90%;max-width:420px;padding:12px;margin:10px auto;display:block;border-radius:5px;border:1px solid #ccc;}
-.contact-form button{padding:12px 28px;background:#1b1b2f;color:#fff;border:none;border-radius:5px;}
-footer{background:#1b1b2f;color:#fff;text-align:center;padding:22px;}
+/* Countries */
+.countries{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+  padding:0 20px;
+}
 
-.social-float{position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:12px;}
-.social-float a{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:#fff;font-size:22px;text-decoration:none;}
+.card{
+  background:#fff;
+  padding:22px;
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  font-weight:bold;
+}
+
+/* Export Box */
+.export-box{
+  max-width:900px;
+  margin:auto;
+  background:#fff;
+  padding:40px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Contact */
+.contact-form{
+  text-align:center;
+}
+
+.contact-form input,
+.contact-form textarea{
+  width:90%;
+  max-width:420px;
+  padding:12px;
+  margin:10px auto;
+  display:block;
+  border-radius:5px;
+  border:1px solid #ccc;
+}
+
+.contact-form button{
+  padding:12px 28px;
+  background:#1b1b2f;
+  color:#fff;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+/* Footer */
+footer{
+  background:#1b1b2f;
+  color:#fff;
+  text-align:center;
+  padding:20px;
+}
+
+/* Floating Social */
+.social-float{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.social-float a{
+  width:52px;
+  height:52px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  color:#fff;
+  font-size:22px;
+  text-decoration:none;
+}
+
 .whatsapp-btn{background:#25D366;}
 .linkedin-btn{background:#0077b5;}
-.instagram-btn{background:radial-gradient(circle,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);}
+.instagram-btn{
+  background:radial-gradient(circle,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
+}
 </style>
 </head>
 
@@ -110,50 +174,88 @@ footer{background:#1b1b2f;color:#fff;text-align:center;padding:22px;}
 <header>
   <img src="logo.png" alt="Sun Spices India Logo">
   <h1>Sun Spices India</h1>
-  <p>Trusted Merchant Exporter of Indian Cardamom & Whole Spices</p>
+  <p>Merchant Exporter of Cardamom, Turmeric & Whole Spices</p>
 </header>
 
+<!-- FULL SCREEN IMAGE GALLERY (26 IMAGES) -->
+<section class="section gallery">
+
+<!-- CARDAMOM -->
+<div class="gallery-item"><img src="cardamom-02.jpg.jfif"><div class="gallery-title">Premium Green Cardamom</div></div>
+<div class="gallery-item"><img src="cardamom-bulk-01.jpg.jfif"><div class="gallery-title">Cardamom Bulk Export</div></div>
+<div class="gallery-item"><img src="cardamom-bulk-02.jpg.jfif"><div class="gallery-title">Wholesale Cardamom</div></div>
+<div class="gallery-item"><img src="cardamom-bulk-03.jpg.jfif"><div class="gallery-title">Export Grade Cardamom</div></div>
+<div class="gallery-item"><img src="cardamom-export-quality.jpg.jfif"><div class="gallery-title">High Export Quality Cardamom</div></div>
+<div class="gallery-item"><img src="cardamom-graded-01.jpg.jfif"><div class="gallery-title">Machine Graded Cardamom</div></div>
+<div class="gallery-item"><img src="cardamom-graded-02.jpg.jfif"><div class="gallery-title">Uniform Size Cardamom</div></div>
+<div class="gallery-item"><img src="cardamom-green-01.jpg.jfif"><div class="gallery-title">Fresh Green Cardamom</div></div>
+<div class="gallery-item"><img src="cardamom-green-03.jpg.jfif"><div class="gallery-title">Kerala Green Cardamom</div></div>
+<div class="gallery-item"><img src="cardamom-plant-01.jpg.jfif"><div class="gallery-title">Cardamom Plantation</div></div>
+<div class="gallery-item"><img src="cardamom-pods-closeup.jpg.jfif"><div class="gallery-title">Cardamom Pods Close-Up</div></div>
+<div class="gallery-item"><img src="cardamom-premium.jpg.jfif"><div class="gallery-title">Premium Cardamom</div></div>
+<div class="gallery-item"><img src="cardamom-wholesale.jpg.jfif"><div class="gallery-title">Wholesale Supply</div></div>
+
+<!-- TURMERIC -->
+<div class="gallery-item"><img src="turmeric-curcumin-rich.jpg.jfif"><div class="gallery-title">High Curcumin Turmeric</div></div>
+<div class="gallery-item"><img src="turmeric-fingers-bulk.jpg.jfif"><div class="gallery-title">Turmeric Fingers Bulk</div></div>
+<div class="gallery-item"><img src="turmeric-fingers.jpg.jfif"><div class="gallery-title">Natural Turmeric Fingers</div></div>
+<div class="gallery-item"><img src="turmeric-powder-export.jpg.jfif"><div class="gallery-title">Turmeric Powder Export</div></div>
+<div class="gallery-item"><img src="turmeric-powder.jpg.jfif"><div class="gallery-title">Pure Turmeric Powder</div></div>
+
+<!-- WHOLE SPICES -->
+<div class="gallery-item"><img src="indian-spices-mixjpg.jfif"><div class="gallery-title">Indian Spice Mix</div></div>
+<div class="gallery-item"><img src="kerala-spices.jpg.jfif"><div class="gallery-title">Kerala Whole Spices</div></div>
+<div class="gallery-item"><img src="premium-whole-spices.jpg.jfif"><div class="gallery-title">Premium Whole Spices</div></div>
+<div class="gallery-item"><img src="spices-assortment.jpg.jfif"><div class="gallery-title">Spice Assortment</div></div>
+<div class="gallery-item"><img src="spices-export-quality.jpg.jfif"><div class="gallery-title">Export Quality Spices</div></div>
+<div class="gallery-item"><img src="whole-spices-bulk.jpg.jfif"><div class="gallery-title">Bulk Whole Spices</div></div>
+<div class="gallery-item"><img src="whole-spices-collection.jpg.jfif"><div class="gallery-title">Whole Spices Collection</div></div>
+<div class="gallery-item"><img src="whole-spices-export.jpg.jfif"><div class="gallery-title">Whole Spices Export</div></div>
+
+</section>
+
 <section class="section">
-<h2>Our Export Product Gallery</h2>
-
-<div class="gallery">
-<div class="gallery-box"><img src="images/cardamom-green-01.jpg.jfif"><div class="gallery-text">Green Cardamom – Export Grade</div></div>
-<div class="gallery-box"><img src="images/cardamom-bulk-01.jpg.jfif"><div class="gallery-text">Bulk Cardamom Supply</div></div>
-<div class="gallery-box"><img src="images/cardamom-premium.jpg.jfif"><div class="gallery-text">Premium Cardamom Pods</div></div>
-<div class="gallery-box"><img src="images/cardamom-pods-closeup.jpg.jfif"><div class="gallery-text">Fresh Cardamom Close-Up</div></div>
-
-<div class="gallery-box"><img src="images/turmeric-fingers.jpg.jfif"><div class="gallery-text">Sun-Dried Turmeric Fingers</div></div>
-<div class="gallery-box"><img src="images/turmeric-powder-export.jpg.jfif"><div class="gallery-text">Export Quality Turmeric Powder</div></div>
-<div class="gallery-box"><img src="images/turmeric-curcumin-rich.jpg.jfif"><div class="gallery-text">High Curcumin Turmeric</div></div>
-
-<div class="gallery-box"><img src="images/whole-spices-export.jpg.jfif"><div class="gallery-text">Whole Spices for Export</div></div>
-<div class="gallery-box"><img src="images/kerala-spices.jpg.jfif"><div class="gallery-text">Authentic Kerala Spices</div></div>
-<div class="gallery-box"><img src="images/premium-whole-spices.jpg.jfif"><div class="gallery-text">Premium Whole Spices</div></div>
+<h2>Export Destinations</h2>
+<div class="countries">
+<div class="card">Saudi Arabia</div>
+<div class="card">UAE</div>
+<div class="card">Kuwait</div>
+<div class="card">Oman</div>
+<div class="card">Malaysia</div>
+<div class="card">Singapore</div>
+<div class="card">USA</div>
+<div class="card">UK</div>
+<div class="card">Germany</div>
 </div>
 </section>
 
-<!-- REST OF YOUR ORIGINAL SECTIONS BELOW (UNCHANGED) -->
-<!-- About, Export Countries, Why Choose, Contact, Footer already intact -->
+<section class="section export-box">
+<h2>Why Choose Sun Spices India</h2>
+<p>✔ Cardamom & Turmeric Specialists</p>
+<p>✔ Kerala Sourced Whole Spices</p>
+<p>✔ B2B Export Packing – 25kg / 50kg</p>
+<p>✔ FOB / CIF – LC / TT</p>
+</section>
+
+<section class="section contact-form">
+<h2>Business Enquiry</h2>
+<form action="mailto:sunspices.exports.in@gmail.com" method="post" enctype="text/plain">
+<input type="text" placeholder="Company Name" required>
+<input type="email" placeholder="Email" required>
+<textarea rows="5" placeholder="Product & Quantity"></textarea>
+<button type="submit">Send Enquiry</button>
+</form>
+</section>
 
 <footer>
-<p>© 2026 Sun Spices India | Merchant Exporter – India</p>
+© 2026 Sun Spices India
 </footer>
 
 <div class="social-float">
-<a href="https://wa.me/917207396427" target="_blank" class="whatsapp-btn">💬</a>
-<a href="https://www.linkedin.com/in/surya-gowtham-6176443a5" target="_blank" class="linkedin-btn">in</a>
-<a href="https://www.instagram.com/sunspicesindia" target="_blank" class="instagram-btn">📷</a>
+<a href="https://wa.me/917207396427" class="whatsapp-btn">💬</a>
+<a href="#" class="linkedin-btn">in</a>
+<a href="#" class="instagram-btn">📷</a>
 </div>
-
-<script>
-const boxes=document.querySelectorAll('.gallery-box');
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(e=>{
-if(e.isIntersecting){e.target.classList.add('show');}
-});
-},{threshold:0.2});
-boxes.forEach(b=>observer.observe(b));
-</script>
 
 </body>
 </html>
