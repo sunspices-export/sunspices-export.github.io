@@ -78,6 +78,62 @@ header p{
   font-size:16px;
 }
 
+/* ===== PRODUCT GALLERY ===== */
+.product-gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:25px;
+}
+
+.product-card{
+  background:#fff;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 8px 20px rgba(0,0,0,0.12);
+  text-align:center;
+  transform:translateY(40px);
+  opacity:0;
+  transition:all 0.8s ease;
+  position:relative;
+}
+
+.product-card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+
+.product-card h3{
+  margin:15px 0 5px;
+  font-size:18px;
+}
+
+.product-card p{
+  font-size:14px;
+  padding:0 15px 20px;
+  color:#555;
+}
+
+.product-card.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+/* Highlight Badge */
+.highlight::before{
+  content:"TOP EXPORT";
+  position:absolute;
+  top:12px;
+  left:12px;
+  background:#e63946;
+  color:#fff;
+  font-size:12px;
+  padding:6px 10px;
+  border-radius:20px;
+  font-weight:bold;
+}
+
+/* Contact */
 .contact-form{
   text-align:center;
 }
@@ -182,6 +238,37 @@ footer{
   </div>
 </section>
 
+<!-- PRODUCT GALLERY -->
+<section class="section">
+  <h2>Our Export Product Range</h2>
+
+  <div class="product-gallery">
+    <div class="product-card fade-in highlight">
+      <img src="images/cardamom-green-01.jpg" alt="Green Cardamom Export">
+      <h3>Green Cardamom</h3>
+      <p>Premium export-quality cardamom with strong aroma and color.</p>
+    </div>
+
+    <div class="product-card fade-in highlight">
+      <img src="images/turmeric-powder-export.jpg" alt="Turmeric Powder Export">
+      <h3>Turmeric Powder</h3>
+      <p>High curcumin turmeric powder for global food & pharma buyers.</p>
+    </div>
+
+    <div class="product-card fade-in">
+      <img src="images/whole-spices-export.jpg" alt="Whole Spices Export">
+      <h3>Whole Spices</h3>
+      <p>Carefully sourced Indian whole spices for international markets.</p>
+    </div>
+
+    <div class="product-card fade-in">
+      <img src="images/kerala-spices.jpg" alt="Kerala Spices">
+      <h3>Kerala Spices</h3>
+      <p>Directly sourced from Kerala’s premium spice-growing regions.</p>
+    </div>
+  </div>
+</section>
+
 <section class="section export-box">
   <h2>Why Choose Sun Spices India</h2>
   <p>✔ Merchant Exporter – Flexible sourcing model</p>
@@ -206,12 +293,23 @@ footer{
   <p>© 2026 Sun Spices India | Merchant Exporter – India</p>
 </footer>
 
-<!-- Floating Buttons -->
 <div class="social-float">
   <a href="https://wa.me/917207396427" target="_blank" class="whatsapp-btn">💬</a>
-  <a href="https://www.linkedin.com/in/surya-gowtham-6176443a5" target="_blank" rel="noopener noreferrer" class="linkedin-btn">in</a>
+  <a href="https://www.linkedin.com/in/surya-gowtham-6176443a5" target="_blank" class="linkedin-btn">in</a>
   <a href="https://www.instagram.com/sunspicesindia" target="_blank" class="instagram-btn">📷</a>
 </div>
+
+<script>
+const items = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+    }
+  });
+},{threshold:0.2});
+items.forEach(i=>observer.observe(i));
+</script>
 
 </body>
 </html>
