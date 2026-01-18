@@ -41,12 +41,95 @@ footer{background:#1b1b2f;color:#fff;text-align:center;padding:22px;font-size:14
 .instagram-btn{background:radial-gradient(circle,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);}
 
 @media(max-width:600px){header h1{font-size:26px;}}
+/* ===== TOP NAVBAR ===== */
+.top-header{
+  background: linear-gradient(90deg,#0f2027,#203a43,#2c5364);
+  padding:15px 0;
+  position:sticky;
+  top:0;
+  z-index:10000;
+}
+
+.nav-container{
+  max-width:1200px;
+  margin:auto;
+  padding:0 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo-box{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo-box img{
+  height:55px;
+}
+
+.brand-text h1{
+  margin:0;
+  font-size:22px;
+  color:#f4c430;
+}
+
+.brand-text p{
+  margin:0;
+  font-size:12px;
+  color:#ddd;
+}
+
+.nav-menu a{
+  margin-left:25px;
+  text-decoration:none;
+  color:#fff;
+  font-size:15px;
+  font-weight:500;
+  transition:0.3s;
+}
+
+.nav-menu a:hover{
+  color:#f4c430;
+}
+
+@media(max-width:768px){
+  .nav-container{
+    flex-direction:column;
+    gap:15px;
+  }
+  .nav-menu a{
+    margin:0 10px;
+  }
+}  
 </style>
 </head>
 <body>
+<!-- TOP NAVBAR HEADER -->
+<div class="top-header">
+  <div class="nav-container">
+
+    <div class="logo-box">
+      <img src="images/logo.png" alt="Sun Spices India Logo">
+      <div class="brand-text">
+        <h1>Sun Spices India</h1>
+        <p>Merchant Exporter of Indian Spices</p>
+      </div>
+    </div>
+
+    <nav class="nav-menu">
+      <a href="#">Home</a>
+      <a href="#products">Our Products</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+  </div>
+</div>  
 
 <header>
-<img src="logo.png" alt="Sun Spices India Logo">
+<img src="logo.png" alt="Sun spices india Logo">
 <h1>Sun Spices India</h1>
 <p>Trusted Merchant Exporter of Indian Cardamom & Whole Spices</p>
 </header>
@@ -150,6 +233,7 @@ boxes.forEach(b=>observer.observe(b));
 
 </body>
 </html>
+
 
 
 
