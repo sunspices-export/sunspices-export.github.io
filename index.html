@@ -103,6 +103,10 @@ footer{background:#1b1b2f;color:#fff;text-align:center;padding:22px;font-size:14
     margin:0 10px;
   }
 } 
+.instagram-btn{
+background:radial-gradient(circle,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
+}
+
 /* ===== ADVANCED SOCIAL FLOAT BUTTONS ===== */
 .social-float-advanced{
   position:fixed;
@@ -130,38 +134,22 @@ footer{background:#1b1b2f;color:#fff;text-align:center;padding:22px;font-size:14
   box-shadow:0 8px 20px rgba(0,0,0,0.3);
 }
 
-.social-btn span{
-  white-space:nowrap;
-  opacity:0;
-  transition:0.3s;
-}
+.social-btn span{opacity:0;transition:0.3s;}
+.social-btn i{font-style:normal;font-size:20px;}
 
-.social-btn i{
-  font-style:normal;
-  font-size:20px;
-}
+.social-btn:hover{width:170px;}
+.social-btn:hover span{opacity:1;}
 
-/* Hover effect */
-.social-btn:hover{
-  width:170px;
-}
-
-.social-btn:hover span{
-  opacity:1;
-}
-
-/* Brand colors */
 .whatsapp{background:#25D366;}
 .linkedin{background:#0077b5;}
 .instagram{
   background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
 }
 
-/* Mobile */
 @media(max-width:600px){
   .social-btn:hover{width:52px;}
   .social-btn span{display:none;}
-}  
+}
 </style>
 </head>
 <body>
@@ -302,6 +290,7 @@ boxes.forEach(b=>observer.observe(b));
 
 </body>
 </html>
+
 
 
 
