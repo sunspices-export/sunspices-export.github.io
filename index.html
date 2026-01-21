@@ -150,9 +150,143 @@ background:radial-gradient(circle,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
   .social-btn:hover{width:52px;}
   .social-btn span{display:none;}
 }
+/* ===== HERO SLIDER ===== */
+.hero{
+  position:relative;
+  height:100vh;
+  overflow:hidden;
+}
+.hero-slide{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  animation:heroFade 15s infinite;
+}
+.hero-slide:nth-child(1){animation-delay:0s;}
+.hero-slide:nth-child(2){animation-delay:5s;}
+.hero-slide:nth-child(3){animation-delay:10s;}
+
+@keyframes heroFade{
+  0%{opacity:0}
+  10%{opacity:1}
+  30%{opacity:1}
+  40%{opacity:0}
+  100%{opacity:0}
+}
+
+.hero-text{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  text-align:center;
+  color:#fff;
+  z-index:5;
+}
+.hero-text h1{font-size:50px;margin:0;}
+.hero-text p{font-size:20px;}
+
+/* ===== WELCOME ===== */
+.welcome{
+  display:flex;
+  gap:40px;
+  align-items:center;
+}
+.welcome img{
+  max-width:520px;
+  width:100%;
+  border-radius:18px;
+}
+@media(max-width:768px){
+  .welcome{flex-direction:column;}
+}
+
+/* ===== PRODUCTS ===== */
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:30px;
+}
+.product-box{
+  position:relative;
+  height:360px;
+  overflow:hidden;
+  border-radius:18px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.25);
+}
+.product-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:0.6s;
+}
+.product-box:hover img{transform:scale(1.1);}
+.product-name{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  padding:15px;
+  background:linear-gradient(to top,rgba(0,0,0,.75),transparent);
+  color:#fff;
+  font-weight:bold;
+  font-size:18px;
+}
 </style>
 </head>
 <body>
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-slide" style="background-image:url('images/whole-spices-hero.jfif')"></div>
+  <div class="hero-slide" style="background-image:url('images/whole-spices-hero-2.jfif')"></div>
+  <div class="hero-slide" style="background-image:url('images/whole-spices-hero-3.jfif')"></div>
+
+  <div class="hero-text">
+    <h1>Sun Spices India</h1>
+    <p>Trusted Merchant Exporter of Indian Cardamom & Whole Spices</p>
+  </div>
+</section>
+  <section class="section welcome">
+  <img src="images/spices-welcome.jfif" alt="Welcome to Sun Spices India">
+  <div>
+    <h2>Welcome to Sun Spices India</h2>
+    <section class="section">
+<h2>Our Quality Products</h2>
+
+<div class="products">
+
+<div class="product-box"><img src="images/cardamom.jpg"><div class="product-name">Green Cardamom</div></div>
+<div class="product-box"><img src="images/turmeric-01.jfif"><div class="product-name">Turmeric</div></div>
+<div class="product-box"><img src="images/ajwain-seeds.jfif"><div class="product-name">Ajwain Seeds</div></div>
+<div class="product-box"><img src="images/anise-seeds.jfif"><div class="product-name">Anise Seeds</div></div>
+<div class="product-box"><img src="images/balck-pepper.jfif"><div class="product-name">Black Pepper</div></div>
+<div class="product-box"><img src="images/bay-leaf.jfif"><div class="product-name">Bay Leaf</div></div>
+<div class="product-box"><img src="images/caraway-seeds.jfif"><div class="product-name">Caraway Seeds</div></div>
+<div class="product-box"><img src="images/cinnamon.jfif"><div class="product-name">Cinnamon</div></div>
+<div class="product-box"><img src="images/cloves.jfif"><div class="product-name">Cloves</div></div>
+<div class="product-box"><img src="images/coriander-seeds.jfif"><div class="product-name">Coriander Seeds</div></div>
+<div class="product-box"><img src="images/cumin-seeds.jfif"><div class="product-name">Cumin Seeds</div></div>
+<div class="product-box"><img src="images/dill-seeds.jfif"><div class="product-name">Dill Seeds</div></div>
+<div class="product-box"><img src="images/fennel-seeds.jfif"><div class="product-name">Fennel Seeds</div></div>
+<div class="product-box"><img src="images/fenugreek-seeds.jfif"><div class="product-name">Fenugreek Seeds</div></div>
+<div class="product-box"><img src="images/mace.jfif"><div class="product-name">Mace</div></div>
+<div class="product-box"><img src="images/mustard-seeds.jfif"><div class="product-name">Mustard Seeds</div></div>
+<div class="product-box"><img src="images/nigella-seeds.jfif"><div class="product-name">Nigella Seeds</div></div>
+<div class="product-box"><img src="images/nutmeg.jfif"><div class="product-name">Nutmeg</div></div>
+<div class="product-box"><img src="images/poppy-seeds.jfif"><div class="product-name">Poppy Seeds</div></div>
+<div class="product-box"><img src="images/red-chilli-powder.jfif"><div class="product-name">Red Chilli Powder</div></div>
+<div class="product-box"><img src="images/star-anise.jfif"><div class="product-name">Star Anise</div></div>
+
+</div>
+</section>
+    <p>Sun Spices India is a professionally managed merchant exporter.</p>
+    <p>We specialize in Indian cardamom and premium whole spices.</p>
+    <p>Our sourcing is rooted in Kerala’s spice-growing regions.</p>
+    <p>We serve global B2B buyers with consistent quality & reliability.</p>
+  </div>
+</section>
 <!-- TOP NAVBAR HEADER -->
 <div class="top-header">
   <div class="nav-container">
@@ -267,6 +401,7 @@ boxes.forEach(b=>observer.observe(b));
 
 </body>
 </html>
+
 
 
 
