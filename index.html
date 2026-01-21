@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sun Spices India | Premium Whole Spices Exporter</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
 :root {
@@ -16,114 +17,80 @@
 body { margin: 0; font-family: 'Poppins', sans-serif; background: #fff; color: #333; line-height: 1.6; }
 
 /* NAVBAR */
-.header {
-    position: sticky; top: 0; z-index: 1000;
-    background: #fff; border-bottom: 1px solid #eee;
-    padding: 15px 0;
-}
-.nav-container {
-    max-width: 1200px; margin: auto;
-    display: flex; align-items: center; justify-content: space-between; padding: 0 20px;
-}
+.header { position: sticky; top: 0; z-index: 1000; background: #fff; border-bottom: 1px solid #eee; padding: 15px 0; }
+.nav-container { max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; }
 .logo { font-weight: 600; font-size: 24px; color: var(--red-accent); text-decoration: none; letter-spacing: 1px; }
-.nav-menu a {
-    text-decoration: none; color: #333; margin-left: 25px; font-weight: 500; font-size: 14px; transition: 0.3s;
-}
-.nav-menu a:hover { color: var(--red-accent); }
+.nav-menu a { text-decoration: none; color: #333; margin-left: 25px; font-weight: 500; font-size: 14px; }
 
 /* HERO SLIDER */
 .hero { height: 75vh; position: relative; overflow: hidden; background: #000; }
-.hero-slide {
-    position: absolute; width: 100%; height: 100%;
-    background-size: cover; background-position: center;
-    opacity: 0; animation: fadeSlider 15s infinite;
-}
+.hero-slide { position: absolute; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; animation: fadeSlider 15s infinite; }
 .hero-slide:nth-child(1) { animation-delay: 0s; }
 .hero-slide:nth-child(2) { animation-delay: 5s; }
 .hero-slide:nth-child(3) { animation-delay: 10s; }
-@keyframes fadeSlider {
-    0% { opacity: 0; } 10% { opacity: 1; } 33% { opacity: 1; } 43% { opacity: 0; }
-}
-.hero-overlay {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center;
-}
+@keyframes fadeSlider { 0% { opacity: 0; } 10% { opacity: 1; } 33% { opacity: 1; } 43% { opacity: 0; } }
+.hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; }
 .hero-content { text-align: center; color: #fff; max-width: 800px; padding: 20px; }
 .hero-content h1 { font-size: 52px; margin: 0; font-weight: 600; }
-.hero-content p { font-size: 20px; margin-top: 10px; color: var(--gold); }
 
 /* WELCOME SECTION */
-.welcome-section {
-    max-width: 1200px; margin: 80px auto; padding: 0 20px;
-    display: flex; gap: 60px; align-items: center;
-}
+.welcome-section { max-width: 1200px; margin: 80px auto; padding: 0 20px; display: flex; gap: 60px; align-items: center; }
 .welcome-img { flex: 1; }
-.welcome-img img { width: 100%; border-radius: 4px; box-shadow: 20px 20px 0px var(--light-gray); }
+.welcome-img img { width: 100%; border-radius: 4px; box-shadow: 20px 20px 0px #f9f9f9; }
 .welcome-text { flex: 1; }
-.welcome-text h2 { color: var(--red-accent); font-size: 36px; margin-bottom: 20px; }
-.welcome-text p { font-size: 16px; color: #555; margin-bottom: 15px; }
+.welcome-text h2 { color: var(--red-accent); font-size: 36px; }
 
 /* PRODUCT GRID */
 .products-section { max-width: 1200px; margin: 80px auto; padding: 0 20px; }
-.section-head { text-align: center; margin-bottom: 50px; }
-.section-head h2 { font-size: 32px; position: relative; display: inline-block; padding-bottom: 10px; }
-.section-head h2::after { content: ''; width: 60px; height: 3px; background: var(--red-accent); position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); }
-
-.grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 30px;
-}
-.p-card {
-    border: 1px solid #f0f0f0; border-radius: 8px; overflow: hidden; cursor: pointer;
-    transition: 0.4s; background: #fff; position: relative;
-}
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 30px; }
+.p-card { border: 1px solid #f0f0f0; border-radius: 8px; overflow: hidden; cursor: pointer; transition: 0.4s; background: #fff; }
 .p-card:hover { box-shadow: 0 15px 30px rgba(0,0,0,0.1); transform: translateY(-10px); }
 .p-card img { width: 100%; height: 250px; object-fit: cover; }
 .p-card .p-info { padding: 20px; text-align: center; }
-.p-card h3 { font-size: 18px; margin: 0; color: var(--primary); }
 
-/* MODAL - Rashmika International Premium Style */
-.modal {
-    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(255,255,255,1); z-index: 2000; overflow-y: auto;
-}
+/* MODAL */
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 2000; overflow-y: auto; }
 .modal-body { max-width: 1100px; margin: 40px auto; display: flex; gap: 50px; padding: 40px; position: relative; }
 .modal-img { flex: 1.2; }
 .modal-img img { width: 100%; border-radius: 8px; border: 1px solid #eee; position: sticky; top: 20px; }
 .modal-info { flex: 1; }
-.modal-info h2 { font-size: 38px; color: var(--primary); margin-top: 0; margin-bottom: 10px; }
-.modal-info .category { color: var(--red-accent); font-weight: 600; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; }
-.modal-info hr { border: 0; border-top: 1px solid #eee; margin: 20px 0; }
-.modal-info p { font-size: 16px; color: #666; line-height: 1.8; }
-
-/* ENQUIRY FORM */
-.form-box { background: #fdfdfd; padding: 30px; margin-top: 30px; border: 1px solid #eee; border-radius: 8px; }
-.form-box h4 { margin-top: 0; font-size: 20px; margin-bottom: 20px; }
-.form-box input, .form-box textarea {
-    width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit;
-}
-.form-box button { background: var(--primary); color: #fff; border: none; padding: 15px; width: 100%; cursor: pointer; font-weight: 600; border-radius: 4px; transition: 0.3s; }
-.form-box button:hover { background: var(--red-accent); }
-
 .close-btn { position: fixed; right: 30px; top: 20px; font-size: 45px; cursor: pointer; color: #999; z-index: 2100; }
 
-/* SOCIAL BUTTONS */
-.floating-social {
-    position: fixed; right: 20px; bottom: 40px; display: flex; flex-direction: column; gap: 12px; z-index: 1000;
-}
-.s-btn {
-    width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    color: #fff; text-decoration: none; font-size: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: 0.3s;
-}
-.s-btn:hover { transform: scale(1.1); }
-.whatsapp { background: #25D366; }
-.linkedin { background: #0077b5; }
-.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+/* FORM */
+.form-box { background: #fdfdfd; padding: 30px; margin-top: 30px; border: 1px solid #eee; border-radius: 8px; }
+.form-box input, .form-box textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; }
+.form-box button { background: var(--primary); color: #fff; border: none; padding: 15px; width: 100%; cursor: pointer; font-weight: 600; border-radius: 4px; }
 
-@media (max-width: 900px) {
-    .welcome-section, .modal-body { flex-direction: column; padding: 20px; }
-    .hero-content h1 { font-size: 32px; }
-    .modal-img, .modal-info { width: 100%; }
+/* --- NEXT GEN SOCIAL MEDIA ANIMATION --- */
+.social-fab-container {
+    position: fixed; bottom: 30px; right: 30px; z-index: 1500;
 }
+.fab-main {
+    width: 60px; height: 60px; background: var(--red-accent);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 24px; box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    cursor: pointer; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.fab-options {
+    list-style: none; margin: 0; padding: 0;
+    position: absolute; bottom: 70px; right: 5px;
+    opacity: 0; visibility: hidden; transition: 0.3s;
+}
+.social-fab-container:hover .fab-options { opacity: 1; visibility: visible; }
+.social-fab-container:hover .fab-main { transform: rotate(45deg); background: #333; }
+
+.fab-options li { margin-bottom: 15px; transform: translateY(20px); transition: 0.3s; }
+.social-fab-container:hover .fab-options li { transform: translateY(0); }
+
+.fab-btn {
+    width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    color: #fff; text-decoration: none; font-size: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.wa { background: #25D366; }
+.li { background: #0077b5; }
+.ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+
+@media (max-width: 900px) { .welcome-section, .modal-body { flex-direction: column; } .modal-img, .modal-info { width: 100%; } }
 </style>
 </head>
 <body>
@@ -159,85 +126,77 @@ body { margin: 0; font-family: 'Poppins', sans-serif; background: #fff; color: #
     <div class="welcome-text">
         <span style="color:var(--red-accent); font-weight:600;">ESTABLISHED EXPORTERS</span>
         <h2>Premium Quality Guaranteed</h2>
-        <p>At Sun Spices India, we pride ourselves on being a premier merchant exporter of the finest Indian spices. Our journey begins in the high-altitude plantations of Kerala, where we hand-select only the best produce.</p>
-        <p>We ensure that every grain and pod maintains its natural essential oils, vibrant color, and therapeutic properties through meticulous quality control and superior packaging standards.</p>
+        <p>At Sun Spices India, we pride ourselves on being a premier merchant exporter of the finest Indian spices.</p>
     </div>
 </section>
 
 <section class="products-section" id="products">
-    <div class="section-head">
-        <h2>Our Exclusive Portfolio</h2>
-    </div>
+    <h2 style="text-align: center; margin-bottom: 40px;">Our Exclusive Portfolio</h2>
     <div class="grid" id="productGrid"></div>
 </section>
 
 <div id="productModal" class="modal">
     <span class="close-btn" onclick="closeModal()">&times;</span>
     <div class="modal-body">
-        <div class="modal-img">
-            <img id="mImg" src="" alt="">
-        </div>
+        <div class="modal-img"><img id="mImg" src="" alt=""></div>
         <div class="modal-info">
-            <span class="category">Premium Export Grade</span>
+            <span style="color:var(--red-accent); font-weight:600;">Premium Export Grade</span>
             <h2 id="mTitle"></h2>
-            <hr>
+            <hr style="border:0; border-top:1px solid #eee; margin:20px 0;">
             <p id="mDesc"></p>
-            
             <div class="form-box">
                 <h4>Quick Enquiry</h4>
                 <input type="text" placeholder="Full Name">
                 <input type="email" placeholder="Email Address">
-                <input type="text" placeholder="Phone Number">
-                <textarea placeholder="Tell us about your requirement..." rows="4"></textarea>
-                <button onclick="alert('Thank you! Our team will contact you shortly.')">Submit Request</button>
+                <textarea placeholder="Your Requirement..." rows="4"></textarea>
+                <button onclick="alert('Enquiry Sent!')">Submit Request</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="floating-social">
-    <a href="https://wa.me/917207396427" class="s-btn whatsapp" target="_blank">W</a>
-    <a href="https://www.linkedin.com/in/surya-gowtham-6176443a5" class="s-btn linkedin" target="_blank">in</a>
-    <a href="https://www.instagram.com/sunspicesindia" class="s-btn instagram" target="_blank">I</a>
+<div class="social-fab-container">
+    <ul class="fab-options">
+        <li><a href="https://wa.me/917207396427" class="fab-btn wa" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
+        <li><a href="https://www.linkedin.com/in/surya-gowtham-6176443a5" class="fab-btn li" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+        <li><a href="https://www.instagram.com/sunspicesindia" class="fab-btn ig" target="_blank"><i class="fab fa-instagram"></i></a></li>
+    </ul>
+    <div class="fab-main">
+        <i class="fas fa-plus"></i>
+    </div>
 </div>
 
 <script>
 const products = [
-    { name: 'Cardamom', img: 'cardamom.jpg', desc: 'Known as the "Queen of Spices," our green cardamom is sourced from the Idukki district of Kerala. We offer various grades (7mm, 8mm) with high essential oil content, intense aroma, and deep green color.' },
-    { name: 'Turmeric', img: 'turmeric-01.jfif', desc: 'Our turmeric is famous for its high Curcumin content. Sourced from organic farms, it provides a deep golden hue and powerful anti-inflammatory properties, ideal for culinary and medicinal use.' },
-    { name: 'Ajwain', img: 'ajwain-seeds.jfif', desc: 'Premium quality Ajwain seeds with a strong, pungent aroma. Hand-cleaned to ensure zero impurities, these seeds are essential for digestive health and traditional spice blends.' },
-    { name: 'Anise Seeds', img: 'anise-seeds.jfif', desc: 'Delicate and sweet anise seeds selected for their superior flavor. Our seeds are carefully dried to preserve their distinct liquorice-like aroma and essential oils.' },
-    { name: 'Black Pepper', img: 'balck-pepper.jfif', desc: 'The "King of Spices." Our Malabar Black Pepper is world-renowned for its bold size, biting heat, and complex citrusy undertones. Harvested at peak ripeness for maximum potency.' },
-    { name: 'Bay Leaf', img: 'bay-leaf.jfif', desc: 'Fragrant and whole dried bay leaves. These leaves add a subtle depth to stews and curries, carefully preserved to retain their olive-green color and herbal scent.' },
-    { name: 'Caraway Seeds', img: 'caraway-seeds.jfif', desc: 'Aromatic caraway seeds with a sharp, earthy flavor. Highly sought after for bakery products and traditional European and Asian spice preparations.' },
-    { name: 'Cinnamon', img: 'cinnamon.jfif', desc: 'Authentic Ceylon and Indian cinnamon sticks. Characterized by their sweet, woody aroma and thin, fragile layers, perfect for both desserts and savory dishes.' },
-    { name: 'Cloves', img: 'cloves.jfif', desc: 'Bold and pungent cloves from the Western Ghats. These are full-headed, hand-picked pods that are rich in eugenol, providing an intense warmth to any preparation.' },
-    { name: 'Coriander Seeds', img: 'coriander-seeds.jfif', desc: 'Crisp and golden coriander seeds with a refreshing lemony profile. We ensure uniform size and high oil content for a rich, aromatic spice base.' },
-    { name: 'Cumin Seeds', img: 'cumin-seeds.jfif', desc: 'Our cumin seeds are machine-cleaned and hand-sorted. They offer an earthy, warming flavor that is fundamental to global cuisines, available in premium export grades.' },
-    { name: 'Dill Seeds', img: 'dill-seeds.jfif', desc: 'Premium dill seeds with a mild, slightly bitter taste. Excellent for pickling and seasoning, our seeds are processed to maintain their natural freshness.' },
-    { name: 'Fennel Seeds', img: 'fennel-seeds.jfif', desc: 'Sweet and aromatic fennel seeds. Sorted for purity and color, these seeds are popular as a digestive aid and for adding a refreshing sweetness to dishes.' },
-    { name: 'Fenugreek Seeds', img: 'fenugreek-seeds.jfif', desc: 'Deep yellow, uniform-sized fenugreek seeds. Known for their maple-like aroma and bitter-sweet taste, sourced for their high nutritional value.' },
-    { name: 'Mace', img: 'mace.jfif', desc: 'The lacy covering of the nutmeg seed. Our mace is brilliant orange in color and offers a more delicate, floral version of the nutmeg flavor.' },
-    { name: 'Mustard Seeds', img: 'mustard-seeds.jfif', desc: 'Bold black and yellow mustard seeds. These provide a sharp, nutty heat and are essential for oil extraction and tempering in Asian cooking.' },
-    { name: 'Nigella Seeds', img: 'nigella-seeds.jfif', desc: 'Also known as Kalonji, our jet-black nigella seeds offer a unique onion-pepper flavor profile, perfect for garnishing breads and seasoning vegetables.' },
-    { name: 'Nutmeg', img: 'nutmeg.jfif', desc: 'Whole, high-density nutmeg seeds. Grated fresh, they provide a warm, sweet, and nutty aroma that is irreplaceable in premium culinary recipes.' },
-    { name: 'Poppy Seeds', img: 'poppy-seeds.jfif', desc: 'Creamy white poppy seeds known for adding texture and a nutty flavor to gravies and baked goods. Cleaned thoroughly to meet international safety standards.' },
-    { name: 'Red Chilli', img: 'red-chilli-powder.jfif', desc: 'Vibrant red chilli with the perfect balance of heat and color. We offer whole dried chillies and fine powder, processed under hygienic conditions.' },
-    { name: 'Star Anise', img: 'star-anise.jfif', desc: 'Beautifully shaped star anise pods. These are harvested whole to ensure they retain their strong anise flavor and decorative appeal for gourmet cooking.' }
+    { name: 'Cardamom', img: 'cardamom.jpg', desc: 'Known as the "Queen of Spices," our green cardamom is sourced from the Idukki district of Kerala. We offer various grades (7mm, 8mm) with high essential oil content.' },
+    { name: 'Turmeric', img: 'turmeric-01.jfif', desc: 'Our turmeric is famous for its high Curcumin content. Sourced from organic farms, it provides a deep golden hue and powerful properties.' },
+    { name: 'Ajwain', img: 'ajwain-seeds.jfif', desc: 'Premium quality Ajwain seeds with a strong, pungent aroma. Hand-cleaned to ensure zero impurities.' },
+    { name: 'Anise Seeds', img: 'anise-seeds.jfif', desc: 'Delicate and sweet anise seeds selected for their superior flavor. Carefully dried to preserve aroma.' },
+    { name: 'Black Pepper', img: 'balck-pepper.jfif', desc: 'The "King of Spices." Our Malabar Black Pepper is world-renowned for its bold size and biting heat.' },
+    { name: 'Bay Leaf', img: 'bay-leaf.jfif', desc: 'Fragrant and whole dried bay leaves. These leaves add a subtle depth to stews and curries.' },
+    { name: 'Caraway Seeds', img: 'caraway-seeds.jfif', desc: 'Aromatic caraway seeds with a sharp, earthy flavor. Highly sought after for bakery products.' },
+    { name: 'Cinnamon', img: 'cinnamon.jfif', desc: 'Authentic Ceylon and Indian cinnamon sticks. Characterized by their sweet, woody aroma.' },
+    { name: 'Cloves', img: 'cloves.jfif', desc: 'Bold and pungent cloves from the Western Ghats. Full-headed pods rich in eugenol.' },
+    { name: 'Coriander Seeds', img: 'coriander-seeds.jfif', desc: 'Crisp and golden coriander seeds with a refreshing lemony profile.' },
+    { name: 'Cumin Seeds', img: 'cumin-seeds.jfif', desc: 'Machine-cleaned and hand-sorted. They offer an earthy, warming flavor fundamental to global cuisines.' },
+    { name: 'Dill Seeds', img: 'dill-seeds.jfif', desc: 'Premium dill seeds with a mild, slightly bitter taste. Excellent for pickling and seasoning.' },
+    { name: 'Fennel Seeds', img: 'fennel-seeds.jfif', desc: 'Sweet and aromatic fennel seeds. Sorted for purity and color.' },
+    { name: 'Fenugreek Seeds', img: 'fenugreek-seeds.jfif', desc: 'Deep yellow, uniform-sized fenugreek seeds. Known for their maple-like aroma.' },
+    { name: 'Mace', img: 'mace.jfif', desc: 'The lacy covering of the nutmeg seed. Offers a delicate, floral version of the nutmeg flavor.' },
+    { name: 'Mustard Seeds', img: 'mustard-seeds.jfif', desc: 'Bold black and yellow mustard seeds. These provide a sharp, nutty heat.' },
+    { name: 'Nigella Seeds', img: 'nigella-seeds.jfif', desc: 'Also known as Kalonji, our jet-black nigella seeds offer a unique onion-pepper flavor profile.' },
+    { name: 'Nutmeg', img: 'nutmeg.jfif', desc: 'Whole, high-density nutmeg seeds. Provides a warm, sweet, and nutty aroma.' },
+    { name: 'Poppy Seeds', img: 'poppy-seeds.jfif', desc: 'Creamy white poppy seeds known for adding texture and a nutty flavor to gravies.' },
+    { name: 'Red Chilli', img: 'red-chilli-powder.jfif', desc: 'Vibrant red chilli with the perfect balance of heat and color.' },
+    { name: 'Star Anise', img: 'star-anise.jfif', desc: 'Beautifully shaped star anise pods. Harvested whole to retain strong anise flavor.' }
 ];
 
 const grid = document.getElementById('productGrid');
-
 products.forEach(p => {
     const card = document.createElement('div');
     card.className = 'p-card';
     card.onclick = () => openModal(p.name, 'images/' + p.img, p.desc);
-    card.innerHTML = `
-        <img src="images/${p.img}" alt="${p.name}">
-        <div class="p-info">
-            <h3>${p.name}</h3>
-        </div>
-    `;
+    card.innerHTML = `<img src="images/${p.img}" alt="${p.name}"><div class="p-info"><h3>${p.name}</h3></div>`;
     grid.appendChild(card);
 });
 
