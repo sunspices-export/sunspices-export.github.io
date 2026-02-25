@@ -132,11 +132,17 @@
                     <label>Grade / Variety</label>
                     <select id="mGrade"></select>
                     
-                    <label>Quantity Required</label>
-                    <input type="text" id="mQty" placeholder="e.g. 10 Metric Tons">
+                    <label>Quantity Required (KG)</label>
+                    <input type="number" id="mQty" placeholder="e.g. 1000">
 
-                    <label>Destination Country</label>
-                    <input type="text" id="mDest" placeholder="e.g. United Kingdom">
+                    <label>Incoterms (Pricing Basis)</label>
+                    <select id="mShipping">
+                        <option value="FOB">FOB (Ex-Vandanmedu / Port Loading)</option>
+                        <option value="CIF">CIF (To Destination Port)</option>
+                    </select>
+
+                    <label>Destination Port / Country</label>
+                    <input type="text" id="mDest" placeholder="e.g. Jebel Ali, UAE">
 
                     <label>Required Certificates (Select All That Apply)</label>
                     <div class="cert-grid">
@@ -151,10 +157,10 @@
                     <label>Business Email</label>
                     <input type="email" id="mEmail" placeholder="buyer@company.com">
                     
-                    <p id="cap" style="font-weight:600; color:var(--gold); margin:5px 0;"></p>
+                    <p id="cap" style="font-weight:600; color:var(--gold); margin:5px 0; font-size:16px;"></p>
                     <input type="number" id="capIn" placeholder="Answer?">
                     
-                    <button onclick="handleEnquiry()" style="width:100%; padding:15px; background:var(--dark); color:#fff; border:none; cursor:pointer; font-weight:600; text-transform:uppercase;">Send Enquiry</button>
+                    <button onclick="handleEnquiry()" style="width:100%; padding:15px; background:var(--dark); color:#fff; border:none; cursor:pointer; font-weight:600; text-transform:uppercase;">Get AI Quotation</button>
                 </div>
             </div>
         </div>
@@ -174,217 +180,132 @@
     </footer>
 
     <script>
-        const spices = [
-            { 
-                name: 'Cardamom', 
-                img: 'images/cardamom.jpg', 
-                grades: ['AGEB 8mm+', 'AGB 7.5mm', 'AGS 7mm', '6-7mm Mix'], 
-                desc: 'Our Alleppey Green Extra Bold Cardamom is sourced directly from Vandanmedu plantations. These pods are recognized for their superior essential oil content and vibrant green color. We ensure a moisture level below 12% and zero pesticides to meet global food safety standards. Perfect for high-end culinary and medicinal applications.' 
+        // 1. ADMIN DASHBOARD: Meeru roju market rates ikkada update cheyachu
+        const spiceMarket = {
+            "Cardamom": {
+                gstRate: 0.05,
+                grades: {
+                    "8mm+ (AGEB)": 3200,
+                    "7.5mm (AGB)": 2900,
+                    "7-8mm (Mix)": 2850,
+                    "7mm (AGS)": 2800,
+                    "6-7mm": 2500,
+                    "Rejection/Masala": 2100
+                },
+                desc: 'Our Alleppey Green Extra Bold Cardamom is sourced directly from Vandanmedu. High essential oil and vibrant green color guaranteed.'
             },
-            { 
-                name: 'Black Pepper', 
-                img: 'images/balck-pepper.jfif', 
-                grades: ['TGEB (Tellicherry Bold)', 'TGSEB', '550 GL', '500 GL'], 
-                desc: 'Known as the "King of Spices," our Malabar Black Pepper is hand-harvested and sun-dried to lock in its signature pungency. The TGEB grade ensures large, heavy berries with high piperine content. We maintain strict Sortex cleaning to remove all impurities. This pepper is ideal for both bulk industrial spice blending and premium retail packaging.' 
+            "Black Pepper": {
+                gstRate: 0.05,
+                grades: { "TGEB Bold": 750, "TGSEB": 710, "550 GL": 680 },
+                desc: 'Malabar Black Pepper prized as "Black Gold." Sun-dried to ensure maximum piperine content.'
             },
-            { 
-                name: 'Turmeric', 
-                img: 'images/turmeric-01.jfif', 
-                grades: ['Salem Finger (Premium)', 'Erode Variety', 'High Curcumin (6%+)'], 
-                desc: 'Sourced from the best growing belts, our turmeric fingers are characterized by their deep orange-yellow core and high curcumin levels. We utilize traditional curing processes combined with modern drying to prevent fungal growth. Every batch is lab-tested for lead chromate-free purity. It is highly sought after by pharmaceutical and culinary sectors globally.' 
-            },
-            { 
-                name: 'Star Anise', 
-                img: 'images/star-anise.jfif', 
-                grades: ['Whole A-Grade', 'Broken Mix'], 
-                desc: 'Our Star Anise is carefully hand-sorted to ensure a minimum of 90% whole pods per shipment. It possesses a distinct licorice-like aroma and sweet-spicy flavor profile essential for Asian and European cuisines. We ensure no moisture-related damage through moisture-proof bulk packaging. Perfect for spice oils and gourmet spice blends.' 
-            },
-            { 
-                name: 'Cloves', 
-                img: 'images/cloves.jfif', 
-                grades: ['Lal Pari (Handpicked)', 'Standard Quality'], 
-                desc: 'Our cloves are harvested at the peak of maturity from Kerala’s high-altitude regions. They are rich in Eugenol oil, providing an intense aroma and numbing warmth. We offer "Lal Pari" quality, which is bright reddish-brown and free from headless cloves or stems. These are processed to meet the stringent quality requirements of the Middle East and US markets.' 
-            },
-            { 
-                name: 'Cinnamon', 
-                img: 'images/cinnamon.jfif', 
-                grades: ['Alba Grade', 'C5 Special', 'H1'], 
-                desc: 'Authentic Ceylon-style cinnamon quills, hand-rolled to perfection. Unlike Cassia, our cinnamon is low in coumarin, making it safe and premium for international health standards. The Alba grade represents the thinnest, most delicate quills with a sweet, woody fragrance. We provide moisture-controlled packaging to maintain its brittle texture and aroma.' 
-            },
-            { 
-                name: 'Ajwain Seeds', 
-                img: 'images/ajwain-seeds.jfif', 
-                grades: ['Sortex Cleaned', 'Machine Cleaned'], 
-                desc: 'Our Ajwain seeds are known for their high thymol content, offering a strong, sharp aroma and digestive benefits. We use advanced Sortex technology to ensure 99.5% purity, free from dust and stones. These seeds are a staple in Middle Eastern and Indian spice markets. We provide various bulk packaging options tailored to buyer specifications.' 
-            },
-            { 
-                name: 'Anise Seeds', 
-                img: 'images/anise-seeds.jfif', 
-                grades: ['Premium Export Grade'], 
-                desc: 'Sweet, aromatic Anise seeds sourced from reliable growers and cleaned to perfection. These seeds are essential for flavoring beverages, baked goods, and confectionery worldwide. We ensure that the seeds retain their essential oil profile through cool-room storage before shipment. Our export quality ensures zero admixture and high germination standards if required.' 
-            },
-            { 
-                name: 'Bay Leaf', 
-                img: 'images/bay-leaf.jfif', 
-                grades: ['Handpicked Whole Leaves'], 
-                desc: 'Our Bay Leaves are sun-dried and hand-sorted to maintain their natural green hue and leathery texture. They are prized for their subtle, herbal fragrance that enhances slow-cooked dishes and soups. We ensure the leaves are unbroken and free from pests or discoloration. Bulk shipments are packed in air-tight bags to preserve the delicate aroma during transit.' 
-            },
-            { 
-                name: 'Coriander Seeds', 
-                img: 'images/coriander-seeds.jfif', 
-                grades: ['Eagle Grade', 'Badami Grade', 'Scooter Grade'], 
-                desc: 'Sun-dried Coriander seeds with a fresh, citrusy aroma and pale golden color. We offer different grades based on seed size and color, from the premium Badami to the robust Eagle grade. Our seeds are machine-cleaned to remove hollow seeds and stalks. They are widely exported for use in curry powders and gin distillation processes.' 
-            },
-            { 
-                name: 'Cumin Seeds', 
-                img: 'images/cumin-seeds.jfif', 
-                grades: ['Sortex 99.5% Pure', 'Singapore Quality'], 
-                desc: 'Premium Cumin seeds with a warm, earthy flavor and high volatile oil content. We use state-of-the-art cleaning plants to achieve the highest purity levels required by European buyers. Each batch is tested for pesticide residues to comply with international regulations. Our Cumin is ideal for ground spices, spice mixes, and oil extraction.' 
-            },
-            { 
-                name: 'Dill Seeds', 
-                img: 'images/dill-seeds.jfif', 
-                grades: ['Machine Cleaned Export'], 
-                desc: 'High-quality Dill seeds with a pungent, grassy aroma, cleaned thoroughly for export markets. These seeds are essential for pickling, seasoning, and traditional herbal formulations. We ensure the seeds are mature and uniform in size to provide consistent flavor. Our processing minimizes foreign matter to less than 1%.' 
-            },
-            { 
-                name: 'Fennel Seeds', 
-                img: 'images/fennel-seeds.jfif', 
-                grades: ['Lucknowi (Sweet)', 'Bold Variety'], 
-                desc: 'Our Fennel seeds are known for their sweet, refreshing taste and vibrant green color. The Lucknowi variety is particularly prized for mouth fresheners and premium tea blends. We use shade-drying techniques to preserve the color and essential oils. All exports are tested to ensure zero artificial coloring or additives.' 
-            },
-            { 
-                name: 'Fenugreek Seeds', 
-                img: 'images/fenugreek-seeds.jfif', 
-                grades: ['Bold Yellow', 'Machine Cleaned'], 
-                desc: 'Rich, bitter, and aromatic Fenugreek seeds, graded for consistent size and color. These seeds are a powerhouse of nutrition and a key ingredient in spice blends like curry powder. We ensure the seeds are free from stones and sand through multiple cleaning stages. Packed in sturdy bags to withstand long-distance sea freight.' 
-            },
-            { 
-                name: 'Mace (Javitri)', 
-                img: 'images/mace.jfif', 
-                grades: ['Whole Flower', 'Broken Mix'], 
-                desc: 'The delicate, lacy covering of the nutmeg, our Mace is hand-separated and sun-dried to maintain its bright orange-red color. It offers a more refined, floral version of nutmeg flavor. We specialize in "Whole Flower" grade, which is highly valued in the gourmet food industry. Careful packaging ensures the fragile petals remain intact during shipping.' 
-            },
-            { 
-                name: 'Mustard Seeds', 
-                img: 'images/mustard-seeds.jfif', 
-                grades: ['Bold Black', 'Yellow Mustard'], 
-                desc: 'Sharp and pungent Mustard seeds, cleaned and graded for uniform size. Our black mustard is essential for traditional tempering, while yellow mustard is exported for condiment manufacturing. We ensure high oil content and zero bitterness from immature seeds. Every shipment is inspected for purity and moisture levels.' 
-            },
-            { 
-                name: 'Nigella Seeds', 
-                img: 'images/nigella-seeds.jfif', 
-                grades: ['Sortex 99% Pure Kalonji'], 
-                desc: 'Premium Nigella seeds (Kalonji) with a unique peppery, onion-like aroma. These seeds are highly valued for their health benefits and use in baking and spice mixes. We use Sortex cleaning to ensure the jet-black seeds are free from impurities. Our Kalonji is popular in the Middle Eastern and South Asian bakery sectors.' 
-            },
-            { 
-                name: 'Nutmeg', 
-                img: 'images/nutmeg.jfif', 
-                grades: ['With Shell', 'Without Shell (Kernels)'], 
-                desc: 'Freshly harvested Nutmeg from the plantations of Kerala. We offer both whole nuts with shells for longer shelf life and graded kernels for immediate processing. Our nutmeg is tested for aflatoxin levels to meet strict EU and US import standards. It is rich in essential oils and has a warm, sweet aroma perfect for various industries.' 
-            },
-            { 
-                name: 'Poppy Seeds', 
-                img: 'images/poppy-seeds.jfif', 
-                grades: ['Creamy White Grade'], 
-                desc: 'Nutty and sweet Poppy seeds, cleaned and processed for culinary and bakery use. We ensure the seeds are of the creamy white variety, which is preferred for its texture and appearance. Our processing ensures the seeds are free from any alkaloids or impurities. They are packed in moisture-proof liners to maintain freshness.' 
-            },
-            { 
-                name: 'Red Chilli Powder', 
-                img: 'images/red-chilli-powder.jfif', 
-                grades: ['Sannam', 'Byadgi (High Color)', 'Teja (High Heat)'], 
-                desc: 'We offer a range of Red Chilli powders from the intensely hot Teja to the vibrant, low-heat Byadgi. Our chillies are stem-removed and ground in hygienic facilities to maintain color and heat. We guarantee zero artificial colors or Sudan dye contamination. Each batch comes with a Scoville heat unit (SHU) report for buyer clarity.' 
-            },
-            { 
-                name: 'Caraway Seeds', 
-                img: 'images/caraway-seeds.jfif', 
-                grades: ['Premium Export Grade'], 
-                desc: 'Highly aromatic Caraway seeds with a distinct earthy and anisic flavor. These seeds are widely used in European bread making and spirits. We ensure the seeds are clean, mature, and rich in carvone oil. Our export quality ensures a consistent flavor profile, making us a reliable partner for international food manufacturers.' 
-            }
-        ];
+            "Turmeric": { gstRate: 0.05, grades: { "Salem Finger": 180, "Erode Variety": 160, "High Curcumin": 220 }, desc: 'Naturally processed Turmeric with vibrant color and therapeutic curcumin levels.' },
+            "Star Anise": { gstRate: 0.05, grades: { "Whole A-Grade": 750, "Broken Mix": 650 }, desc: 'Hand-sorted pods with a sweet, licorice-like aroma.' },
+            "Cloves": { gstRate: 0.05, grades: { "Lal Pari": 950, "Standard": 850 }, desc: 'Rich in Eugenol oil, sourced from Kerala high-altitudes.' },
+            "Cinnamon": { gstRate: 0.05, grades: { "Alba Grade": 550, "C5 Special": 480 }, desc: 'Authentic sweet woody quills, hand-rolled and sun-dried.' },
+            "Ajwain Seeds": { gstRate: 0.05, grades: { "Sortex Cleaned": 240, "Machine Cleaned": 210 }, desc: 'Pure seeds with intense pungent aroma.' },
+            "Anise Seeds": { gstRate: 0.05, grades: { "Export Grade": 260 }, desc: 'Sweet aromatic seeds cleaned for spice blends.' },
+            "Bay Leaf": { gstRate: 0.05, grades: { "Handpicked Whole": 140 }, desc: 'Aromatic whole leaves with natural green color.' },
+            "Coriander Seeds": { gstRate: 0.05, grades: { "Eagle Grade": 130, "Badami Grade": 115 }, desc: 'Crisp seeds with fresh citrus notes.' },
+            "Cumin Seeds": { gstRate: 0.05, grades: { "Sortex 99.5%": 380, "Singapore Quality": 350 }, desc: 'High purity seeds with warm, earthy aroma.' },
+            "Dill Seeds": { gstRate: 0.05, grades: { "Machine Cleaned": 160 }, desc: 'Thoroughly cleaned seeds essential for seasoning.' },
+            "Fennel Seeds": { gstRate: 0.05, grades: { "Lucknowi (Sweet)": 220, "Bold Variety": 190 }, desc: 'Aromatic seeds with high volatile oil content.' },
+            "Fenugreek Seeds": { gstRate: 0.05, grades: { "Bold Yellow": 110 }, desc: 'Graded seeds with consistent color.' },
+            "Mace (Javitri)": { gstRate: 0.05, grades: { "Whole Flower": 1950, "Broken Mix": 1750 }, desc: 'Delicate floral spice hand-separated and sun-dried.' },
+            "Mustard Seeds": { gstRate: 0.05, grades: { "Bold Black": 95, "Yellow Variety": 110 }, desc: 'Cleaned seeds graded for consistent oil content.' },
+            "Nigella Seeds": { gstRate: 0.05, grades: { "99% Pure Kalonji": 320 }, desc: 'Premium black cumin seeds with high nutritional benefits.' },
+            "Nutmeg": { gstRate: 0.05, grades: { "With Shell": 650, "Kernels": 850 }, desc: 'Graded whole nutmeg with natural oils intact.' },
+            "Poppy Seeds": { gstRate: 0.05, grades: { "Creamy White": 1450 }, desc: 'Cleaned seeds providing rich texture for culinary applications.' },
+            "Red Chilli Powder": { gstRate: 0.05, grades: { "High Heat": 310, "Byadgi": 450 }, desc: 'Vibrant powder ensuring balanced heat and color.' },
+            "Caraway Seeds": { gstRate: 0.05, grades: { "Premium Export": 380 }, desc: 'Aromatic seeds graded for international bakery.' }
+        };
 
+        // 2. CONSTANT SETTINGS
+        const exchangeRate = 83; // 1 USD = 83 INR
+        const internalLogistics = 50; // Loading + Packing + Local Transport
+        const seaFreight = 15; // International Shipping (approx per kg)
+        const profitMargin = 1.25; // 25% Profit
+
+        // 3. GENERATE GRID
         const grid = document.getElementById('mainGrid');
-        spices.forEach((p, i) => {
+        Object.keys(spiceMarket).forEach((name, i) => {
             grid.innerHTML += `
-            <div class="card" onclick="openProduct(${i})">
-                <img src="${p.img}" onerror="this.src='https://via.placeholder.com/450x400'">
-                <h3>${p.name}</h3>
+            <div class="card" onclick="openProduct('${name}')">
+                <img src="images/${name.toLowerCase().replace(' ', '-')}.jpg" onerror="this.src='https://via.placeholder.com/450x400'">
+                <h3>${name}</h3>
             </div>`;
         });
 
-        let currentAns = 0;
+        let currentProduct = null, currentAns = 0;
 
-        function openProduct(index) {
-            const p = spices[index];
-            document.getElementById('mTitle').innerText = p.name;
-            document.getElementById('mImg').src = p.img;
+        function openProduct(name) {
+            currentProduct = name;
+            const p = spiceMarket[name];
+            document.getElementById('mTitle').innerText = name;
+            document.getElementById('mImg').src = `images/${name.toLowerCase().replace(' ', '-')}.jpg`;
             document.getElementById('mDesc').innerText = p.desc;
             
             const gradeDropdown = document.getElementById('mGrade');
-            gradeDropdown.innerHTML = p.grades.map(g => `<option value="${g}">${g}</option>`).join('');
+            gradeDropdown.innerHTML = Object.keys(p.grades).map(g => `<option value="${g}">${g}</option>`).join('');
             
-            // Reset form
-            document.getElementById('mQty').value = "";
-            document.getElementById('mDest').value = "";
-            document.getElementById('mEmail').value = "";
-            document.querySelectorAll('.cert-item').forEach(c => c.checked = false);
-
             document.getElementById('productModal').style.display = 'block';
             document.body.style.overflow = 'hidden';
             
-            const n1 = Math.floor(Math.random() * 10) + 1;
-            const n2 = Math.floor(Math.random() * 10) + 1;
+            const n1 = Math.floor(Math.random() * 10) + 1, n2 = Math.floor(Math.random() * 10) + 1;
             currentAns = n1 + n2;
-            document.getElementById('cap').innerText = `Human Check: ${n1} + ${n2} = ?`;
+            document.getElementById('cap').innerText = `Security Check: ${n1} + ${n2} = ?`;
             document.getElementById('capIn').value = "";
         }
 
-        function closeModal() { 
-            document.getElementById('productModal').style.display = 'none'; 
-            document.body.style.overflow = 'auto'; 
-        }
+        function closeModal() { document.getElementById('productModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
+        // 4. SMART NEGOTIATION & EMAIL LOGIC
         function handleEnquiry() {
-            const userAns = parseInt(document.getElementById('capIn').value);
-            const qty = document.getElementById('mQty').value;
+            const p = spiceMarket[currentProduct];
+            const qty = parseFloat(document.getElementById('mQty').value);
+            const grade = document.getElementById('mGrade').value;
+            const shippingType = document.getElementById('mShipping').value;
             const dest = document.getElementById('mDest').value;
             const email = document.getElementById('mEmail').value;
-            
-            // Get selected certificates
-            const selectedCerts = [];
-            document.querySelectorAll('.cert-item:checked').forEach(c => selectedCerts.push(c.value));
+            const userAns = parseInt(document.getElementById('capIn').value);
+            const selectedCerts = Array.from(document.querySelectorAll('.cert-item:checked')).map(c => c.value);
 
-            if(userAns !== currentAns) {
-                alert("Wrong Captcha! Please solve again.");
+            if (userAns !== currentAns || !qty || !email || !dest) {
+                alert("Please solve the security check and fill all details.");
                 return;
             }
 
-            if(qty === "" || email === "" || dest === "") { 
-                alert("Please fill all details."); 
-                return; 
-            }
+           // AI CALCULATION (Hidden Logic)
+            let basePrice = p.grades[grade];
+            let purchaseWithGST = basePrice * (1 + p.gstRate);
+            let totalCostINR = purchaseWithGST + internalLogistics;
+            if (shippingType === "CIF") totalCostINR += seaFreight;
             
-            const prod = document.getElementById('mTitle').innerText;
-            const grade = document.getElementById('mGrade').value;
+            let finalPriceINR = totalCostINR * profitMargin;
+            let quoteUSD = (finalPriceINR / exchangeRate).toFixed(2);
 
-            const body = `Sun Spices India Export Enquiry:%0A%0A` +
-                         `Product: ${prod}%0A` +
-                         `Grade: ${grade}%0A` +
-                         `Quantity: ${qty}%0A` +
-                         `Destination: ${dest}%0A` +
-                         `Certs Needed: ${selectedCerts.join(', ') || 'None'}%0A` +
-                         `Buyer Email: ${email}`;
+            // PROFESSIONAL EMAIL DRAFT (AI Negotiation Start)
+            let subject = `Export Enquiry: ${currentProduct} (${grade}) - Sun Spices India`;
+            let body = `Dear Sun Spices India Export Team,%0A%0A` +
+                       `I am interested in procuring ${currentProduct} from your Vandanmedu unit.%0A%0A` +
+                       `*OFFICIAL ENQUIRY DETAILS:*%0A` +
+                       `- Product: ${currentProduct}%0A` +
+                       `- Grade/Variety: ${grade}%0A` +
+                       `- Quantity: ${qty} KG%0A` +
+                       `- Destination: ${dest}%0A` +
+                       `- Pricing Basis: ${shippingType}%0A` +
+                       `- Certificates Required: ${selectedCerts.join(', ') || 'Standard Packing'}%0A` +
+                       `- AI Estimated CIF/FOB Quote: $${quoteUSD} per KG%0A%0A` +
+                       `I would like to negotiate the final pricing and terms based on this initial quotation. Please respond with your best commercial offer.%0A%0A` +
+                       `Best Regards,%0A` +
+                       `Buyer Contact: ${email}`;
+
+            // EXECUTION
+            window.location.href = `mailto:sunspices.exports.in@gmail.com?subject=${subject}&body=${body}`;
             
-            window.location.href = `mailto:sunspices.exports.in@gmail.com?subject=Bulk Enquiry for ${prod}&body=${body}`;
-            
-            setTimeout(() => { 
-                window.open(`https://wa.me/917207396427?text=${body}`, '_blank'); 
-            }, 1500);
-            
-            alert("Enquiry Generated! Sending to Email and WhatsApp...");
+            alert(`Quotation Generated: $${quoteUSD}/KG (${shippingType}). Your Email app will now open for negotiation.`);
             closeModal();
         }
     </script>
 </body>
 </html>
-
