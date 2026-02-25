@@ -28,7 +28,8 @@
         .vivid-section { padding: 100px 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1250px; margin: auto; }
         .vivid-section:nth-child(even) { direction: rtl; }
         .vivid-section img { width: 100%; border-radius: 5px; box-shadow: 20px 20px 0px var(--dark); }
-        .vivid-text h2 { font-family: 'Playfair Display', serif; font-size: 42px; color: var(--dark); margin-bottom: 20px; }
+        .vivid-text h2 { font-family: 'Playfair Display', serif; font-size: 42px; color: var(--dark); margin-bottom: 20px; text-align: left; }
+        .vivid-section:nth-child(even) .vivid-text { direction: ltr; }
         .vivid-text p { font-size: 17px; line-height: 1.9; color: #555; text-align: justify; }
 
         /* PRODUCT GRID */
@@ -39,7 +40,7 @@
         .card img { width: 100%; height: 400px; object-fit: cover; }
         .card h3 { font-family: 'Playfair Display', serif; padding: 20px; font-size: 24px; color: var(--dark); }
 
-        /* ENQUIRY MODAL */
+        /* MODAL */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 3000; overflow-y: auto; }
         .modal-body { max-width: 1100px; margin: 40px auto; background: #fff; display: flex; gap: 40px; padding: 50px; border-radius: 5px; position: relative; }
         .modal-img { flex: 1; }
@@ -47,19 +48,16 @@
         .modal-info { flex: 1.3; }
         .form-box label { font-weight: 600; font-size: 13px; color: var(--dark); display: block; margin-bottom: 5px; }
         .form-box select, .form-box input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; box-sizing: border-box; }
-        
-        .cert-selection { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; background: #f9f9f9; padding: 10px; border: 1px solid #eee; }
-        .cert-item { display: flex; align-items: center; font-size: 12px; gap: 5px; }
-        
-        .close-btn { position: absolute; right: 25px; top: 15px; font-size: 40px; cursor: pointer; color: #333; }
+        .cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; background: #f9f9f9; padding: 10px; border-radius: 5px; }
+        .cert-grid label { font-weight: 400; font-size: 12px; display: flex; align-items: center; gap: 5px; cursor: pointer; margin: 0; }
+        .close-btn { position: absolute; right: 25px; top: 15px; font-size: 50px; cursor: pointer; }
 
-        /* SIDE SOCIAL */
         .side-social { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 2500; display: flex; flex-direction: column; }
-        .side-social a { display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; color: white; text-decoration: none; font-size: 20px; transition: 0.3s; margin-bottom: 2px; }
+        .side-social a { display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; color: white; text-decoration: none; font-size: 24px; transition: 0.3s; margin-bottom: 2px; }
         .side-social .wa { background: #25D366; } .side-social .ig { background: #e4405f; } .side-social .li { background: #0077b5; }
-
-        footer { background: var(--luxury); color: #888; padding: 60px 30px; text-align: center; }
-        @media (max-width: 1000px) { .products-grid { grid-template-columns: 1fr; } .modal-body { flex-direction: column; margin: 10px; padding: 20px; } .vivid-section { grid-template-columns: 1fr; } }
+        
+        footer { background: var(--luxury); color: #888; padding: 80px 30px; text-align: center; }
+        @media (max-width: 1000px) { .products-grid { grid-template-columns: 1fr 1fr; } .modal-body { flex-direction: column; } .vivid-section { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -90,31 +88,31 @@
         <img src="images/hero-cardamom.jpg" alt="Premium Cardamom">
         <div class="vivid-text">
             <h2>The Queen of Spices</h2>
-            <p>Our Alleppey Green Extra Bold (AGEB) cardamom pods represent the pinnacle of Kerala's harvest. Sourced from Vandanmedu, these pods are prized for their high essential oil content and size ranging from 7mm to 8mm+. We maintain strict quality control to ensure global standards.</p>
+            <p>Our Alleppey Green Extra Bold (AGEB) cardamom pods represent the pinnacle of Kerala's harvest. Sourced from the mist-covered plantations of Vandanmedu, these pods are prized globally for their vibrant green color and intense essential oil content. We strictly adhere to size-grading ranging from 7mm to 8mm+ to ensure only the finest reaches our clients.</p>
         </div>
     </section>
 
     <section class="vivid-section">
-        <img src="images/hero-all-spices.jpeg" alt="Assorted Spices">
+        <img src="images/hero-balck-pepper.jpg" alt="Malabar Pepper">
         <div class="vivid-text">
-            <h2>Global Export Experts</h2>
-            <p>Sun Spices India handles a diverse range of whole spices. Our commitment to 100% purity ensures consistent quality for our global B2B clients from Europe to the Middle East, ensuring safe and reliable global distribution.</p>
+            <h2>The King of Spice: Malabar Pepper</h2>
+            <p>Directly sourced from the heart of Idukki, our black pepper (TGEB) is sun-dried to perfection, retaining its natural piperine levels. Known for its bold aroma and sharp heat, it meets the highest standards for European and Middle Eastern markets. Every batch undergoes rigorous quality checks for density and purity before export.</p>
         </div>
     </section>
 
     <section class="vivid-section">
-        <img src="images/hero-plantation.jpg" alt="Kerala Plantation">
+        <img src="images/quality-check.jpg" alt="Quality Standards">
         <div class="vivid-text">
-            <h2>The Source of Purity</h2>
-            <p>We are rooted in the high-altitude plantations of Vandanmedu, Idukki. This direct sourcing allows us to control the quality from harvest to packaging, meeting international food safety standards at every step.</p>
+            <h2>Uncompromising Quality Control</h2>
+            <p>At Sun Spices India, quality is not just a process; it's our heritage. From farm-level procurement to vacuum-sealed packaging, we ensure zero contamination. We provide comprehensive lab reports and certifications, ensuring that every shipment complies with the specific food safety regulations of the target destination country.</p>
         </div>
     </section>
 
     <section class="vivid-section">
-        <img src="images/lifestyle.webp" alt="Traditional Processing">
+        <img src="images/heritage.jpg" alt="Processing Heritage">
         <div class="vivid-text">
-            <h2>Established Heritage</h2>
-            <p>Our traditional drying and grading methods, combined with modern quality control, make us the most reliable spice partner for international buyers seeking authentic Indian flavors with professional service.</p>
+            <h2>Rooted in Vandanmedu</h2>
+            <p>Strategically located in Vandanmedu, the spice hub of the world, our proximity to the plantations allows us to maintain a transparent supply chain. This enables us to offer "New Crop" freshness throughout the year. We bridge the gap between traditional Kerala farming and modern global B2B trade requirements with professional ease.</p>
         </div>
     </section>
 
@@ -129,31 +127,31 @@
             <div class="modal-img"><img id="mImg" src=""></div>
             <div class="modal-info">
                 <h2 id="mTitle" style="font-family:'Playfair Display'; color:var(--dark); margin-top:0;"></h2>
-                <p id="mDesc" style="color:#555; line-height:1.6; text-align:justify; font-size:14px;"></p>
-                
+                <p id="mDesc" style="color:#555; line-height:1.6; text-align:justify; margin-bottom:20px; font-size:14px;"></p>
                 <div class="form-box">
-                    <h4>B2B Export Enquiry</h4>
-                    
-                    <label>Select Grade / Variety</label>
+                    <label>Grade / Variety</label>
                     <select id="mGrade"></select>
                     
-                    <label>Required Quantity</label>
-                    <input type="text" id="mQty" placeholder="e.g. 5 Metric Tons">
+                    <label>Quantity Required</label>
+                    <input type="text" id="mQty" placeholder="e.g. 10 Metric Tons">
 
-                    <label>Required Certificates (Check all that apply)</label>
-                    <div class="cert-selection">
-                        <div class="cert-item"><input type="checkbox" class="cert-chk" value="Phytosanitary"> Phytosanitary</div>
-                        <div class="cert-item"><input type="checkbox" class="cert-chk" value="Health Certificate"> Health Cert</div>
-                        <div class="cert-item"><input type="checkbox" class="cert-chk" value="COO (Origin)"> COO</div>
-                        <div class="cert-item"><input type="checkbox" class="cert-chk" value="Lab Analysis/COA"> Lab COA</div>
-                        <div class="cert-item"><input type="checkbox" class="cert-chk" value="Fumigation"> Fumigation</div>
-                        <div class="cert-item"><input type="checkbox" class="cert-chk" value="Halal/Organic"> Halal/Organic</div>
+                    <label>Destination Country</label>
+                    <input type="text" id="mDest" placeholder="e.g. United Kingdom">
+
+                    <label>Required Certificates (Select All That Apply)</label>
+                    <div class="cert-grid">
+                        <label><input type="checkbox" class="cert-item" value="Phytosanitary"> Phytosanitary</label>
+                        <label><input type="checkbox" class="cert-item" value="Health Certificate"> Health Cert</label>
+                        <label><input type="checkbox" class="cert-item" value="COA/Lab Report"> COA/Lab Report</label>
+                        <label><input type="checkbox" class="cert-item" value="COO"> COO (Origin)</label>
+                        <label><input type="checkbox" class="cert-item" value="FDA/ISO"> FDA/ISO</label>
+                        <label><input type="checkbox" class="cert-item" value="Halal"> Halal</label>
                     </div>
 
-                    <label>Your Business Email</label>
-                    <input type="email" id="mEmail" placeholder="email@company.com">
+                    <label>Business Email</label>
+                    <input type="email" id="mEmail" placeholder="buyer@company.com">
                     
-                    <p id="cap" style="font-weight:600; color:var(--gold); margin:5px 0; font-size:16px;"></p>
+                    <p id="cap" style="font-weight:600; color:var(--gold); margin:5px 0;"></p>
                     <input type="number" id="capIn" placeholder="Answer?">
                     
                     <button onclick="handleEnquiry()" style="width:100%; padding:15px; background:var(--dark); color:#fff; border:none; cursor:pointer; font-weight:600; text-transform:uppercase;">Send Enquiry</button>
@@ -169,8 +167,8 @@
     </div>
 
     <footer id="contact">
-        <h4>Sun Spices India</h4>
-        <p>Telaprolu, Unguturu Mandal, Krishna District, Andhra Pradesh - 521109</p>
+        <h4>Sun Spices India | Global Export Office</h4>
+        <p>Vandanmedu, Idukki District, Kerala - 685551, India</p>
         <p>Email: sunspices.exports.in@gmail.com | Phone: +91 7207396427</p>
         <p>© 2026 Sun Spices India. All Rights Reserved.</p>
     </footer>
@@ -180,26 +178,128 @@
             { 
                 name: 'Cardamom', 
                 img: 'images/cardamom.jpg', 
-                grades: ['AGEB (Alleppey Green Extra Bold) 8mm+', 'AGB (Bold) 7.5mm', 'AGS (Superior) 7mm', '6mm-7mm Mix'], 
-                desc: 'Alleppey Green Cardamom is the highest grade of cardamom worldwide, known for its deep green skin and intense aroma. Sourced directly from Vandanmedu, our pods are meticulously hand-graded to ensure consistent size and flavor. These pods are rich in essential oils, making them the preferred choice for premium culinary applications and spice blends globally. We guarantee 100% purity with no artificial coloring or additives.' 
+                grades: ['AGEB 8mm+', 'AGB 7.5mm', 'AGS 7mm', '6-7mm Mix'], 
+                desc: 'Our Alleppey Green Extra Bold Cardamom is sourced directly from Vandanmedu plantations. These pods are recognized for their superior essential oil content and vibrant green color. We ensure a moisture level below 12% and zero pesticides to meet global food safety standards. Perfect for high-end culinary and medicinal applications.' 
             },
             { 
                 name: 'Black Pepper', 
                 img: 'images/balck-pepper.jfif', 
-                grades: ['TGEB (Tellicherry Garbled Extra Bold)', 'TGSEB', '550 GL (Heavy)', '500 GL'], 
-                desc: 'Known as the "King of Spices," our Malabar Black Pepper is prized for its high piperine content and pungent aroma. We specialize in Tellicherry Garbled Extra Bold (TGEB) grades, which are larger and more aromatic than standard varieties. Each batch is sun-dried to maintain its natural essential oils and deep black color. Perfect for international B2B buyers seeking authentic Indian heat and superior flavor profiles.' 
+                grades: ['TGEB (Tellicherry Bold)', 'TGSEB', '550 GL', '500 GL'], 
+                desc: 'Known as the "King of Spices," our Malabar Black Pepper is hand-harvested and sun-dried to lock in its signature pungency. The TGEB grade ensures large, heavy berries with high piperine content. We maintain strict Sortex cleaning to remove all impurities. This pepper is ideal for both bulk industrial spice blending and premium retail packaging.' 
             },
             { 
                 name: 'Turmeric', 
                 img: 'images/turmeric-01.jfif', 
-                grades: ['Salem Finger (Premium)', 'Erode Variety', 'High Curcumin Powder (6%+)'], 
-                desc: 'Our turmeric is sourced from the famous Erode and Salem belts, renowned for producing the world’s most vibrant golden fingers. We process these roots naturally to preserve high levels of Curcumin, the active compound responsible for its therapeutic properties. Whether you need whole polished fingers or finely ground powder, Sun Spices India ensures a lead-free, pure product. Ideal for the pharmaceutical, food, and cosmetic industries.' 
+                grades: ['Salem Finger (Premium)', 'Erode Variety', 'High Curcumin (6%+)'], 
+                desc: 'Sourced from the best growing belts, our turmeric fingers are characterized by their deep orange-yellow core and high curcumin levels. We utilize traditional curing processes combined with modern drying to prevent fungal growth. Every batch is lab-tested for lead chromate-free purity. It is highly sought after by pharmaceutical and culinary sectors globally.' 
+            },
+            { 
+                name: 'Star Anise', 
+                img: 'images/star-anise.jfif', 
+                grades: ['Whole A-Grade', 'Broken Mix'], 
+                desc: 'Our Star Anise is carefully hand-sorted to ensure a minimum of 90% whole pods per shipment. It possesses a distinct licorice-like aroma and sweet-spicy flavor profile essential for Asian and European cuisines. We ensure no moisture-related damage through moisture-proof bulk packaging. Perfect for spice oils and gourmet spice blends.' 
             },
             { 
                 name: 'Cloves', 
                 img: 'images/cloves.jfif', 
-                grades: ['Lal Pari (Zanzibar Quality)', 'Standard Handpicked'], 
-                desc: 'Sun Spices India provides premium "Lal Pari" cloves, characterized by their reddish-brown color and full-headed maturity. Handpicked from the plantations of Kerala, these cloves are rich in Eugenol oil, offering an intense fragrance and warm flavor. We ensure low moisture content and zero stems or impurities in our export-grade batches. These are widely used in medicinal oils, dental care, and gourmet spice mixes.' 
+                grades: ['Lal Pari (Handpicked)', 'Standard Quality'], 
+                desc: 'Our cloves are harvested at the peak of maturity from Kerala’s high-altitude regions. They are rich in Eugenol oil, providing an intense aroma and numbing warmth. We offer "Lal Pari" quality, which is bright reddish-brown and free from headless cloves or stems. These are processed to meet the stringent quality requirements of the Middle East and US markets.' 
+            },
+            { 
+                name: 'Cinnamon', 
+                img: 'images/cinnamon.jfif', 
+                grades: ['Alba Grade', 'C5 Special', 'H1'], 
+                desc: 'Authentic Ceylon-style cinnamon quills, hand-rolled to perfection. Unlike Cassia, our cinnamon is low in coumarin, making it safe and premium for international health standards. The Alba grade represents the thinnest, most delicate quills with a sweet, woody fragrance. We provide moisture-controlled packaging to maintain its brittle texture and aroma.' 
+            },
+            { 
+                name: 'Ajwain Seeds', 
+                img: 'images/ajwain-seeds.jfif', 
+                grades: ['Sortex Cleaned', 'Machine Cleaned'], 
+                desc: 'Our Ajwain seeds are known for their high thymol content, offering a strong, sharp aroma and digestive benefits. We use advanced Sortex technology to ensure 99.5% purity, free from dust and stones. These seeds are a staple in Middle Eastern and Indian spice markets. We provide various bulk packaging options tailored to buyer specifications.' 
+            },
+            { 
+                name: 'Anise Seeds', 
+                img: 'images/anise-seeds.jfif', 
+                grades: ['Premium Export Grade'], 
+                desc: 'Sweet, aromatic Anise seeds sourced from reliable growers and cleaned to perfection. These seeds are essential for flavoring beverages, baked goods, and confectionery worldwide. We ensure that the seeds retain their essential oil profile through cool-room storage before shipment. Our export quality ensures zero admixture and high germination standards if required.' 
+            },
+            { 
+                name: 'Bay Leaf', 
+                img: 'images/bay-leaf.jfif', 
+                grades: ['Handpicked Whole Leaves'], 
+                desc: 'Our Bay Leaves are sun-dried and hand-sorted to maintain their natural green hue and leathery texture. They are prized for their subtle, herbal fragrance that enhances slow-cooked dishes and soups. We ensure the leaves are unbroken and free from pests or discoloration. Bulk shipments are packed in air-tight bags to preserve the delicate aroma during transit.' 
+            },
+            { 
+                name: 'Coriander Seeds', 
+                img: 'images/coriander-seeds.jfif', 
+                grades: ['Eagle Grade', 'Badami Grade', 'Scooter Grade'], 
+                desc: 'Sun-dried Coriander seeds with a fresh, citrusy aroma and pale golden color. We offer different grades based on seed size and color, from the premium Badami to the robust Eagle grade. Our seeds are machine-cleaned to remove hollow seeds and stalks. They are widely exported for use in curry powders and gin distillation processes.' 
+            },
+            { 
+                name: 'Cumin Seeds', 
+                img: 'images/cumin-seeds.jfif', 
+                grades: ['Sortex 99.5% Pure', 'Singapore Quality'], 
+                desc: 'Premium Cumin seeds with a warm, earthy flavor and high volatile oil content. We use state-of-the-art cleaning plants to achieve the highest purity levels required by European buyers. Each batch is tested for pesticide residues to comply with international regulations. Our Cumin is ideal for ground spices, spice mixes, and oil extraction.' 
+            },
+            { 
+                name: 'Dill Seeds', 
+                img: 'images/dill-seeds.jfif', 
+                grades: ['Machine Cleaned Export'], 
+                desc: 'High-quality Dill seeds with a pungent, grassy aroma, cleaned thoroughly for export markets. These seeds are essential for pickling, seasoning, and traditional herbal formulations. We ensure the seeds are mature and uniform in size to provide consistent flavor. Our processing minimizes foreign matter to less than 1%.' 
+            },
+            { 
+                name: 'Fennel Seeds', 
+                img: 'images/fennel-seeds.jfif', 
+                grades: ['Lucknowi (Sweet)', 'Bold Variety'], 
+                desc: 'Our Fennel seeds are known for their sweet, refreshing taste and vibrant green color. The Lucknowi variety is particularly prized for mouth fresheners and premium tea blends. We use shade-drying techniques to preserve the color and essential oils. All exports are tested to ensure zero artificial coloring or additives.' 
+            },
+            { 
+                name: 'Fenugreek Seeds', 
+                img: 'images/fenugreek-seeds.jfif', 
+                grades: ['Bold Yellow', 'Machine Cleaned'], 
+                desc: 'Rich, bitter, and aromatic Fenugreek seeds, graded for consistent size and color. These seeds are a powerhouse of nutrition and a key ingredient in spice blends like curry powder. We ensure the seeds are free from stones and sand through multiple cleaning stages. Packed in sturdy bags to withstand long-distance sea freight.' 
+            },
+            { 
+                name: 'Mace (Javitri)', 
+                img: 'images/mace.jfif', 
+                grades: ['Whole Flower', 'Broken Mix'], 
+                desc: 'The delicate, lacy covering of the nutmeg, our Mace is hand-separated and sun-dried to maintain its bright orange-red color. It offers a more refined, floral version of nutmeg flavor. We specialize in "Whole Flower" grade, which is highly valued in the gourmet food industry. Careful packaging ensures the fragile petals remain intact during shipping.' 
+            },
+            { 
+                name: 'Mustard Seeds', 
+                img: 'images/mustard-seeds.jfif', 
+                grades: ['Bold Black', 'Yellow Mustard'], 
+                desc: 'Sharp and pungent Mustard seeds, cleaned and graded for uniform size. Our black mustard is essential for traditional tempering, while yellow mustard is exported for condiment manufacturing. We ensure high oil content and zero bitterness from immature seeds. Every shipment is inspected for purity and moisture levels.' 
+            },
+            { 
+                name: 'Nigella Seeds', 
+                img: 'images/nigella-seeds.jfif', 
+                grades: ['Sortex 99% Pure Kalonji'], 
+                desc: 'Premium Nigella seeds (Kalonji) with a unique peppery, onion-like aroma. These seeds are highly valued for their health benefits and use in baking and spice mixes. We use Sortex cleaning to ensure the jet-black seeds are free from impurities. Our Kalonji is popular in the Middle Eastern and South Asian bakery sectors.' 
+            },
+            { 
+                name: 'Nutmeg', 
+                img: 'images/nutmeg.jfif', 
+                grades: ['With Shell', 'Without Shell (Kernels)'], 
+                desc: 'Freshly harvested Nutmeg from the plantations of Kerala. We offer both whole nuts with shells for longer shelf life and graded kernels for immediate processing. Our nutmeg is tested for aflatoxin levels to meet strict EU and US import standards. It is rich in essential oils and has a warm, sweet aroma perfect for various industries.' 
+            },
+            { 
+                name: 'Poppy Seeds', 
+                img: 'images/poppy-seeds.jfif', 
+                grades: ['Creamy White Grade'], 
+                desc: 'Nutty and sweet Poppy seeds, cleaned and processed for culinary and bakery use. We ensure the seeds are of the creamy white variety, which is preferred for its texture and appearance. Our processing ensures the seeds are free from any alkaloids or impurities. They are packed in moisture-proof liners to maintain freshness.' 
+            },
+            { 
+                name: 'Red Chilli Powder', 
+                img: 'images/red-chilli-powder.jfif', 
+                grades: ['Sannam', 'Byadgi (High Color)', 'Teja (High Heat)'], 
+                desc: 'We offer a range of Red Chilli powders from the intensely hot Teja to the vibrant, low-heat Byadgi. Our chillies are stem-removed and ground in hygienic facilities to maintain color and heat. We guarantee zero artificial colors or Sudan dye contamination. Each batch comes with a Scoville heat unit (SHU) report for buyer clarity.' 
+            },
+            { 
+                name: 'Caraway Seeds', 
+                img: 'images/caraway-seeds.jfif', 
+                grades: ['Premium Export Grade'], 
+                desc: 'Highly aromatic Caraway seeds with a distinct earthy and anisic flavor. These seeds are widely used in European bread making and spirits. We ensure the seeds are clean, mature, and rich in carvone oil. Our export quality ensures a consistent flavor profile, making us a reliable partner for international food manufacturers.' 
             }
         ];
 
@@ -223,18 +323,20 @@
             const gradeDropdown = document.getElementById('mGrade');
             gradeDropdown.innerHTML = p.grades.map(g => `<option value="${g}">${g}</option>`).join('');
             
+            // Reset form
+            document.getElementById('mQty').value = "";
+            document.getElementById('mDest').value = "";
+            document.getElementById('mEmail').value = "";
+            document.querySelectorAll('.cert-item').forEach(c => c.checked = false);
+
             document.getElementById('productModal').style.display = 'block';
             document.body.style.overflow = 'hidden';
             
-            // Clear previous selections
-            document.querySelectorAll('.cert-chk').forEach(cb => cb.checked = false);
-            document.getElementById('capIn').value = "";
-
-            // Captcha
             const n1 = Math.floor(Math.random() * 10) + 1;
             const n2 = Math.floor(Math.random() * 10) + 1;
             currentAns = n1 + n2;
             document.getElementById('cap').innerText = `Human Check: ${n1} + ${n2} = ?`;
+            document.getElementById('capIn').value = "";
         }
 
         function closeModal() { 
@@ -245,42 +347,42 @@
         function handleEnquiry() {
             const userAns = parseInt(document.getElementById('capIn').value);
             const qty = document.getElementById('mQty').value;
+            const dest = document.getElementById('mDest').value;
             const email = document.getElementById('mEmail').value;
             
-            // Get Selected Certificates
+            // Get selected certificates
             const selectedCerts = [];
-            document.querySelectorAll('.cert-chk:checked').forEach(cb => selectedCerts.push(cb.value));
+            document.querySelectorAll('.cert-item:checked').forEach(c => selectedCerts.push(c.value));
 
             if(userAns !== currentAns) {
                 alert("Wrong Captcha! Please solve again.");
                 return;
             }
 
-            if(qty === "" || email === "" || selectedCerts.length === 0) { 
-                alert("Please fill all details and select at least one certificate."); 
+            if(qty === "" || email === "" || dest === "") { 
+                alert("Please fill all details."); 
                 return; 
             }
             
             const prod = document.getElementById('mTitle').innerText;
             const grade = document.getElementById('mGrade').value;
 
-            const body = `Sun Spices India - New B2B Enquiry:%0A%0AProduct: ${prod}%0AGrade: ${grade}%0AQuantity: ${qty}%0ACertificates: ${selectedCerts.join(", ")}%0ABuyer Email: ${email}`;
+            const body = `Sun Spices India Export Enquiry:%0A%0A` +
+                         `Product: ${prod}%0A` +
+                         `Grade: ${grade}%0A` +
+                         `Quantity: ${qty}%0A` +
+                         `Destination: ${dest}%0A` +
+                         `Certs Needed: ${selectedCerts.join(', ') || 'None'}%0A` +
+                         `Buyer Email: ${email}`;
             
-            // Send to Email
             window.location.href = `mailto:sunspices.exports.in@gmail.com?subject=Bulk Enquiry for ${prod}&body=${body}`;
             
-            // Open WhatsApp after delay
             setTimeout(() => { 
                 window.open(`https://wa.me/917207396427?text=${body}`, '_blank'); 
             }, 1500);
             
-            alert("Enquiry Generated! Opening Email and WhatsApp...");
+            alert("Enquiry Generated! Sending to Email and WhatsApp...");
             closeModal();
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            if (event.target == document.getElementById('productModal')) closeModal();
         }
     </script>
 </body>
