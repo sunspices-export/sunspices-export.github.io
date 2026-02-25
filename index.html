@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        :root { --gold: #C5A059; --dark: #1A2F23; --luxury: #0D0D0D; --cream: #FCF9F5; }
+        :root { --gold: #C5A059; --dark: #1A2F23; --cream: #FCF9F5; }
         body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--cream); color: #333; scroll-behavior: smooth; overflow-x: hidden; }
 
         /* HEADER */
@@ -16,42 +16,42 @@
         .nav-container { max-width: 1300px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 0 30px; }
         .logo-box { display: flex; align-items: center; gap: 15px; text-decoration: none; color: var(--dark); }
         .logo-box img { height: 60px; }
-        .logo-box span { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; }
+        .logo-box span { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; }
 
         /* HERO SECTION */
-        .hero { height: 90vh; position: relative; overflow: hidden; background: #000; }
-        .hero video { width: 100%; height: 100%; object-fit: cover; opacity: 0.65; }
+        .hero { height: 85vh; position: relative; overflow: hidden; background: #000; }
+        .hero video { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
         .hero-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #fff; width: 90%; }
-        .hero-content h1 { font-family: 'Playfair Display', serif; font-size: clamp(40px, 8vw, 85px); margin: 0; line-height: 1.1; font-style: italic; }
+        .hero-content h1 { font-family: 'Playfair Display', serif; font-size: clamp(35px, 7vw, 75px); margin: 0; line-height: 1.1; font-style: italic; }
 
         /* PRODUCT GRID */
-        .grid { max-width: 1300px; margin: 80px auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; padding: 0 30px; }
-        .card { background: #fff; border: 1px solid #EAE0D5; overflow: hidden; transition: 0.6s; cursor: pointer; border-radius: 5px; text-align: center; }
-        .card:hover { transform: translateY(-12px); box-shadow: 0 30px 60px rgba(0,0,0,0.12); }
-        .card img { width: 100%; height: 420px; object-fit: cover; }
-        .card h3 { font-family: 'Playfair Display', serif; font-size: 24px; padding: 25px; margin: 0; }
+        .products { max-width: 1300px; margin: 80px auto; padding: 0 30px; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .card { background: #fff; border: 1px solid #EAE0D5; overflow: hidden; transition: 0.4s; cursor: pointer; text-align: center; border-radius: 8px; }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); border-color: var(--gold); }
+        .card img { width: 100%; height: 350px; object-fit: cover; }
+        .card h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--dark); padding: 15px; margin: 0; }
 
-        /* MODAL POPUP */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 3000; overflow-y: auto; }
-        .modal-body { max-width: 1100px; margin: 50px auto; background: #fff; display: flex; gap: 50px; padding: 50px; position: relative; border-radius: 5px; }
-        .modal-img { flex: 1.3; }
-        .modal-img img { width: 100%; border-radius: 4px; }
+        /* ENQUIRY MODAL */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 3000; overflow-y: auto; }
+        .modal-body { max-width: 1100px; margin: 30px auto; background: #fff; display: flex; gap: 30px; padding: 40px; position: relative; border-radius: 10px; }
+        .modal-img { flex: 1.2; }
+        .modal-img img { width: 100%; border-radius: 8px; border: 1px solid #eee; }
         .modal-info { flex: 1; }
-        .close-btn { position: absolute; right: 25px; top: 15px; font-size: 50px; cursor: pointer; }
+        .close-btn { position: absolute; right: 20px; top: 10px; font-size: 45px; cursor: pointer; color: #333; }
 
-        .form-box { background: #fdfaf5; padding: 30px; border-radius: 4px; margin-top: 20px; border: 1px solid #eee; }
-        .form-box select, .form-box input, .form-box textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; font-family: inherit; }
-        .form-box button { width: 100%; padding: 18px; background: var(--dark); color: #fff; border: none; cursor: pointer; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+        .form-box { background: #fdfaf5; padding: 25px; border-radius: 8px; margin-top: 15px; border: 1px solid #EAE0D5; }
+        .form-box select, .form-box input, .form-box textarea { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-family: inherit; }
+        .form-box button { width: 100%; padding: 15px; background: var(--dark); color: #fff; border: none; cursor: pointer; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .form-box button:hover { background: var(--gold); }
 
-        /* FLOATING SOCIAL BUTTONS ANIMATION */
-        .fab-container { position: fixed; bottom: 30px; right: 30px; z-index: 2500; }
-        .fab-main { width: 65px; height: 65px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 26px; cursor: pointer; box-shadow: 0 5px 20px rgba(0,0,0,0.3); transition: 0.4s; }
-        .fab-list { position: absolute; bottom: 80px; right: 5px; list-style: none; padding: 0; margin: 0; display: none; flex-direction: column; gap: 15px; }
-        .fab-container:hover .fab-list { display: flex; animation: slideUp 0.4s ease forwards; }
-        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .fab-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 22px; text-decoration: none; transition: 0.3s; }
+        /* PREMIUM FLOATING SOCIAL PANEL */
+        .social-panel { position: fixed; bottom: 30px; right: 30px; z-index: 2500; display: flex; flex-direction: column; gap: 15px; }
+        .social-link { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 22px; text-decoration: none; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: 0.4s; }
+        .social-link:hover { transform: scale(1.1) translateX(-5px); }
         .wa { background: #25D366; } .li { background: #0077b5; } .ig { background: #e4405f; }
-        .fab-btn:hover { transform: scale(1.15); }
+        
+        @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } .modal-body { flex-direction: column; } }
     </style>
 </head>
 <body>
@@ -59,40 +59,46 @@
     <header class="header">
         <div class="nav-container">
             <a href="#" class="logo-box">
-                <img src="images/sun-spices-logo.jpeg" alt="Logo">
+                <img src="images/sun-spices-logo.jpeg" alt="Sun Spices Logo">
                 <span>SUN SPICES INDIA</span>
             </a>
-            <nav class="nav-menu">
-                <a href="#about">Story</a>
-                <a href="#products">Portfolio</a>
-                <a href="#contact">Contact</a>
+            <nav>
+                <a href="#products" style="text-decoration:none; color:inherit; margin-left:25px; font-weight:600;">PORTFOLIO</a>
+                <a href="#contact" style="text-decoration:none; color:inherit; margin-left:25px; font-weight:600;">CONTACT</a>
             </nav>
         </div>
     </header>
 
     <section class="hero">
-        <video autoplay muted loop playsinline><source src="images/spice-video.mp4" type="video/mp4"></video>
+        <video autoplay muted loop playsinline>
+            <source src="images/spice-video.mp4" type="video/mp4">
+        </video>
         <div class="hero-content">
             <p style="color:var(--gold); letter-spacing:5px;">PREMIUM EXPORTERS</p>
             <h1>Pure. Fragrant. <br> <i>Uncompromising.</i></h1>
         </div>
     </section>
 
-    <div class="grid" id="productGrid"></div>
+    <section id="products" class="products">
+        <h2 style="text-align: center; font-family: 'Playfair Display', serif; font-size: 40px; margin-bottom: 50px;">The Whole Spices Portfolio</h2>
+        <div class="grid" id="productGrid"></div>
+    </section>
 
     <div id="productModal" class="modal">
         <div class="modal-body">
             <span class="close-btn" onclick="closeModal()">&times;</span>
             <div class="modal-img"><img id="mImg" src=""></div>
             <div class="modal-info">
-                <h2 id="mTitle" style="font-family:'Playfair Display'; color:var(--dark); font-size:32px; margin-top:0;"></h2>
+                <h2 id="mTitle" style="font-family:'Playfair Display'; color:var(--dark); margin-top:0;"></h2>
                 <p id="mDesc" style="color:#555; line-height:1.7; font-size:16px;"></p>
+                
                 <div class="form-box">
-                    <h4 id="gradeLabel" style="margin-top:0;">Select Specification</h4>
-                    <select id="dynamicGrade"></select>
-                    <input type="text" placeholder="Quantity required (e.g. 500kg)">
-                    <input type="email" placeholder="Your Email">
-                    <p id="cap" style="font-weight:600; color:var(--gold); margin-bottom:10px;"></p>
+                    <h4>Custom Order Enquiry</h4>
+                    <div id="gradeContainer"></div>
+                    <input type="text" placeholder="Quantity Needed (e.g., 1000kg)">
+                    <input type="email" placeholder="Contact Email">
+                    <textarea placeholder="Specific packaging or quality requirements..." rows="2"></textarea>
+                    <p id="cap" style="font-weight:600; color:var(--gold); margin:5px 0;"></p>
                     <input type="number" id="capIn" placeholder="Answer?">
                     <button onclick="submitInquiry()">Request Quote</button>
                 </div>
@@ -100,56 +106,52 @@
         </div>
     </div>
 
-    <div class="fab-container">
-        <div class="fab-list">
-            <a href="https://wa.me/917207396427" class="fab-btn wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.linkedin.com/in/surya-gowtham-6176443a5" class="fab-btn li" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://www.instagram.com/sunspicesindia" class="fab-btn ig" target="_blank"><i class="fab fa-instagram"></i></a>
-        </div>
-        <div class="fab-main"><i class="fas fa-plus"></i></div>
+    <div class="social-panel">
+        <a href="https://wa.me/917207396427" class="social-link wa" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://www.linkedin.com/in/surya-gowtham-6176443a5" class="social-link li" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.instagram.com/sunspicesindia" class="social-link ig" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
     </div>
+
+    <footer id="contact" style="background:#000; color:#fff; padding:60px 30px; text-align:center;">
+        <p>sunspices.exports.in@gmail.com | +91 7207396427</p>
+        <p style="font-size:12px; color:#555; margin-top:20px;">© 2026 Sun Spices India.</p>
+    </footer>
 
     <script>
         const spices = [
-            { name: 'Cardamom', img: 'cardamom.jpg', desc: 'Premium green cardamom from Kerala.', grades: ['8mm Bold', '7.5mm Grade', '7mm Standard', 'Fresh Green Split'] },
-            { name: 'Black Pepper', img: 'balck-pepper.jfif', desc: 'Authentic Malabar pepper berries.', grades: ['Bold MG-1', 'Garbled', 'Ungarbled', 'Light Pepper'] },
-            { name: 'Turmeric', img: 'turmeric-01.jfif', desc: 'High curcumin content Salem turmeric.', grades: ['High Curcumin (5%+)','Standard Grade','Finger Polished','Bulb Turmeric'] },
-            { name: 'Star Anise', img: 'star-anise.jfif', desc: 'Fragrant star-shaped pods.', grades: ['Whole Star', 'Broken Star', 'Powder Grade'] },
-            { name: 'Cloves', img: 'cloves.jfif', desc: 'Full-headed dried cloves with high essential oils.', grades: ['Handpicked Grade-A', 'Standard Grade', 'Clove Stems'] },
-            { name: 'Cinnamon', img: 'cinnamon.jfif', desc: 'Sweet woody cinnamon quills from Kerala.', grades: ['H1 Quills', 'H2 Quills', 'Chips Grade'] },
-            { name: 'Nutmeg', img: 'nutmeg.jfif', desc: 'Whole nutmeg seeds with natural shell.', grades: ['With Shell', 'Without Shell', 'BWP Grade'] },
-            { name: 'Mace', img: 'mace.jfif', desc: 'Delicate floral spice from the nutmeg husk.', grades: ['Whole Flower', 'Broken Mace', 'Red Mace'] },
-            { name: 'Coriander Seeds', img: 'coriander-seeds.jfif', desc: 'Golden crisp seeds with citrusy profile.', grades: ['Badami Grade', 'Eagle Grade', 'Scooter Grade'] },
-            { name: 'Cumin Seeds', img: 'cumin-seeds.jfif', desc: 'Machine cleaned bold cumin seeds.', grades: ['99% Purity', '98% Purity', 'Singapore Grade'] },
-            { name: 'Fennel Seeds', img: 'fennel-seeds.jfif', desc: 'Sweet green seeds with high essential oil.', grades: ['Abu Grade', 'Lucknowi Grade', 'Medium Grade'] },
-            { name: 'Fenugreek Seeds', img: 'fenugreek-seeds.jfif', desc: 'Nutty seeds, essential for spice powders.', grades: ['Machine Cleaned', 'Sortex Purity', 'Standard Quality'] },
-            { name: 'Mustard Seeds', img: 'mustard-seeds.jfif', desc: 'Bold black mustard seeds for tempering.', grades: ['Bold Black', 'Small Black', 'Yellow Mustard'] },
-            { name: 'Nigella Seeds', img: 'nigella-seeds.jfif', desc: 'Premium Kalonji seeds.', grades: ['99% Purity', 'Standard Grade'] },
-            { name: 'Red Chilli Powder', img: 'red-chilli-powder.jfif', desc: 'Pure, pungent red dried chilli powder.', grades: ['Extra Hot', 'Medium Spicy', 'Kashmiri (Color)'] }
+            { name: 'Cardamom', img: 'cardamom.jpg', desc: 'Premium green cardamom from Kerala.', grades: ['8mm Bold (Premium)', '7.5mm Grade', '7mm Standard', 'Fresh Green 6mm'] },
+            { name: 'Black Pepper', img: 'balck-pepper.jfif', desc: 'Bold berries with high piperine content.', grades: ['550 GL (Bold)', '500 GL', 'Pepper Husks', 'Pinheads'] },
+            { name: 'Turmeric', img: 'turmeric-01.jfif', desc: 'High Curcumin Salem Turmeric.', grades: ['Curcumin 5%+', 'Curcumin 3%+', 'Turmeric Finger', 'Polished Turmeric'] },
+            { name: 'Star Anise', img: 'star-anise.jfif', desc: 'Fragrant star-shaped pods.', grades: ['Whole Star (Handpicked)', 'Broken Star Anise'] },
+            { name: 'Cloves', img: 'cloves.jfif', desc: 'Full-headed dried cloves from Idukki.', grades: ['Handpicked (CG1)', 'FAQ Grade', 'Cloves Stems'] },
+            { name: 'Cinnamon', img: 'cinnamon.jfif', desc: 'Authentic sweet woody quills.', grades: ['C5 Alba Quills', 'H1 Grade', 'Cinnamon Powder'] },
+            { name: 'Ajwain', img: 'ajwain-seeds.jfif', desc: 'Pure seeds with strong pungent aroma.', grades: ['Machine Cleaned', 'Sortex Cleaned'] },
+            { name: 'Bay Leaf', img: 'bay-leaf.jfif', desc: 'Whole aromatic leaves.', grades: ['Grade A (Whole Leaves)', 'Broken Leaves'] },
+            { name: 'Coriander Seeds', img: 'coriander-seeds.jfif', desc: 'Golden seeds with fresh citrus notes.', grades: ['Eagle Quality', 'Indori Quality', 'Badami Quality'] },
+            { name: 'Cumin Seeds', img: 'cumin-seeds.jfif', desc: 'Machine cleaned bold cumin seeds.', grades: ['Singapore Quality (99%)', 'Europe Quality (99.5%)'] },
+            { name: 'Mustard Seeds', img: 'mustard-seeds.jfif', desc: 'Bold black mustard seeds.', grades: ['Bold Black', 'Small Black', 'Yellow Mustard'] },
+            { name: 'Nutmeg', img: 'nutmeg.jfif', desc: 'Whole nutmeg with shell.', grades: ['With Shell', 'Without Shell (ABCD)', 'Nutmeg Powder'] }
         ];
 
         const grid = document.getElementById('productGrid');
         spices.forEach(s => {
-            grid.innerHTML += `<div class="card" onclick="openModal('${s.name}')">
-                <img src="images/${s.img}" onerror="this.src='https://via.placeholder.com/600x420?text=${s.name}'">
+            grid.innerHTML += `<div class="card" onclick="openModal('${s.name}', 'images/${s.img}', '${s.desc}', ${JSON.stringify(s.grades)})">
+                <img src="images/${s.img}" onerror="this.src='https://via.placeholder.com/400x350'">
                 <div class="card-info"><h3>${s.name}</h3></div>
             </div>`;
         });
 
         let ans = 0;
-        function openModal(name) {
-            const s = spices.find(x => x.name === name);
-            document.getElementById('mTitle').innerText = s.name;
-            document.getElementById('mImg').src = 'images/' + s.img;
-            document.getElementById('mDesc').innerText = s.desc;
+        function openModal(n, i, d, g) {
+            document.getElementById('mTitle').innerText = n;
+            document.getElementById('mImg').src = i;
+            document.getElementById('mDesc').innerText = d;
             
-            const gSelect = document.getElementById('dynamicGrade');
-            gSelect.innerHTML = '';
-            s.grades.forEach(g => {
-                let opt = document.createElement('option');
-                opt.value = g; opt.innerText = g;
-                gSelect.appendChild(opt);
-            });
+            // Dynamic Grade Dropdown
+            let selectHtml = `<select id="gradeSelect"><option value="">Select Grade for ${n}</option>`;
+            g.forEach(grade => { selectHtml += `<option value="${grade}">${grade}</option>`; });
+            selectHtml += `</select>`;
+            document.getElementById('gradeContainer').innerHTML = selectHtml;
 
             document.getElementById('productModal').style.display = 'block';
             document.body.style.overflow = 'hidden';
@@ -157,7 +159,6 @@
             ans = n1+n2;
             document.getElementById('cap').innerText = `Solve: ${n1} + ${n2} = ?`;
         }
-
         function closeModal() { document.getElementById('productModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
         function submitInquiry() { 
             if(parseInt(document.getElementById('capIn').value) === ans) { alert("Enquiry Sent Successfully!"); closeModal(); } 
