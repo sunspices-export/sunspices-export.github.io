@@ -26,7 +26,7 @@
         .hero-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #fff; width: 90%; }
         .hero-content h1 { font-family: 'Playfair Display', serif; font-size: clamp(40px, 8vw, 85px); margin: 0; line-height: 1.1; font-style: italic; }
 
-        /* 4 BIG PREMIUM SECTIONS (Vivid Visuals) */
+        /* 4 BIG PREMIUM SECTIONS */
         .vivid-section { padding: 100px 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1200px; margin: auto; }
         .vivid-section:nth-child(even) { direction: rtl; }
         .vivid-section img { width: 100%; border-radius: 5px; box-shadow: 20px 20px 0px var(--dark); }
@@ -40,7 +40,7 @@
         .card img { width: 100%; height: 400px; object-fit: cover; }
         .card h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--dark); padding: 20px; margin: 0; }
 
-        /* ADVANCED ENQUIRY MODAL */
+        /* MODAL POPUP */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 3000; overflow-y: auto; }
         .modal-body { max-width: 1150px; margin: 50px auto; background: #fff; display: flex; gap: 40px; padding: 50px; position: relative; border-radius: 5px; }
         .modal-img { flex: 1.2; }
@@ -50,19 +50,19 @@
 
         .form-box { background: #fdfaf5; padding: 30px; border-radius: 5px; margin-top: 20px; border: 1px solid #EAE0D5; }
         .form-box select, .form-box input, .form-box textarea { width: 100%; padding: 14px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 0; box-sizing: border-box; font-family: inherit; }
-        .form-box button { width: 100%; padding: 18px; background: var(--dark); color: #fff; border: none; cursor: pointer; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+        .form-box button { width: 100%; padding: 18px; background: var(--dark); color: #fff; border: none; cursor: pointer; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; }
+        .form-box button:hover { background: var(--gold); }
 
-        /* PREMIUM FLOATING SOCIAL BAR (Right Side) */
+        /* SOCIAL BAR */
         .side-social { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 2500; }
         .side-social a { display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; color: white; text-decoration: none; font-size: 24px; transition: 0.3s; margin-bottom: 2px; }
         .side-social .wa { background: #25D366; } .side-social .ig { background: #e4405f; } .side-social .li { background: #0077b5; }
         .side-social a:hover { width: 80px; padding-right: 20px; }
 
-        /* FOOTER */
         footer { background: var(--luxury); color: #888; padding: 80px 30px; text-align: center; }
         footer h4 { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 20px; }
 
-        @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } .vivid-section, .modal-body { grid-template-columns: 1fr; flex-direction: column; } }
+        @media (max-width: 900px) { .products-grid { grid-template-columns: 1fr 1fr; } .vivid-section, .modal-body { grid-template-columns: 1fr; flex-direction: column; } }
     </style>
 </head>
 <body>
@@ -94,7 +94,7 @@
         <img src="images/hero-cardamom.jpg" alt="Premium Cardamom">
         <div class="vivid-text">
             <h2>The Queen of Spices</h2>
-            <p>Our handpicked green cardamom from the heart of Vandanmedu represents the finest quality India has to offer. Each pod is sun-dried to maintain its vibrant color and rich essential oils.</p>
+            <p>Our handpicked green cardamom from the heart of Vandanmedu represents the finest quality India has to offer. Sourced directly from Kerala plantations.</p>
         </div>
     </section>
 
@@ -102,27 +102,11 @@
         <img src="images/hero-all-spices.jpeg" alt="Assorted Spices">
         <div class="vivid-text">
             <h2>The Complete Portfolio</h2>
-            <p>From Black Pepper to Star Anise, Sun Spices India handles a diverse range of whole spices. Our direct links with farmers ensure zero middlemen and 100% purity for our global B2B clients.</p>
+            <p>From Black Pepper to Star Anise, we handle a diverse range of whole spices with 100% purity guaranteed for global B2B clients.</p>
         </div>
     </section>
 
-    <section class="vivid-section">
-        <img src="images/hero-plantation.jpg" alt="Kerala Plantation">
-        <div class="vivid-text">
-            <h2>Direct From Plantations</h2>
-            <p>We are rooted in the high-altitude plantations of Kerala. This direct sourcing allows us to control the quality from harvest to packaging, meeting international food safety standards.</p>
-        </div>
-    </section>
-
-    <section class="vivid-section">
-        <img src="images/lifestyle.webp" alt="Traditional Processing">
-        <div class="vivid-text">
-            <h2>Established Heritage</h2>
-            <p>Our established exporting experience guarantees that every batch we ship is consistent in grade, size, and aroma, making us the most reliable spice partner in India.</p>
-        </div>
-    </section>
-
-    <section id="products" class="products-grid" id="productGrid">
+    <section id="products" class="products-grid">
         </section>
 
     <div id="productModal" class="modal">
@@ -139,7 +123,7 @@
                     <input type="email" placeholder="Your Email Address">
                     <p id="cap" style="font-weight:600; color:var(--gold); margin:5px 0;"></p>
                     <input type="number" id="capIn" placeholder="Answer?">
-                    <button onclick="submitInquiry()">Submit Inquiry</button>
+                    <button onclick="handleInquiry()">Submit Inquiry</button>
                 </div>
             </div>
         </div>
@@ -160,30 +144,30 @@
 
     <script>
         const products = [
-            { name: 'Cardamom', img: 'cardamom.jpg', grades: ['8mm Bold (Premium)', '7.5mm Grade', '7mm Standard'], desc: 'Premium green cardamom pods with high oil content and vibrant color. Sourced from Vandanmedu, Kerala.' },
-            { name: 'Black Pepper', img: 'balck-pepper.jfif', grades: ['550 GL (Bold)', '500 GL', 'A-Grade Uncleaned'], desc: 'Known as "Black Gold," our Malabar pepper is sun-dried and graded for sharp pungency and bold berry size.' },
-            { name: 'Turmeric Powder', img: 'turmeric-01.jfif', grades: ['Premium (High Curcumin)', 'Standard Export'], desc: 'Vibrant golden turmeric with high curcumin content, processed under strict hygiene standards.' },
-            { name: 'Star Anise', img: 'star-anise.jfif', grades: ['Whole Unbroken', 'Standard Mix'], desc: 'Fragrant star-shaped pods, hand-sorted to ensure 95% whole pieces for premium culinary use.' },
-            { name: 'Cloves', img: 'cloves.jfif', grades: ['Hand-Selected Bold', 'Standard Grade'], desc: 'Full-headed dried cloves with deep aroma and high essential oil content.' },
-            { name: 'Cinnamon Quills', img: 'cinnamon.jfif', grades: ['Grade C5 (Delicate)', 'Grade H1'], desc: 'Authentic sweet woody cinnamon quills from Kerala, hand-rolled and sun-dried.' },
-            { name: 'Ajwain Seeds', img: 'ajwain-seeds.jfif', grades: ['Machine Cleaned', 'Sortex Cleaned'], desc: 'Pure Ajwain seeds with strong pungent aroma and high purity levels.' },
-            { name: 'Anise Seeds', img: 'anise-seeds.jfif', grades: ['Premium Export Grade'], desc: 'Aromatic anise seeds, cleaned thoroughly for baking and beverage industries.' },
-            { name: 'Bay Leaf', img: 'bay-leaf.jfif', grades: ['Whole Leaf (A-Grade)'], desc: 'Handpicked whole bay leaves with intact fragrance and natural green shade.' },
-            { name: 'Coriander Seeds', img: 'coriander-seeds.jfif', grades: ['Eagle Grade', 'Badami Grade'], desc: 'Crisp, golden coriander seeds with citrusy profile and consistent size.' },
-            { name: 'Cumin Seeds', img: 'cumin-seeds.jfif', grades: ['Machine Cleaned 99%', 'Sortex 99.5%'], desc: 'High purity cumin seeds with warm, earthy aroma and uniform grading.' },
-            { name: 'Dill Seeds', img: 'dill-seeds.jfif', grades: ['Export Grade'], desc: 'Cleaned dill seeds essential for seasoning and traditional oil extraction.' },
-            { name: 'Fennel Seeds', img: 'fennel-seeds.jfif', grades: ['Lucknowi Green', 'Standard Green'], desc: 'Sweet aromatic seeds with high essential oil, used as digestive and spice.' },
-            { name: 'Fenugreek Seeds', img: 'fenugreek-seeds.jfif', grades: ['Bold Yellow', 'Standard'], desc: 'Bittersweet seeds with high nutritional value, graded for export.' },
-            { name: 'Mace (Javitri)', img: 'mace.jfif', grades: ['Whole Flower (Premium)', 'Broken Mix'], desc: 'Delicate floral spice from the nutmeg husk, handpicked for its vibrant color.' },
-            { name: 'Mustard Seeds', img: 'mustard-seeds.jfif', grades: ['Bold Black', 'Small Black'], desc: 'Cleaned black mustard seeds essential for traditional tempering and oils.' },
-            { name: 'Nigella Seeds', img: 'nigella-seeds.jfif', grades: ['99% Pure Kalonji'], desc: 'Premium black cumin (Kalonji) seeds with high oil content and health benefits.' },
-            { name: 'Nutmeg', img: 'nutmeg.jfif', grades: ['Whole with Shell', 'Shelled Kernels'], desc: 'Whole nutmeg seeds with strong, nutty aroma, graded for bulk export.' },
-            { name: 'Poppy Seeds', img: 'poppy-seeds.jfif', desc: 'Creamy white poppy seeds for textured gravies and baking.' },
-            { name: 'Red Chilli Powder', img: 'red-chilli-powder.jfif', grades: ['High Heat (Sannam)', 'Medium Heat'], desc: 'Vibrant red chilli with perfect balance of color and pungency.' },
-            { name: 'Caraway Seeds', img: 'caraway-seeds.jfif', grades: ['Premium Grade'], desc: 'Aromatic caraway seeds for premium spice blends and international bakery.' }
+            { name: 'Cardamom', img: 'cardamom.jpg', grades: ['8mm Bold', '7.5mm Grade', '7mm Standard'], desc: 'Premium green cardamom pods with high oil content from Kerala plantations.' },
+            { name: 'Black Pepper', img: 'balck-pepper.jfif', grades: ['550 GL (Bold)', '500 GL'], desc: 'Authentic Malabar black pepper, sun-dried for sharp pungency.' },
+            { name: 'Turmeric Powder', img: 'turmeric-01.jfif', grades: ['Premium High Curcumin'], desc: 'Vibrant golden turmeric with maximum therapeutic value.' },
+            { name: 'Star Anise', img: 'star-anise.jfif', grades: ['Whole Unbroken'], desc: 'Fragrant star-shaped pods, hand-sorted for purity.' },
+            { name: 'Cloves', img: 'cloves.jfif', grades: ['Hand-Selected Bold'], desc: 'Full-headed dried cloves with deep aroma.' },
+            { name: 'Cinnamon Quills', img: 'cinnamon.jfif', grades: ['Grade C5 Delicate'], desc: 'Hand-rolled sweet woody cinnamon quills.' },
+            { name: 'Ajwain Seeds', img: 'ajwain-seeds.jfif', grades: ['Machine Cleaned'], desc: 'Pure seeds with strong pungent aroma.' },
+            { name: 'Anise Seeds', img: 'anise-seeds.jfif', grades: ['Premium Export'], desc: 'Aromatic seeds cleaned for beverages.' },
+            { name: 'Bay Leaf', img: 'bay-leaf.jfif', grades: ['Whole A-Grade'], desc: 'Handpicked leaves with intact fragrance.' },
+            { name: 'Coriander Seeds', img: 'coriander-seeds.jfif', grades: ['Eagle Grade'], desc: 'Crisp golden seeds with citrusy profile.' },
+            { name: 'Cumin Seeds', img: 'cumin-seeds.jfif', grades: ['Sortex 99.5%'], desc: 'High purity seeds with warm earthy aroma.' },
+            { name: 'Dill Seeds', img: 'dill-seeds.jfif', grades: ['Export Grade'], desc: 'Cleaned seeds for premium seasoning.' },
+            { name: 'Fennel Seeds', img: 'fennel-seeds.jfif', grades: ['Lucknowi Green'], desc: 'Sweet aromatic seeds with high essential oil.' },
+            { name: 'Fenugreek Seeds', img: 'fenugreek-seeds.jfif', grades: ['Bold Yellow'], desc: 'Bittersweet seeds with high nutritional value.' },
+            { name: 'Mace (Javitri)', img: 'mace.jfif', grades: ['Whole Flower'], desc: 'Delicate floral spice handpicked for color.' },
+            { name: 'Mustard Seeds', img: 'mustard-seeds.jfif', grades: ['Bold Black'], desc: 'Cleaned black mustard for tempering.' },
+            { name: 'Nigella Seeds', img: 'nigella-seeds.jfif', grades: ['99% Pure'], desc: 'Premium Kalonji seeds with health benefits.' },
+            { name: 'Nutmeg', img: 'nutmeg.jfif', grades: ['Whole with Shell'], desc: 'Graded whole nutmeg for bulk export.' },
+            { name: 'Poppy Seeds', img: 'poppy-seeds.jfif', grades: ['Creamy White'], desc: 'Textured seeds for gravies and baking.' },
+            { name: 'Red Chilli Powder', img: 'red-chilli-powder.jfif', grades: ['High Heat Sannam'], desc: 'Vibrant red chilli with perfect pungency.' },
+            { name: 'Caraway Seeds', img: 'caraway-seeds.jfif', grades: ['Premium Grade'], desc: 'Aromatic seeds for international bakery.' }
         ];
 
-        const grid = document.getElementById('products');
+        const grid = document.querySelector('#products');
         products.forEach(p => {
             grid.innerHTML += `<div class="card" onclick="openModal('${p.name}', 'images/${p.img}', '${p.desc}', ${JSON.stringify(p.grades || ['Standard Export'])})">
                 <img src="images/${p.img}" onerror="this.src='https://via.placeholder.com/400x400?text=${p.name}'">
@@ -208,9 +192,16 @@
         }
 
         function closeModal() { document.getElementById('productModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
-        function submitInquiry() { 
-            if(parseInt(document.getElementById('capIn').value) === ans) { alert("Enquiry Sent Successfully!"); closeModal(); } 
-            else { alert("Incorrect Answer!"); }
+
+        // Corrected function name to match button
+        function handleInquiry() { 
+            const userAns = document.getElementById('capIn').value;
+            if(userAns == ans && userAns !== "") { 
+                alert("Enquiry Sent Successfully! We will contact you soon."); 
+                closeModal(); 
+            } else { 
+                alert("Incorrect Answer! Please try again."); 
+            }
         }
     </script>
 </body>
