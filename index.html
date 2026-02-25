@@ -8,73 +8,60 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        :root { --gold: #C5A059; --dark: #1A2F23; --luxury: #0D0D0D; --cream: #FCF9F5; }
-        
+        :root { --gold: #C5A059; --dark: #1A2F23; --cream: #FCF9F5; }
         body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--cream); color: #333; scroll-behavior: smooth; overflow-x: hidden; }
 
-        /* HEADER & NAVIGATION */
-        .header { position: sticky; top: 0; z-index: 2000; background: rgba(255,255,255,0.98); padding: 10px 0; border-bottom: 1px solid #EAE0D5; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+        /* HEADER */
+        .header { position: sticky; top: 0; z-index: 2000; background: #fff; padding: 10px 0; border-bottom: 1px solid #EAE0D5; }
         .nav-container { max-width: 1300px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 0 30px; }
         .logo-box { display: flex; align-items: center; gap: 15px; text-decoration: none; color: var(--dark); }
-        .logo-box img { height: 65px; width: auto; border-radius: 4px; }
-        .logo-box span { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; letter-spacing: 1px; }
-        .nav-menu a { text-decoration: none; color: #333; margin-left: 30px; font-weight: 600; font-size: 14px; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
-        .nav-menu a:hover { color: var(--gold); }
+        .logo-box img { height: 60px; width: auto; }
+        .logo-box span { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; }
 
-        /* PREMIUM VIDEO HERO */
-        .hero { height: 90vh; position: relative; overflow: hidden; background: #000; }
-        .hero video { width: 100%; height: 100%; object-fit: cover; opacity: 0.65; }
-        .hero-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #fff; width: 90%; }
-        .hero-content p { font-size: 18px; letter-spacing: 6px; text-transform: uppercase; color: var(--gold); margin-bottom: 15px; font-weight: 600; }
+        /* PREMIUM HERO SLIDER & VIDEO */
+        .hero-container { height: 90vh; position: relative; background: #000; overflow: hidden; }
+        .hero-slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1.5s ease-in-out; }
+        .hero-slide.active { opacity: 0.6; }
+        .hero-slide img, .hero-slide video { width: 100%; height: 100%; object-fit: cover; }
+        
+        .hero-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #fff; z-index: 10; width: 90%; }
         .hero-content h1 { font-family: 'Playfair Display', serif; font-size: clamp(40px, 8vw, 85px); margin: 0; line-height: 1.1; font-style: italic; }
+        .hero-content p { font-size: 18px; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; margin-top: 20px; }
 
-        /* ABOUT / LIFESTYLE SECTION */
-        .about { max-width: 1250px; margin: 100px auto; padding: 0 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-        .about-img { position: relative; }
-        .about-img img { width: 100%; border-radius: 5px; box-shadow: 25px 25px 0px var(--dark); transition: 0.5s; }
-        .about-text span { color: var(--gold); font-weight: 600; letter-spacing: 3px; font-size: 13px; }
-        .about-text h2 { font-family: 'Playfair Display', serif; font-size: 45px; margin: 15px 0; color: var(--dark); line-height: 1.2; }
+        /* ABOUT SECTION */
+        .about { max-width: 1200px; margin: 100px auto; padding: 0 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .about-img img { width: 100%; border-radius: 5px; box-shadow: 20px 20px 0px var(--dark); }
+        .about-text h2 { font-family: 'Playfair Display', serif; font-size: 42px; margin-bottom: 20px; color: var(--dark); }
         .about-text p { font-size: 17px; line-height: 1.9; color: #555; text-align: justify; }
 
-        /* DYNAMIC PRODUCT GRID */
-        .products-section { padding: 100px 30px; background: #fff; }
-        .section-header { text-align: center; margin-bottom: 70px; }
-        .section-header h2 { font-family: 'Playfair Display', serif; font-size: 48px; margin: 0; }
-        .grid { max-width: 1300px; margin: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; }
-        .card { background: var(--cream); border: 1px solid #EAE0D5; overflow: hidden; transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); cursor: pointer; position: relative; }
-        .card:hover { transform: translateY(-12px); box-shadow: 0 30px 60px rgba(0,0,0,0.12); border-color: var(--gold); }
-        .card img { width: 100%; height: 420px; object-fit: cover; transition: 0.8s; }
-        .card:hover img { transform: scale(1.08); }
-        .card-info { padding: 25px; text-align: center; background: #fff; }
-        .card-info h3 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--dark); margin: 0; }
+        /* PRODUCT GRID */
+        .grid-container { max-width: 1300px; margin: 80px auto; padding: 0 30px; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .card { background: #fff; border: 1px solid #EAE0D5; overflow: hidden; transition: 0.5s; cursor: pointer; text-align: center; }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+        .card img { width: 100%; height: 400px; object-fit: cover; }
+        .card-info { padding: 20px; }
+        .card-info h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--dark); margin: 0; }
 
-        /* EXCELLENT ENQUIRY MODAL */
+        /* MODAL POPUP */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 3000; overflow-y: auto; }
-        .modal-body { max-width: 1150px; margin: 50px auto; background: #fff; display: flex; gap: 50px; padding: 50px; position: relative; border-radius: 5px; animation: slideDown 0.5s ease; }
-        @keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .modal-img { flex: 1.3; }
-        .modal-img img { width: 100%; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .modal-info { flex: 1; display: flex; flex-direction: column; }
-        .close-btn { position: absolute; right: 25px; top: 15px; font-size: 50px; cursor: pointer; color: #333; transition: 0.3s; }
-        .close-btn:hover { color: var(--gold); }
+        .modal-body { max-width: 1100px; margin: 50px auto; background: #fff; display: flex; gap: 40px; padding: 40px; position: relative; border-radius: 8px; }
+        .modal-img { flex: 1.2; }
+        .modal-img img { width: 100%; border-radius: 5px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .modal-info { flex: 1; }
+        .close-btn { position: absolute; right: 20px; top: 10px; font-size: 45px; cursor: pointer; color: #333; }
 
-        .form-box { background: #fdfaf5; padding: 35px; border-radius: 4px; margin-top: auto; border: 1px solid #eee; }
-        .form-box h4 { font-family: 'Playfair Display', serif; margin-top: 0; font-size: 22px; color: var(--dark); }
-        .form-box input, .form-box textarea { width: 100%; padding: 14px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 0; box-sizing: border-box; font-family: inherit; font-size: 14px; }
-        .form-box button { width: 100%; padding: 18px; background: var(--dark); color: #fff; border: none; cursor: pointer; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; }
-        .form-box button:hover { background: var(--gold); }
+        .form-box { background: #fdfaf5; padding: 25px; border-radius: 5px; margin-top: 20px; border: 1px solid #eee; }
+        .form-box input, .form-box select, .form-box textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-family: inherit; }
+        .form-box button { width: 100%; padding: 15px; background: var(--dark); color: #fff; border: none; cursor: pointer; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
 
         /* FOOTER */
-        footer { background: var(--luxury); color: #fff; padding: 100px 30px 40px; }
-        .footer-grid { max-width: 1200px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; }
-        .footer-box h4 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--gold); margin-bottom: 30px; }
-        .footer-box p { color: #888; line-height: 1.8; font-size: 15px; }
-        .social-icons { display: flex; gap: 25px; margin-top: 25px; }
-        .social-icons a { color: #fff; font-size: 24px; transition: 0.3s; }
-        .social-icons a:hover { color: var(--gold); transform: translateY(-5px); }
+        footer { background: #000; color: #fff; padding: 80px 30px 40px; }
+        .footer-grid { max-width: 1200px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
+        .footer-box h4 { font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 20px; font-size: 22px; }
+        .footer-box p { font-size: 15px; color: #888; line-height: 1.7; }
 
-        @media (max-width: 1000px) { .grid { grid-template-columns: 1fr 1fr; } .about, .modal-body { flex-direction: column; padding: 30px; } .modal-img, .modal-info { flex: none; width: 100%; } }
-        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } .hero-content h1 { font-size: 40px; } }
+        @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } .about, .modal-body { flex-direction: column; } }
     </style>
 </head>
 <body>
@@ -85,41 +72,40 @@
                 <img src="images/sun-spices-logo.jpeg" alt="Sun Spices Logo">
                 <span>SUN SPICES INDIA</span>
             </a>
-            <nav class="nav-menu">
-                <a href="#about">Our Story</a>
-                <a href="#products">Portfolio</a>
-                <a href="#contact">Contact</a>
+            <nav>
+                <a href="#about" style="text-decoration:none; color:inherit; margin-left:25px; font-weight:600;">STORY</a>
+                <a href="#products" style="text-decoration:none; color:inherit; margin-left:25px; font-weight:600;">PORTFOLIO</a>
+                <a href="#contact" style="text-decoration:none; color:inherit; margin-left:25px; font-weight:600;">CONTACT</a>
             </nav>
         </div>
     </header>
 
-    <section class="hero">
-        <video autoplay muted loop playsinline poster="images/hero-cardamom.jpg">
-            <source src="images/spice-video.mp4" type="video/mp4">
-        </video>
+    <section class="hero-container">
+        <div class="hero-slide active">
+            <video autoplay muted loop playsinline><source src="images/spice-video.mp4" type="video/mp4"></video>
+        </div>
+        <div class="hero-slide"><img src="images/hero-cardamom.jpg" alt="Premium Cardamom"></div>
+        <div class="hero-slide"><img src="images/hero-all-spices.jpeg" alt="Premium Spices"></div>
+        <div class="hero-slide"><img src="images/hero-plantation.jpg" alt="Kerala Plantation"></div>
+
         <div class="hero-content">
-            <p>Exporting the Soul of Kerala</p>
-            <h1>Pure. Fragrant. <br> Uncompromising.</h1>
+            <p>Directly from the Heart of Kerala</p>
+            <h1>Pure. Fragrant. <br> <i>Uncompromising.</i></h1>
         </div>
     </section>
 
     <section id="about" class="about">
-        <div class="about-img">
-            <img src="images/lifestyle.webp" alt="Harvesting Heritage">
-        </div>
+        <div class="about-img"><img src="images/lifestyle.webp" alt="Authentic Spices"></div>
         <div class="about-text">
             <span>ESTABLISHED EXPORTERS</span>
-            <h2>Authentic Flavors, <br>Global Reach</h2>
-            <p>At Sun Spices India, we pride ourselves on being a premier merchant exporter of the finest Indian spices. Sourced from the high-altitude plantations of Kerala, our products represent the pinnacle of purity and aroma.</p>
-            <p>Our commitment to excellence ensures that every batch maintains its natural essential oils and superior grade, meeting stringent international food safety standards for our global B2B partners.</p>
+            <h2>Authentic Flavors, Global Reach</h2>
+            <p>At Sun Spices India, we specialize in exporting premium whole spices sourced directly from the high-altitude plantations of Kerala. Our commitment to excellence ensures that every product maintains its natural aroma and superior quality.</p>
+            <p>We work closely with local farmers in Vandanmedu to bring you the finest grades of spices, meeting all international food safety standards for our global B2B partners.</p>
         </div>
     </section>
 
-    <section id="products" class="products-section">
-        <div class="section-header">
-            <h2 style="color:var(--dark);">The Whole Spices Portfolio</h2>
-            <p style="color:var(--gold); letter-spacing:2px;">HANDPICKED & SUN-DRIED PREMIUM GRADES</p>
-        </div>
+    <section id="products" class="grid-container">
+        <h2 style="text-align: center; font-family: 'Playfair Display', serif; font-size: 42px; margin-bottom: 60px;">The Whole Spices Portfolio</h2>
         <div class="grid" id="productGrid"></div>
     </section>
 
@@ -129,13 +115,24 @@
             <div class="modal-img"><img id="mImg" src=""></div>
             <div class="modal-info">
                 <h2 id="mTitle" style="font-family:'Playfair Display'; font-size:36px; color:var(--dark); margin-top:0;"></h2>
-                <p id="mDesc" style="color:#555; line-height:1.8; font-size:17px; margin-bottom:30px; text-align:justify;"></p>
+                <p id="mDesc" style="color:#555; line-height:1.8; font-size:17px; margin-bottom:20px;"></p>
                 <div class="form-box">
-                    <h4>Bulk Enquiry</h4>
-                    <input type="text" placeholder="Your Name / Company">
+                    <h4 style="margin:0 0 15px 0;">Bulk Enquiry</h4>
+                    <input type="text" placeholder="Full Name">
+                    
+                    <div id="mmSelector" style="display:none;">
+                        <label style="font-size:14px; color:#555;">Select Grade:</label>
+                        <select id="gradeSelection">
+                            <option value="6mm">6mm Grade</option>
+                            <option value="7mm">7mm Grade</option>
+                            <option value="8mm Bold">8mm Bold Grade</option>
+                            <option value="Custom">Custom Requirement</option>
+                        </select>
+                    </div>
+
                     <input type="email" placeholder="Email Address">
-                    <textarea placeholder="Specify your quantity and requirement..." rows="3"></textarea>
-                    <p id="cap" style="font-weight:600; color:var(--gold); margin-bottom:10px;"></p>
+                    <textarea placeholder="Tell us your quantity requirement..." rows="3"></textarea>
+                    <p id="cap" style="font-weight:600; color:var(--gold); margin:5px 0;"></p>
                     <input type="number" id="capIn" placeholder="Answer?">
                     <button onclick="submitInquiry()">Request Quote</button>
                 </div>
@@ -145,74 +142,80 @@
 
     <footer id="contact">
         <div class="footer-grid">
-            <div class="footer-box">
-                <h4>Sun Spices India</h4>
-                <p>A trusted name in spice exports, specializing in premium green Cardamom and whole spices from the heart of Kerala, India.</p>
-            </div>
-            <div class="footer-box">
-                <h4>Contact Info</h4>
-                <p><i class="fas fa-map-marker-alt" style="color:var(--gold); margin-right:10px;"></i> Vandanmedu, Idukki District, Kerala - 685551</p>
-                <p><i class="fas fa-phone" style="color:var(--gold); margin-right:10px;"></i> +91 7207396427</p>
-                <p><i class="fas fa-envelope" style="color:var(--gold); margin-right:10px;"></i> sunspices.exports.in@gmail.com</p>
-            </div>
-            <div class="footer-box">
-                <h4>Global Presence</h4>
-                <p>We supply authentic spices to major markets across Europe, Middle East, and Asia with guaranteed freshness.</p>
-                <div class="social-icons">
-                    <a href="https://www.instagram.com/sunspicesindia" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/in/surya-gowtham-6176443a5" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://wa.me/917207396427" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <div class="footer-box"><h4>Sun Spices India</h4><p>Connecting the world to the authentic spice gardens of Kerala.</p></div>
+            <div class="footer-box"><h4>Contact</h4><p>Vandanmedu, Idukki District, Kerala - 685551<br>+91 7207396427<br>sunspices.exports.in@gmail.com</p></div>
+            <div class="footer-box"><h4>Follow Us</h4>
+                <div style="font-size:24px; display:flex; gap:25px; margin-top:10px;">
+                    <a href="https://www.instagram.com/sunspicesindia" target="_blank" style="color:#fff;"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/917207396427" target="_blank" style="color:#fff;"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
         </div>
-        <div style="text-align:center; padding-top:60px; border-top:1px solid #222; margin-top:60px; font-size:13px; color:#555;">
-            © 2026 Sun Spices India. All Rights Reserved.
-        </div>
+        <p style="text-align:center; margin-top:50px; color:#555; border-top:1px solid #222; padding-top:20px;">© 2026 Sun Spices India. All Rights Reserved.</p>
     </footer>
 
     <script>
         const spices = [
-            { name: 'Cardamom (8mm Bold)', img: 'cardamom.jpg', desc: 'Sourced from the heart of Vandanmedu, our 8mm Bold Cardamom is prized for its deep green color and intense essential oil content. We ensure each pod is handpicked to meet premium export standards.' },
-            { name: 'Malabar Black Pepper', img: 'balck-pepper.jfif', desc: 'Known as "Black Gold," our Malabar Pepper berries are large, heavy, and pungent. Carefully sun-dried to maintain their natural piperine content and deep black color.' },
-            { name: 'Salem Turmeric', img: 'turmeric-01.jfif', desc: 'Our Turmeric is tested for high curcumin levels. It is processed under hygienic conditions, resulting in a vibrant golden-yellow powder with rich earthy notes.' },
-            { name: 'Star Anise', img: 'star-anise.jfif', desc: 'Symmetrical star-shaped pods with a distinct licorice-like aroma. We supply whole, unbroken pieces that are essential for gourmet culinary blends.' },
-            { name: 'Cloves', img: 'cloves.jfif', desc: 'Full-headed, aromatic cloves with high eugenol content. These are carefully sun-dried to preserve their intense spice and therapeutic properties.' },
-            { name: 'Ceylon Cinnamon', img: 'cinnamon.jfif', desc: 'Authentic sweet woody cinnamon quills from the finest plantations. These thin-layered quills provide a mild, sweet flavor far superior to common cassia.' },
-            { name: 'Ajwain Seeds', img: 'ajwain-seeds.jfif', desc: 'Cleaned and graded Ajwain seeds with a strong, pungent aroma. Essential for digestive health and adding a unique flavor to savory snacks.' },
-            { name: 'Anise Seeds', img: 'anise-seeds.jfif', desc: 'Premium grade anise seeds, highly aromatic and sweet. Perfect for use in baking, herbal infusions, and traditional confectionery.' },
-            { name: 'Bay Leaf', img: 'bay-leaf.jfif', desc: 'Handpicked whole dried bay leaves. Known for their subtle floral and herbal fragrance, essential for slow-cooked stews and biryanis.' },
-            { name: 'Coriander Seeds', img: 'coriander-seeds.jfif', desc: 'Golden, crisp coriander seeds with a citrusy and warm profile. Machine-cleaned to ensure zero impurities for global export.' },
-            { name: 'Cumin Seeds', img: 'cumin-seeds.jfif', desc: 'Export-quality cumin seeds with high volatile oil content. Thoroughly graded to provide a consistent, warm, and earthy flavor profile.' },
-            { name: 'Fennel Seeds', img: 'fennel-seeds.jfif', desc: 'Sweet green fennel seeds with a refreshing aroma. Sourced for high purity, they are widely used as mouth fresheners and in spice mixes.' },
-            { name: 'Fenugreek Seeds', img: 'fenugreek-seeds.jfif', desc: 'Nutty and slightly bitter seeds, essential for traditional spice powders and pickles. Known for their medicinal and nutritional value.' },
-            { name: 'Mustard Seeds', img: 'mustard-seeds.jfif', desc: 'Bold black mustard seeds that provide a sharp, nutty flavor when tempered. Machine-cleaned for consistent size and quality.' },
-            { name: 'Nutmeg (Whole)', img: 'nutmeg.jfif', desc: 'Large, whole nutmeg seeds with high oil content. Graded for premium quality, delivering a warm, spicy-sweet flavor to both desserts and savory dishes.' }
+            { name: 'Green Cardamom', img: 'cardamom.jpg', desc: 'Sourced from Vandanmedu, our Cardamom is prized for its deep green color and intense essential oil content. Available in various grades from 6mm to 8mm Bold.' },
+            { name: 'Malabar Black Pepper', img: 'balck-pepper.jfif', desc: 'Known as "Black Gold," these bold berries are sun-dried to maintain their sharp pungent flavor and natural piperine content.' },
+            { name: 'Salem Turmeric', img: 'turmeric-01.jfif', desc: 'Tested for high curcumin levels, our turmeric is processed under hygienic conditions to ensure vibrant golden color and therapeutic benefits.' },
+            { name: 'Star Anise', img: 'star-anise.jfif', desc: 'Whole, unbroken star-shaped pods with a distinct licorice-like aroma, essential for gourmet culinary blends.' },
+            { name: 'Cloves', img: 'cloves.jfif', desc: 'Handpicked dried flower buds from Idukki, rich in eugenol with a warm, spicy, and aromatic profile.' },
+            { name: 'Ceylon Cinnamon', img: 'cinnamon.jfif', desc: 'Authentic sweet woody cinnamon quills, hand-rolled and sun-dried for a delicate, premium spice experience.' },
+            { name: 'Ajwain Seeds', img: 'ajwain-seeds.jfif', desc: 'Pure Ajwain seeds with a strong sharp aroma, essential for digestive health and savory flavoring.' },
+            { name: 'Anise Seeds', img: 'anise-seeds.jfif', desc: 'Premium grade anise seeds, highly aromatic and sweet, perfect for baking and herbal infusions.' },
+            { name: 'Bay Leaf', img: 'bay-leaf.jfif', desc: 'Whole aromatic bay leaves handpicked and dried to retain their subtle floral fragrance.' },
+            { name: 'Coriander Seeds', img: 'coriander-seeds.jfif', desc: 'Golden, crisp coriander seeds with a fresh citrusy profile, machine-cleaned for maximum purity.' },
+            { name: 'Cumin Seeds', img: 'cumin-seeds.jfif', desc: 'Export-grade cumin seeds with a warm, earthy aroma and high volatile oil content.' },
+            { name: 'Dill Seeds', img: 'dill-seeds.jfif', desc: 'Cleaned dill seeds with a mild, tangy flavor, perfect for seasonings and pickling.' },
+            { name: 'Fennel Seeds', img: 'fennel-seeds.jfif', desc: 'Sweet aromatic fennel seeds with high purity and natural green color, used as a digestive aid.' },
+            { name: 'Fenugreek Seeds', img: 'fenugreek-seeds.jfif', desc: 'Premium fenugreek seeds, bitter-sweet and rich in minerals, essential for traditional pickles.' },
+            { name: 'Mace', img: 'mace.jfif', desc: 'The delicate crimson husk of the nutmeg, offering a warm and floral spice profile for luxury cooking.' },
+            { name: 'Mustard Seeds', img: 'mustard-seeds.jfif', desc: 'Bold black mustard seeds that provide a sharp, nutty flavor when tempered for authentic cooking.' },
+            { name: 'Nigella Seeds', img: 'nigella-seeds.jfif', desc: 'Premium Kalonji seeds with a unique pepper-onion flavor, rich in nutritional value.' },
+            { name: 'Nutmeg', img: 'nutmeg.jfif', desc: 'Whole nutmeg seeds with high oil content, delivering a warm, spicy-sweet flavor for gourmet recipes.' },
+            { name: 'Poppy Seeds', img: 'poppy-seeds.jfif', desc: 'Creamy white poppy seeds for textured gravies and traditional sweets, sourced for maximum freshness.' },
+            { name: 'Red Chilli Powder', img: 'red-chilli-powder.jfif', desc: 'Vibrant red dried chillies ground to perfection, providing natural color and a balanced spicy kick.' },
+            { name: 'Caraway Seeds', img: 'caraway-seeds.jfif', desc: 'Aromatic caraway seeds perfect for premium bakery products and traditional medicinal spice blends.' }
         ];
 
         const grid = document.getElementById('productGrid');
         spices.forEach(s => {
             grid.innerHTML += `
                 <div class="card" onclick="openModal('${s.name}', 'images/${s.img}', '${s.desc}')">
-                    <img src="images/${s.img}" onerror="this.src='https://via.placeholder.com/600x420?text=${s.name}'">
+                    <img src="images/${s.img}" onerror="this.src='https://via.placeholder.com/600x400?text=${s.name}'">
                     <div class="card-info"><h3>${s.name}</h3></div>
                 </div>`;
         });
+
+        // Hero Slider Logic
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 5000);
 
         let ans = 0;
         function openModal(n, i, d) {
             document.getElementById('mTitle').innerText = n;
             document.getElementById('mImg').src = i;
             document.getElementById('mDesc').innerText = d;
+            
+            // Show grade selector only for Cardamom
+            document.getElementById('mmSelector').style.display = n === 'Green Cardamom' ? 'block' : 'none';
+            
             document.getElementById('productModal').style.display = 'block';
             document.body.style.overflow = 'hidden';
             let n1 = Math.floor(Math.random()*10), n2 = Math.floor(Math.random()*10);
             ans = n1+n2;
-            document.getElementById('cap').innerText = `Solve to Verify: ${n1} + ${n2} = ?`;
+            document.getElementById('cap').innerText = `Verify: ${n1} + ${n2} = ?`;
         }
 
         function closeModal() { document.getElementById('productModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
         function submitInquiry() { 
-            if(parseInt(document.getElementById('capIn').value) === ans) { alert("Enquiry Sent Successfully! We will contact you soon."); closeModal(); } 
+            if(parseInt(document.getElementById('capIn').value) === ans) { alert("Enquiry Sent Successfully!"); closeModal(); } 
             else { alert("Incorrect Answer! Please try again."); }
         }
     </script>
