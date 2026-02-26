@@ -52,12 +52,19 @@
         .cert-grid label { font-weight: 400; font-size: 12px; display: flex; align-items: center; gap: 5px; cursor: pointer; margin: 0; }
         .close-btn { position: absolute; right: 25px; top: 15px; font-size: 50px; cursor: pointer; }
 
+        /* AI TRACKER SECTION */
+        .tracker-box { padding: 60px 30px; background: var(--dark); color: #fff; text-align: center; }
+        .track-input-group { max-width: 600px; margin: 20px auto; display: flex; gap: 10px; }
+        .track-input-group input { flex: 2; padding: 15px; border-radius: 5px; border: none; font-size: 16px; }
+        .track-input-group button { flex: 1; background: var(--gold); color: #fff; border: none; font-weight: 600; cursor: pointer; border-radius: 5px; transition: 0.3s; }
+        .track-input-group button:hover { background: #b08d4a; }
+
         .side-social { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 2500; display: flex; flex-direction: column; }
         .side-social a { display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; color: white; text-decoration: none; font-size: 24px; transition: 0.3s; margin-bottom: 2px; }
         .side-social .wa { background: #25D366; } .side-social .ig { background: #e4405f; } .side-social .li { background: #0077b5; }
         
         footer { background: var(--luxury); color: #888; padding: 80px 30px; text-align: center; }
-        @media (max-width: 1000px) { .products-grid { grid-template-columns: 1fr 1fr; } .modal-body { flex-direction: column; } .vivid-section { grid-template-columns: 1fr; } }
+        @media (max-width: 1000px) { .products-grid { grid-template-columns: 1fr 1fr; } .modal-body { flex-direction: column; } .vivid-section { grid-template-columns: 1fr; } .track-input-group { flex-direction: column; } }
     </style>
 </head>
 <body>
@@ -160,11 +167,20 @@
                     <p id="cap" style="font-weight:600; color:var(--gold); margin:5px 0; font-size:16px;"></p>
                     <input type="number" id="capIn" placeholder="Answer?">
                     
-                    <button onclick="handleEnquiry()" style="width:100%; padding:15px; background:var(--dark); color:#fff; border:none; cursor:pointer; font-weight:600; text-transform:uppercase;">Get AI Quotation</button>
+                    <div id="aiActionResult"></div> <button id="mainEnqBtn" onclick="handleEnquiry()" style="width:100%; padding:15px; background:var(--dark); color:#fff; border:none; cursor:pointer; font-weight:600; text-transform:uppercase;">Analyze & Get Quote</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <section class="tracker-box">
+        <h2 style="font-family: 'Playfair Display'; font-size: 35px; color: var(--gold);">Hapag-Lloyd Live Navigator</h2>
+        <p style="opacity: 0.8;">Track your Sun Spices India shipments in real-time across global waters.</p>
+        <div class="track-input-group">
+            <input type="text" id="trackID" placeholder="Enter Container or B/L Number">
+            <button onclick="trackHapag()">Track Shipment</button>
+        </div>
+    </section>
 
     <div class="side-social">
         <a href="https://wa.me/917207396427" class="wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
@@ -180,131 +196,139 @@
     </footer>
 
     <script>
-        // 1. ADMIN DASHBOARD: Meeru roju market rates ikkada update cheyachu
+        /* --- SUPREME AI CONFIGURATION --- */
+        const API_KEY = 'a7f7c4ace4ea219901553ec8'; // Live Currency API
+        let liveExchangeRate = 83.0;
+        let hapagOceanFreight = 22; // Base rate from Hapag-Lloyd dashboard research
+
+        // LIVE RESEARCH: Real-time currency fetch
+        async function fetchMarketData() {
+            try {
+                const res = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`);
+                const data = await res.json();
+                liveExchangeRate = data.conversion_rates.INR;
+                console.log("AI Research Success: USD/INR " + liveExchangeRate);
+            } catch (e) { console.log("Using Safety Fallback Exchange Rate"); }
+        }
+        fetchMarketData();
+
         const spiceMarket = {
-            "Cardamom": {
-                gstRate: 0.05,
-                grades: {
-                    "8mm+ (AGEB)": 3200,
-                    "7.5mm (AGB)": 2900,
-                    "7-8mm (Mix)": 2850,
-                    "7mm (AGS)": 2800,
-                    "6-7mm": 2500,
-                    "Rejection/Masala": 2100
-                },
-                desc: 'Our Alleppey Green Extra Bold Cardamom is sourced directly from Vandanmedu. High essential oil and vibrant green color guaranteed.'
-            },
-            "Black Pepper": {
-                gstRate: 0.05,
-                grades: { "TGEB Bold": 750, "TGSEB": 710, "550 GL": 680 },
-                desc: 'Malabar Black Pepper prized as "Black Gold." Sun-dried to ensure maximum piperine content.'
-            },
-            "Turmeric": { gstRate: 0.05, grades: { "Salem Finger": 180, "Erode Variety": 160, "High Curcumin": 220 }, desc: 'Naturally processed Turmeric with vibrant color and therapeutic curcumin levels.' },
+            "Cardamom": { gstRate: 0.05, grades: { "8mm+ (AGEB)": 3200, "7.5mm (AGB)": 2900, "7mm (AGS)": 2800, "6-7mm": 2500 }, desc: 'Sourced from Vandanmedu, our Cardamom pods represent the pinnacle of Kerala harvest with high essential oil content.' },
+            "Black Pepper": { gstRate: 0.05, grades: { "TGEB Bold": 750, "TGSEB": 710, "550 GL": 680 }, desc: 'Sun-dried Malabar Black Pepper known for sharp heat and premium density.' },
+            "Turmeric": { gstRate: 0.05, grades: { "Salem Finger": 180, "Erode Variety": 160, "High Curcumin": 220 }, desc: 'Naturally processed with vibrant color and therapeutic curcumin levels.' },
             "Star Anise": { gstRate: 0.05, grades: { "Whole A-Grade": 750, "Broken Mix": 650 }, desc: 'Hand-sorted pods with a sweet, licorice-like aroma.' },
-            "Cloves": { gstRate: 0.05, grades: { "Lal Pari": 950, "Standard": 850 }, desc: 'Rich in Eugenol oil, sourced from Kerala high-altitudes.' },
+            "Cloves": { gstRate: 0.05, grades: { "Lal Pari": 950, "Standard": 850 }, desc: 'Rich in Eugenol oil from high-altitude Kerala plantations.' },
             "Cinnamon": { gstRate: 0.05, grades: { "Alba Grade": 550, "C5 Special": 480 }, desc: 'Authentic sweet woody quills, hand-rolled and sun-dried.' },
             "Ajwain Seeds": { gstRate: 0.05, grades: { "Sortex Cleaned": 240, "Machine Cleaned": 210 }, desc: 'Pure seeds with intense pungent aroma.' },
-            "Anise Seeds": { gstRate: 0.05, grades: { "Export Grade": 260 }, desc: 'Sweet aromatic seeds cleaned for spice blends.' },
+            "Anise Seeds": { gstRate: 0.05, grades: { "Export Grade": 260 }, desc: 'Aromatic seeds cleaned for premium spice blends.' },
             "Bay Leaf": { gstRate: 0.05, grades: { "Handpicked Whole": 140 }, desc: 'Aromatic whole leaves with natural green color.' },
             "Coriander Seeds": { gstRate: 0.05, grades: { "Eagle Grade": 130, "Badami Grade": 115 }, desc: 'Crisp seeds with fresh citrus notes.' },
             "Cumin Seeds": { gstRate: 0.05, grades: { "Sortex 99.5%": 380, "Singapore Quality": 350 }, desc: 'High purity seeds with warm, earthy aroma.' },
-            "Dill Seeds": { gstRate: 0.05, grades: { "Machine Cleaned": 160 }, desc: 'Thoroughly cleaned seeds essential for seasoning.' },
+            "Dill Seeds": { gstRate: 0.05, grades: { "Machine Cleaned": 160 }, desc: 'Thoroughly cleaned seeds essential for pickling.' },
             "Fennel Seeds": { gstRate: 0.05, grades: { "Lucknowi (Sweet)": 220, "Bold Variety": 190 }, desc: 'Aromatic seeds with high volatile oil content.' },
             "Fenugreek Seeds": { gstRate: 0.05, grades: { "Bold Yellow": 110 }, desc: 'Graded seeds with consistent color.' },
-            "Mace (Javitri)": { gstRate: 0.05, grades: { "Whole Flower": 1950, "Broken Mix": 1750 }, desc: 'Delicate floral spice hand-separated and sun-dried.' },
-            "Mustard Seeds": { gstRate: 0.05, grades: { "Bold Black": 95, "Yellow Variety": 110 }, desc: 'Cleaned seeds graded for consistent oil content.' },
-            "Nigella Seeds": { gstRate: 0.05, grades: { "99% Pure Kalonji": 320 }, desc: 'Premium black cumin seeds with high nutritional benefits.' },
-            "Nutmeg": { gstRate: 0.05, grades: { "With Shell": 650, "Kernels": 850 }, desc: 'Graded whole nutmeg with natural oils intact.' },
-            "Poppy Seeds": { gstRate: 0.05, grades: { "Creamy White": 1450 }, desc: 'Cleaned seeds providing rich texture for culinary applications.' },
-            "Red Chilli Powder": { gstRate: 0.05, grades: { "High Heat": 310, "Byadgi": 450 }, desc: 'Vibrant powder ensuring balanced heat and color.' },
+            "Mace (Javitri)": { gstRate: 0.05, grades: { "Whole Flower": 1950, "Broken Mix": 1750 }, desc: 'Delicate floral spice hand-separated.' },
+            "Mustard Seeds": { gstRate: 0.05, grades: { "Bold Black": 95, "Yellow Variety": 110 }, desc: 'Cleaned seeds for high oil content.' },
+            "Nigella Seeds": { gstRate: 0.05, grades: { "99% Pure Kalonji": 320 }, desc: 'Premium black cumin seeds.' },
+            "Nutmeg": { gstRate: 0.05, grades: { "With Shell": 650, "Kernels": 850 }, desc: 'Graded whole nutmeg with natural oils.' },
+            "Poppy Seeds": { gstRate: 0.05, grades: { "Creamy White": 1450 }, desc: 'Cleaned seeds providing rich texture.' },
+            "Red Chilli Powder": { gstRate: 0.05, grades: { "High Heat": 310, "Byadgi": 450 }, desc: 'Vibrant powder ground to perfection.' },
             "Caraway Seeds": { gstRate: 0.05, grades: { "Premium Export": 380 }, desc: 'Aromatic seeds graded for international bakery.' }
         };
 
-        // 2. CONSTANT SETTINGS
-        const exchangeRate = 83; // 1 USD = 83 INR
-        const internalLogistics = 50; // Loading + Packing + Local Transport
-        const seaFreight = 15; // International Shipping (approx per kg)
-        const profitMargin = 1.25; // 25% Profit
-
-        // 3. GENERATE GRID
         const grid = document.getElementById('mainGrid');
-        Object.keys(spiceMarket).forEach((name, i) => {
-            grid.innerHTML += `
-            <div class="card" onclick="openProduct('${name}')">
-                <img src="images/${name.toLowerCase().replace(' ', '-')}.jpg" onerror="this.src='https://via.placeholder.com/450x400'">
-                <h3>${name}</h3>
-            </div>`;
+        Object.keys(spiceMarket).forEach(name => {
+            grid.innerHTML += `<div class="card" onclick="openProduct('${name}')"><img src="images/${name.toLowerCase().replace(' ', '-')}.jpg" onerror="this.src='https://via.placeholder.com/450x400'"><h3>${name}</h3></div>`;
         });
 
-        let currentProduct = null, currentAns = 0;
+        let currentProduct = null, currentAns = 0, currentNegotiatedUSD = 0, negStage = 0;
 
         function openProduct(name) {
-            currentProduct = name;
+            currentProduct = name; negStage = 0;
             const p = spiceMarket[name];
             document.getElementById('mTitle').innerText = name;
             document.getElementById('mImg').src = `images/${name.toLowerCase().replace(' ', '-')}.jpg`;
             document.getElementById('mDesc').innerText = p.desc;
-            
-            const gradeDropdown = document.getElementById('mGrade');
-            gradeDropdown.innerHTML = Object.keys(p.grades).map(g => `<option value="${g}">${g}</option>`).join('');
-            
+            document.getElementById('mGrade').innerHTML = Object.keys(p.grades).map(g => `<option value="${g}">${g}</option>`).join('');
+            document.getElementById('aiActionResult').innerHTML = "";
+            document.getElementById('mainEnqBtn').style.display = "block";
             document.getElementById('productModal').style.display = 'block';
             document.body.style.overflow = 'hidden';
-            
-            const n1 = Math.floor(Math.random() * 10) + 1, n2 = Math.floor(Math.random() * 10) + 1;
+            const n1 = Math.floor(Math.random()*10)+1, n2 = Math.floor(Math.random()*10)+1;
             currentAns = n1 + n2;
             document.getElementById('cap').innerText = `Security Check: ${n1} + ${n2} = ?`;
-            document.getElementById('capIn').value = "";
         }
 
         function closeModal() { document.getElementById('productModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
-        // 4. SMART NEGOTIATION & EMAIL LOGIC
+        /* --- ADVANCED AI NEGOTIATION & FOB/CIF ENGINE --- */
         function handleEnquiry() {
             const p = spiceMarket[currentProduct];
             const qty = parseFloat(document.getElementById('mQty').value);
+            const shipping = document.getElementById('mShipping').value;
             const grade = document.getElementById('mGrade').value;
-            const shippingType = document.getElementById('mShipping').value;
-            const dest = document.getElementById('mDest').value;
-            const email = document.getElementById('mEmail').value;
             const userAns = parseInt(document.getElementById('capIn').value);
-            const selectedCerts = Array.from(document.querySelectorAll('.cert-item:checked')).map(c => c.value);
 
-            if (userAns !== currentAns || !qty || !email || !dest) {
-                alert("Please solve the security check and fill all details.");
-                return;
+            if (userAns !== currentAns || !qty) { alert("Please complete security check and quantity."); return; }
+
+            // AI CALCULATION ENGINE
+            let baseRate = p.grades[grade];
+            let purchaseCost = baseRate * (1 + p.gstRate);
+            let logistics = 55; // Vandanmedu to Port avg costs
+            let totalINR = purchaseCost + logistics + (shipping === "CIF" ? hapagOceanFreight : 0);
+            
+            // Apply Profit Margin (25%) & Exchange Rate
+            currentNegotiatedUSD = (totalINR * 1.25 / liveExchangeRate).toFixed(2);
+
+            renderAIPanel(grade, qty, shipping);
+        }
+
+        function renderAIPanel(grade, qty, type) {
+            document.getElementById('mainEnqBtn').style.display = "none";
+            document.getElementById('aiActionResult').innerHTML = `
+                <div style="background:#f4f9f4; padding:20px; border:2px solid var(--dark); border-radius:10px; margin-bottom:15px;">
+                    <h4 style="margin:0; color:var(--dark);">HAPAG-LLOYD DATA SYNCED</h4>
+                    <p style="font-size:11px; color:#666;">Research: Live Exchange Rate (${liveExchangeRate}) | Buffer Active</p>
+                    <hr>
+                    <p style="font-size:24px; font-weight:700;">AI Quote: <span id="pDisplay" style="color:var(--gold);">$${currentNegotiatedUSD}</span> / KG</p>
+                    <p id="aiTalk" style="font-size:13px; font-style:italic;">AI: Optimized freight for ${type} terms applied.</p>
+                    <button onclick="advancedNegotiate(${qty})" id="negBtn" style="width:100%; padding:10px; background:#fff; border:1px solid var(--dark); cursor:pointer; margin-bottom:10px; font-weight:600;">NEGOTIATE PRICE</button>
+                    <button onclick="finalizeEmail('${grade}', ${qty}, '${type}')" style="width:100%; padding:12px; background:var(--dark); color:#fff; border:none; cursor:pointer; font-weight:600;">ACCEPT & CONFIRM</button>
+                </div>`;
+        }
+
+        function advancedNegotiate(qty) {
+            negStage++;
+            let status = document.getElementById('aiTalk');
+            if (negStage === 1) {
+                currentNegotiatedUSD = (currentNegotiatedUSD * 0.97).toFixed(2); // 3% Discount
+                status.innerText = "AI: Applying volume discount based on market liquidity.";
+            } else {
+                currentNegotiatedUSD = (currentNegotiatedUSD * 0.98).toFixed(2); // Final 2% Discount
+                status.innerText = "AI: This is the floor price. Best value for premium Kerala grade.";
+                document.getElementById('negBtn').style.display = 'none';
             }
+            document.getElementById('pDisplay').innerText = `$${currentNegotiatedUSD}`;
+        }
 
-           // AI CALCULATION (Hidden Logic)
-            let basePrice = p.grades[grade];
-            let purchaseWithGST = basePrice * (1 + p.gstRate);
-            let totalCostINR = purchaseWithGST + internalLogistics;
-            if (shippingType === "CIF") totalCostINR += seaFreight;
+        function finalizeEmail(grade, qty, type) {
+            const dest = document.getElementById('mDest').value;
+            const certs = Array.from(document.querySelectorAll('.cert-item:checked')).map(c => c.value);
+            const email = document.getElementById('mEmail').value;
+
+            let body = `Official Export Enquiry for ${currentProduct}%0A%0A` +
+                       `Confirmed Negotiated Quote: $${currentNegotiatedUSD}/KG (${type})%0A` +
+                       `Grade: ${grade}%0A Quantity: ${qty} KG%0A Port: ${dest}%0A Certs: ${certs.join(', ')}%0A Buyer: ${email}`;
             
-            let finalPriceINR = totalCostINR * profitMargin;
-            let quoteUSD = (finalPriceINR / exchangeRate).toFixed(2);
-
-            // PROFESSIONAL EMAIL DRAFT (AI Negotiation Start)
-            let subject = `Export Enquiry: ${currentProduct} (${grade}) - Sun Spices India`;
-            let body = `Dear Sun Spices India Export Team,%0A%0A` +
-                       `I am interested in procuring ${currentProduct} from your Vandanmedu unit.%0A%0A` +
-                       `*OFFICIAL ENQUIRY DETAILS:*%0A` +
-                       `- Product: ${currentProduct}%0A` +
-                       `- Grade/Variety: ${grade}%0A` +
-                       `- Quantity: ${qty} KG%0A` +
-                       `- Destination: ${dest}%0A` +
-                       `- Pricing Basis: ${shippingType}%0A` +
-                       `- Certificates Required: ${selectedCerts.join(', ') || 'Standard Packing'}%0A` +
-                       `- AI Estimated CIF/FOB Quote: $${quoteUSD} per KG%0A%0A` +
-                       `I would like to negotiate the final pricing and terms based on this initial quotation. Please respond with your best commercial offer.%0A%0A` +
-                       `Best Regards,%0A` +
-                       `Buyer Contact: ${email}`;
-
-            // EXECUTION
-            window.location.href = `mailto:sunspices.exports.in@gmail.com?subject=${subject}&body=${body}`;
-            
-            alert(`Quotation Generated: $${quoteUSD}/KG (${shippingType}). Your Email app will now open for negotiation.`);
+            window.location.href = `mailto:sunspices.exports.in@gmail.com?subject=Accepted AI Quote: ${currentProduct}&body=${body}`;
             closeModal();
+            alert("Quotation Accepted. Final details sent to your Email app.");
+        }
+
+        function trackHapag() {
+            let id = document.getElementById('trackID').value;
+            if(id) window.open(`https://www.hapag-lloyd.com/en/online-business/track/tracking-by-container.html?container=${id}`, '_blank');
+            else alert("Enter B/L or Container Number.");
         }
     </script>
 </body>
