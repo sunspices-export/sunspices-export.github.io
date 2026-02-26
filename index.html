@@ -8,74 +8,78 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        :root { --gold: #C5A059; --dark: #1A2F23; --luxury: #0D0D0D; --cream: #FCF9F5; --text: #444; }
-        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--cream); color: var(--text); scroll-behavior: smooth; overflow-x: hidden; }
+        :root { --gold: #C5A059; --dark: #1A2F23; --luxury: #0D0D0D; --cream: #FCF9F5; --white: #FFFFFF; }
+        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--cream); color: #333; scroll-behavior: smooth; overflow-x: hidden; }
 
         /* HEADER & NAVIGATION */
-        .header { position: sticky; top: 0; z-index: 2000; background: rgba(255,255,255,0.98); padding: 12px 0; border-bottom: 1px solid #EAE0D5; backdrop-filter: blur(10px); }
-        .nav-container { max-width: 1400px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 0 40px; }
+        .header { position: sticky; top: 0; z-index: 2000; background: var(--white); padding: 15px 0; border-bottom: 1px solid #EAE0D5; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .nav-container { max-width: 1300px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 0 30px; }
         .logo-box { display: flex; align-items: center; gap: 15px; text-decoration: none; color: var(--dark); }
-        .logo-box img { height: 65px; border-radius: 5px; }
-        .logo-box span { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; letter-spacing: 1px; }
-        .nav-menu a { margin-left: 25px; text-decoration: none; color: var(--dark); font-weight: 600; font-size: 14px; transition: 0.3s; text-transform: uppercase; }
-        .nav-menu a:hover { color: var(--gold); }
+        .logo-box img { height: 60px; border-radius: 4px; object-fit: contain; }
+        .logo-box span { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; letter-spacing: 1px; }
 
-        /* HERO SECTION */
-        .hero { height: 90vh; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #000; }
-        .hero video { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.55; }
-        .hero-content { position: relative; z-index: 10; text-align: center; color: #fff; max-width: 900px; }
-        .hero-content h1 { font-family: 'Playfair Display', serif; font-size: clamp(45px, 8vw, 95px); margin: 0; font-style: italic; line-height: 1.1; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
-        .hero-tag { font-size: 18px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: block; }
+        /* HERO & VIDEO */
+        .hero { height: 90vh; position: relative; overflow: hidden; background: #000; display: flex; align-items: center; justify-content: center; }
+        .hero video { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
+        .hero-content { position: relative; z-index: 10; text-align: center; color: var(--white); max-width: 900px; }
+        .hero-content h1 { font-family: 'Playfair Display', serif; font-size: clamp(45px, 8vw, 95px); margin: 0; font-style: italic; line-height: 1.1; }
+        .hero-content p { font-size: 18px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; color: var(--gold); }
 
         /* VIVID SECTIONS */
-        .vivid-section { padding: 120px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1300px; margin: auto; }
+        .vivid-section { padding: 120px 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1300px; margin: auto; }
         .vivid-section:nth-child(even) { direction: rtl; }
-        .vivid-section img { width: 100%; border-radius: 8px; box-shadow: 30px 30px 0px var(--dark); transition: 0.5s; }
+        .vivid-section img { width: 100%; border-radius: 4px; box-shadow: 25px 25px 0px var(--dark); transition: 0.5s; }
         .vivid-section:hover img { transform: scale(1.02); }
         .vivid-text { direction: ltr; }
         .vivid-text h2 { font-family: 'Playfair Display', serif; font-size: 48px; color: var(--dark); margin-bottom: 25px; line-height: 1.2; }
-        .vivid-text p { font-size: 18px; line-height: 2; color: #555; text-align: justify; }
+        .vivid-text p { font-size: 17px; line-height: 2; color: #555; text-align: justify; margin-bottom: 20px; }
 
-        /* PRODUCT GRID */
-        .products-section { padding: 120px 40px; background: #fff; }
-        .products-grid { max-width: 1400px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
-        .card { background: #fff; border: 1px solid #F0E6DB; border-radius: 12px; overflow: hidden; transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); cursor: pointer; position: relative; }
-        .card:hover { transform: translateY(-20px); box-shadow: 0 30px 60px rgba(26, 47, 35, 0.15); border-color: var(--gold); }
-        .card img { width: 100%; height: 450px; object-fit: cover; transition: 0.5s; }
-        .card:hover img { transform: scale(1.05); }
-        .card-info { padding: 30px; text-align: center; background: #fff; position: relative; z-index: 5; }
-        .card h3 { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--dark); margin: 0; }
+        /* PRODUCTS GRID */
+        .products-section { padding: 100px 30px; background: var(--white); }
+        .products-grid { max-width: 1300px; margin: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        .card { background: var(--white); border: 1px solid #EAE0D5; border-radius: 0px; overflow: hidden; transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); cursor: pointer; }
+        .card:hover { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(0,0,0,0.1); border-color: var(--gold); }
+        .card .img-container { width: 100%; height: 420px; overflow: hidden; }
+        .card img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; }
+        .card:hover img { transform: scale(1.1); }
+        .card h3 { font-family: 'Playfair Display', serif; padding: 25px; font-size: 26px; color: var(--dark); text-align: center; margin: 0; }
 
-        /* MODAL & NEGOTIATION PANEL */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(13,13,13,0.98); z-index: 3000; overflow-y: auto; backdrop-filter: blur(15px); }
-        .modal-body { max-width: 1200px; margin: 50px auto; background: #fff; display: flex; gap: 0; border-radius: 15px; overflow: hidden; position: relative; animation: slideUp 0.5s ease-out; }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .modal-img { flex: 1; min-height: 100%; }
+        /* MODAL & NEGOTIATION */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(13, 13, 13, 0.98); z-index: 3000; overflow-y: auto; }
+        .modal-body { max-width: 1200px; margin: 40px auto; background: var(--white); display: flex; min-height: 600px; border-radius: 4px; position: relative; animation: slideUp 0.5s ease; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        .modal-img { flex: 1; background: #eee; }
         .modal-img img { width: 100%; height: 100%; object-fit: cover; }
-        .modal-info { flex: 1.2; padding: 60px; background: #fff; }
-        .close-btn { position: absolute; right: 30px; top: 20px; font-size: 45px; cursor: pointer; color: var(--dark); z-index: 10; transition: 0.3s; }
-        .close-btn:hover { color: var(--gold); }
+        .modal-info { flex: 1.2; padding: 60px; overflow-y: auto; }
+        .close-btn { position: absolute; right: 30px; top: 20px; font-size: 40px; cursor: pointer; color: var(--dark); z-index: 10; }
 
-        .form-box label { font-weight: 600; font-size: 13px; color: var(--dark); display: block; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
-        .form-box select, .form-box input { width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid #EAE0D5; border-radius: 5px; font-family: inherit; font-size: 15px; }
-        .form-box select:focus, .form-box input:focus { outline: 1px solid var(--gold); }
-        .cert-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 25px; background: #F9F7F5; padding: 20px; border-radius: 8px; }
-        .cert-grid label { font-weight: 400; font-size: 13px; display: flex; align-items: center; gap: 10px; cursor: pointer; margin: 0; text-transform: none; }
+        .form-box label { font-weight: 600; font-size: 13px; text-transform: uppercase; color: var(--dark); display: block; margin-bottom: 8px; }
+        .form-box input, .form-box select { width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid #EAE0D5; font-family: inherit; background: #FAFAFA; }
+        .cert-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; background: #F4F4F4; padding: 20px; margin-bottom: 25px; border-radius: 4px; }
+        .cert-grid label { font-size: 12px; text-transform: none; display: flex; align-items: center; gap: 8px; margin: 0; cursor: pointer; }
 
-        .neg-container { background: #1A2F23; color: #fff; padding: 35px; border-radius: 10px; display: none; margin-top: 20px; }
-        .neg-bubble { background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid var(--gold); }
-        .ai-input-group { display: flex; gap: 10px; }
-        .ai-input-group input { margin-bottom: 0; background: #fff; color: #000; }
+        /* AI CHAT INTERFACE */
+        #aiNegotiator { display: none; border-top: 2px solid var(--gold); padding-top: 30px; margin-top: 20px; }
+        .chat-box { height: 250px; overflow-y: auto; background: #f9f9f9; padding: 20px; border: 1px solid #eee; margin-bottom: 15px; border-radius: 4px; display: flex; flex-direction: column; gap: 10px; }
+        .msg { padding: 12px 18px; border-radius: 20px; max-width: 85%; font-size: 14px; line-height: 1.5; }
+        .m-manager { background: var(--dark); color: white; align-self: flex-start; border-bottom-left-radius: 2px; }
+        .m-buyer { background: #EAE0D5; color: var(--dark); align-self: flex-end; border-bottom-right-radius: 2px; }
 
-        /* FLOATING SOCIALS */
+        /* TRACKER SECTION */
+        .tracker-section { background: var(--luxury); color: white; padding: 100px 30px; text-align: center; }
+        .tracker-box { max-width: 700px; margin: 40px auto; display: flex; border: 1px solid rgba(197, 160, 89, 0.3); }
+        .tracker-box input { flex: 2; padding: 20px; background: transparent; border: none; color: white; font-size: 16px; outline: none; }
+        .tracker-box button { flex: 1; background: var(--gold); border: none; color: var(--luxury); font-weight: 600; cursor: pointer; text-transform: uppercase; }
+
+        /* SOCIAL & FOOTER */
         .side-social { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 2500; display: flex; flex-direction: column; }
-        .side-social a { display: flex; align-items: center; justify-content: center; width: 65px; height: 65px; color: white; text-decoration: none; font-size: 26px; transition: 0.4s; margin-bottom: 3px; border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
-        .side-social .wa { background: #25D366; } .side-social .ig { background: #E4405F; } .side-social .li { background: #0077B5; }
-        .side-social a:hover { width: 80px; padding-right: 15px; }
-
-        footer { background: var(--luxury); color: #999; padding: 100px 40px; text-align: center; border-top: 1px solid #333; }
-        footer h4 { color: #fff; font-family: 'Playfair Display'; font-size: 30px; margin-bottom: 20px; }
-        @media (max-width: 1100px) { .modal-body { flex-direction: column; margin: 20px; } .vivid-section { grid-template-columns: 1fr; gap: 40px; } }
+        .side-social a { width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 20px; transition: 0.3s; margin-bottom: 1px; }
+        .side-social .wa { background: #25D366; } .side-social .ig { background: #e4405f; } .side-social .li { background: #0077b5; }
+        
+        footer { background: var(--luxury); color: #777; padding: 80px 30px; text-align: center; border-top: 1px solid #222; }
+        footer h4 { color: var(--gold); font-family: 'Playfair Display'; font-size: 28px; margin-bottom: 15px; }
+        
+        @media (max-width: 1000px) { .products-grid { grid-template-columns: 1fr 1fr; } .modal-body { flex-direction: column; } .vivid-section { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -87,10 +91,10 @@
                 <span>SUN SPICES INDIA</span>
             </a>
             <nav class="nav-menu">
-                <a href="#home">Home</a>
-                <a href="#about">Our Heritage</a>
-                <a href="#products">Portfolio</a>
-                <a href="#contact">Contact</a>
+                <a href="#home" style="margin-left:25px; text-decoration:none; color:var(--dark); font-weight:600; font-size:13px; letter-spacing:1px;">HOME</a>
+                <a href="#about" style="margin-left:25px; text-decoration:none; color:var(--dark); font-weight:600; font-size:13px; letter-spacing:1px;">ABOUT</a>
+                <a href="#products" style="margin-left:25px; text-decoration:none; color:var(--dark); font-weight:600; font-size:13px; letter-spacing:1px;">PRODUCTS</a>
+                <a href="#contact" style="margin-left:25px; text-decoration:none; color:var(--dark); font-weight:600; font-size:13px; letter-spacing:1px;">CONTACT</a>
             </nav>
         </div>
     </header>
@@ -98,7 +102,7 @@
     <div id="home" class="hero">
         <video autoplay muted loop playsinline><source src="images/spice-video.mp4" type="video/mp4"></video>
         <div class="hero-content">
-            <span class="hero-tag">Excellence from Vandanmedu</span>
+            <p>Directly From Vandanmedu Highlands</p>
             <h1>Pure. Fragrant. <br> <i>Uncompromising.</i></h1>
         </div>
     </div>
@@ -106,38 +110,51 @@
     <section id="about" class="vivid-section">
         <img src="images/hero-cardamom.jpg" alt="Vandanmedu Cardamom">
         <div class="vivid-text">
-            <h2>The Queen of Spices</h2>
-            <p>Our Alleppey Green Extra Bold (AGEB) cardamom pods represent the pinnacle of Kerala's harvest. Sourced from the mist-covered plantations of Vandanmedu, these pods are prized globally for their vibrant green color and intense essential oil content. We strictly adhere to size-grading ranging from 7mm to 8mm+ to ensure only the finest reaches our clients. The unique high-altitude climate of the Western Ghats ensures that every pod carries the soul of the rain-washed forest.</p>
+            <h2>The Queen of Spices: Alleppey Green</h2>
+            <p>Our Cardamom represents the soul of Kerala's high-altitude plantations. Sourced from the misty valleys of Vandanmedu, these pods are harvested at peak maturity to lock in the intense essential oil content (cineole). We strictly adhere to size-grading (7mm to 8mm+) ensuring a vibrant green hue that meets the most demanding standards of Gulf and European markets.</p>
+            <p>The unique micro-climate of the Western Ghats provides the perfect moisture and soil acidity, resulting in pods that are larger, greener, and more aromatic than any other variety in the world.</p>
         </div>
     </section>
 
     <section class="vivid-section">
-        <img src="images/hero-balck-pepper.jpg.webp" alt="King of Spices">
+        <img src="images/hero-balck-pepper.jpg.webp" alt="Malabar Black Pepper">
         <div class="vivid-text">
-            <h2>The King of Spice: Malabar Pepper</h2>
-            <p>Directly sourced from the heart of Idukki, our black pepper (TGEB) is sun-dried to perfection, retaining its natural piperine levels. Known for its bold aroma and sharp heat, it meets the highest standards for European and Middle Eastern markets. Every batch undergoes rigorous quality checks for density and purity before export. We preserve the ancient heritage of the Malabar coast, delivering a spice that has shaped global history for centuries.</p>
+            <h2>Black Gold: The King of Malabar</h2>
+            <p>Sourced from the heart of Idukki, our TGEB (Tellicherry Garbled Extra Bold) black pepper is sun-dried to a deep, obsidian black. We ensure zero moisture retention and a high piperine level, providing that signature sharp heat and complex woody aroma. Every grain is Sortex-cleaned to remove all stalks and stones.</p>
+            <p>Grown under the natural canopy of tropical trees, our pepper vines benefit from organic humus-rich soil, ensuring a product that is as healthy as it is flavorful.</p>
         </div>
     </section>
 
     <section class="vivid-section">
-        <img src="images/quality-check.jpg" alt="Quality Excellence">
+        <img src="images/quality-check.jpg" alt="Quality Standards">
         <div class="vivid-text">
-            <h2>Uncompromising Quality Control</h2>
-            <p>At Sun Spices India, quality is not just a process; it's our heritage. From farm-level procurement to vacuum-sealed packaging, we ensure zero contamination. We provide comprehensive lab reports and certifications, ensuring that every shipment complies with the specific food safety regulations of the target destination country. Our multi-stage cleaning and Sortex processing guarantee a product that is 99.5% pure, every single time.</p>
+            <h2>Uncompromising Quality Protocol</h2>
+            <p>At Sun Spices India, quality is our heritage. From farm-gate procurement to final vacuum-sealed packaging, every batch undergoes multi-level screening. We provide full traceability with Phytosanitary, Health, and Lab certifications tailored to your country's specific food safety regulations.</p>
+            <p>We believe in "New Crop" freshness. Our strategically located warehouse in Vandanmedu allows us to process and ship within days of the harvest, bypassing long storage cycles that degrade aroma.</p>
         </div>
     </section>
 
     <section class="vivid-section">
-        <img src="images/heritage.jpg" alt="Heritage">
+        <img src="images/heritage.jpg" alt="The Heritage of Vandanmedu">
         <div class="vivid-text">
-            <h2>Rooted in Vandanmedu Heritage</h2>
-            <p>Strategically located in Vandanmedu, the spice hub of the world, our proximity to the plantations allows us to maintain a transparent supply chain. This enables us to offer "New Crop" freshness throughout the year. We bridge the gap between traditional Kerala farming and modern global B2B trade requirements with professional ease. Our relationship with local farmers ensures that the spice you receive is fair-traded and sustainably harvested.</p>
+            <h2>The Vandanmedu Heritage</h2>
+            <p>Vandanmedu is the world's largest auction center for cardamom. Being rooted here gives us a strategic edge in market intelligence and quality selection. We bridge the gap between traditional Kerala farming and modern B2B global trade with professional precision and complete transparency.</p>
+            <p>Our long-standing relationships with plantation owners ensure we get the "First Pick" of every harvest, allowing us to offer prices that are competitive without ever sacrificing purity.</p>
         </div>
     </section>
 
     <section id="products" class="products-section">
-        <h2 style="text-align:center; font-family:'Playfair Display'; font-size:50px; color:var(--dark); margin-bottom:80px;">The Whole Spices Portfolio</h2>
+        <h2 style="text-align:center; font-family:'Playfair Display'; font-size:50px; margin-bottom:80px;">The 21 Spices Master Portfolio</h2>
         <div class="products-grid" id="mainGrid"></div>
+    </section>
+
+    <section class="tracker-section">
+        <h2 style="font-family:'Playfair Display'; font-size:40px; color:var(--gold);">Hapag-Lloyd Live Tracker</h2>
+        <p style="opacity: 0.7;">Real-time ocean freight tracking for Sun Spices India shipments.</p>
+        <div class="tracker-box">
+            <input type="text" id="trackID" placeholder="Enter Container or B/L Number">
+            <button onclick="trackNow()">Track Shipment</button>
+        </div>
     </section>
 
     <div id="productModal" class="modal">
@@ -145,58 +162,51 @@
             <span class="close-btn" onclick="closeModal()">&times;</span>
             <div class="modal-img"><img id="mImg" src=""></div>
             <div class="modal-info">
-                <h2 id="mTitle" style="font-family:'Playfair Display'; color:var(--dark); font-size:38px; margin-bottom:15px;"></h2>
-                <p id="mDesc" style="color:#666; line-height:1.8; margin-bottom:30px; font-size:15px; text-align:justify; border-left: 3px solid var(--gold); padding-left:20px;"></p>
+                <h2 id="mTitle" style="font-family:'Playfair Display'; font-size:36px; color:var(--dark); margin-top:0;"></h2>
+                <p id="mDesc" style="color:#666; font-size:15px; margin-bottom:30px;"></p>
                 
                 <div class="form-box" id="initialForm">
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
-                        <div>
-                            <label>Grade / Variety</label>
-                            <select id="mGrade"></select>
-                        </div>
-                        <div>
-                            <label>Shipping Basis</label>
-                            <select id="mShipping">
-                                <option value="FOB">FOB (Ex-Unit)</option>
-                                <option value="CIF">CIF (Port Landing)</option>
-                            </select>
-                        </div>
-                    </div>
+                    <label>Grade / Variety</label>
+                    <select id="mGrade"></select>
                     
-                    <label>Quantity (KG)</label>
-                    <input type="number" id="mQty" placeholder="e.g. 5000">
+                    <label>Quantity Required (Metric Tons or KG)</label>
+                    <input type="text" id="mQty" placeholder="e.g. 5 Metric Tons">
 
-                    <label>Destination Port / Country</label>
+                    <label>Incoterms (Pricing)</label>
+                    <select id="mShipping">
+                        <option value="FOB">FOB (Ex-Works / Port Load)</option>
+                        <option value="CIF">CIF (Port to Port)</option>
+                    </select>
+
+                    <label>Destination Port</label>
                     <input type="text" id="mDest" placeholder="e.g. Jebel Ali, UAE">
 
-                    <label>Quality Certifications Needed</label>
+                    <label>Export Certificates (Mandatory & Optional)</label>
                     <div class="cert-grid">
-                        <label><input type="checkbox" class="cert-item" value="Phyto"> Phytosanitary</label>
-                        <label><input type="checkbox" class="cert-item" value="Health"> Health Cert</label>
-                        <label><input type="checkbox" class="cert-item" value="COO"> Origin (COO)</label>
-                        <label><input type="checkbox" class="cert-item" value="Lab"> Lab Report</label>
+                        <label><input type="checkbox" class="cert-item" value="Phytosanitary" checked> Phytosanitary</label>
+                        <label><input type="checkbox" class="cert-item" value="Health Certificate"> Health Cert</label>
+                        <label><input type="checkbox" class="cert-item" value="COO" checked> Origin (COO)</label>
+                        <label><input type="checkbox" class="cert-item" value="FSSAI/FDA"> FSSAI/FDA</label>
+                        <label><input type="checkbox" class="cert-item" value="Lab Report"> Lab/COA</label>
+                        <label><input type="checkbox" class="cert-item" value="Halal"> Halal</label>
                     </div>
 
-                    <label>Business Email</label>
+                    <label>Corporate Email</label>
                     <input type="email" id="mEmail" placeholder="buyer@company.com">
                     
                     <p id="cap" style="font-weight:600; color:var(--gold); margin-bottom:10px;"></p>
-                    <input type="number" id="capIn" placeholder="Result?">
+                    <input type="number" id="capIn" placeholder="Answer?">
                     
-                    <button onclick="initiateNegotiation()" style="width:100%; padding:18px; background:var(--dark); color:#fff; border:none; cursor:pointer; font-weight:600; letter-spacing:1px; transition:0.3s;">CONNECT WITH MANAGER</button>
+                    <button onclick="startManagerChat()" style="width:100%; padding:20px; background:var(--dark); color:#fff; border:none; cursor:pointer; font-weight:600; font-size:16px;">CONSULT WITH MANAGER</button>
                 </div>
 
-                <div id="negPanel" class="neg-container">
-                    <div class="neg-bubble" id="aiBubble">
-                        <strong>Manager:</strong> I have analyzed your requirements and the current market volatility at Vandanmedu auction. Our premium grade is currently trading high due to limited new crop arrivals. 
-                        <br><br>
-                        Initial Quote: <span id="dynPrice" style="color:var(--gold); font-size:20px; font-weight:700;"></span>
+                <div id="aiNegotiator">
+                    <div class="chat-box" id="chatBox"></div>
+                    <div style="display:flex; gap:10px;">
+                        <input type="text" id="buyerMsg" placeholder="Type your message (e.g., 'Price is high', 'Check discount')..." style="flex:1; margin:0; padding:12px;">
+                        <button onclick="handleNegotiation()" style="background:var(--dark); color:white; border:none; padding:0 25px; cursor:pointer;">Send</button>
                     </div>
-                    <div class="ai-input-group">
-                        <input type="text" id="buyerOffer" placeholder="Type your counter-offer (e.g. $40)...">
-                        <button onclick="processBargain()" style="background:var(--gold); color:#000; border:none; padding:10px 20px; font-weight:700; cursor:pointer;">REPLY</button>
-                    </div>
-                    <button onclick="finalizeDeal()" id="finalizeBtn" style="display:none; width:100%; margin-top:20px; padding:15px; background:#fff; color:var(--dark); border:none; font-weight:700; cursor:pointer;">ACCEPT FINAL QUOTE & EMAIL</button>
+                    <button id="finalDealBtn" onclick="finalizeEnquiry()" style="display:none; width:100%; margin-top:15px; padding:15px; background:var(--gold); border:none; font-weight:700;">CONFIRM DEAL & SEND MAIL</button>
                 </div>
             </div>
         </div>
@@ -209,113 +219,158 @@
     </div>
 
     <footer id="contact">
-        <h4>SUN SPICES INDIA</h4>
+        <h4>Sun Spices India</h4>
         <p>Vandanmedu, Idukki District, Kerala - 685551, India</p>
         <p>Email: sunspices.exports.in@gmail.com | Phone: +91 7207396427</p>
-        <p style="font-size:12px; margin-top:40px; opacity:0.5;">© 2026 Sun Spices India. Global Quality. Sustainable Harvesting.</p>
+        <p>© 2026 Sun Spices India. All Rights Reserved.</p>
     </footer>
 
     <script>
-        const API_KEY = 'a7f7c4ace4ea219901553ec8'; // ExchangeRate-API
-        let liveUSD = 83.5;
-        
-        async function fetchLiveRate() {
-            try {
-                const r = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`);
-                const d = await r.json(); liveUSD = d.conversion_rates.INR;
-            } catch(e) { console.log("Using Fallback Currency Rate"); }
-        }
-        fetchLiveRate();
-
-       const spiceMarket = {
-            "Cardamom": { gst: 0.05, grades: {"8mm+ (AGEB)": 3250, "7.5mm (AGB)": 2950, "7mm (AGS)": 2800}, desc: "Grown in the monsoon-rich slopes of Vandanmedu, our Cardamom is harvested only after full maturity. Each pod is sun-dried and hand-graded to preserve the deep green hue and therapeutic essential oils. We ensure a moisture level below 11% for long shelf-life in global transit. Ideal for premium confectionery and medicinal uses." },
-            "Black Pepper": { gst: 0.05, grades: {"TGEB Bold": 780, "TGSEB": 720, "550 GL": 690}, desc: "Sourced from high-altitude plantations in Idukki, our pepper is the true 'Black Gold' of the Malabar coast. We process it using zero-chemical methods, ensuring the highest Piperine content for that signature sharp heat. Each batch is Sortex cleaned to remove dust and light berries. Perfect for European bulk seasoning and gourmet markets." },
-            "Turmeric": { gst: 0.05, grades: {"Salem Premium": 195, "Erode Gold": 170, "High Curcumin": 230}, desc: "Our Turmeric is processed in climate-controlled units to maintain its vibrant orange glow and medicinal Curcumin levels. Sourced from the best growing belts of India, it carries a deep earthy aroma and clean taste. Every finger is polished and hand-sorted to meet food safety norms. Extensively used in wellness products and global culinary arts." },
-            "Star Anise": { gst: 0.05, grades: {"Whole A-Grade": 760, "Broken Mix": 640}, desc: "Hand-harvested pods from select estates, our Star Anise is prized for its uniform shape and intense licorice fragrance. We maintain a strict '90% whole flower' policy for our premium exports. Moisture is strictly controlled to prevent fungal growth during sea freight. A staple for Asian master cuisines and artisanal flavoring." },
-            "Cloves": { gst: 0.05, grades: {"Lal Pari": 980, "Standard": 860}, desc: "Grown in the high ranges of Kerala, our cloves are rich in Eugenol, offering an intense aroma and numbing warmth. We offer the 'Lal Pari' grade, which is recognized by its reddish-brown color and headless-free consistency. Processed in hygienic units to ensure 100% purity. Essential for dental care products and premium spice blends." },
-            "Cinnamon": { gst: 0.05, grades: {"Alba Special": 560, "C5 Quills": 490}, desc: "Authentic sweet woody quills, hand-rolled in traditional Kerala style to preserve the natural oils. Unlike cassia, our cinnamon is low in coumarin, meeting the highest EU and US food safety standards. Each roll is dried in shaded units to maintain its fragile texture. Prized for its subtle sweetness in baking and teas." },
-            "Ajwain Seeds": { gst: 0.05, grades: {"Sortex Cleaned": 250}, desc: "Processed with advanced air-cleaning technology, our Ajwain seeds are 99.5% pure. Sourced from organic farms, they carry a high Thymol content essential for digestive health and flavor. We avoid any artificial heat during drying to keep the natural aroma intact. A global favorite for bakery and traditional spice mixes." },
-            "Anise Seeds": { gst: 0.05, grades: {"Export Grade": 270}, desc: "Sweet aromatic seeds cleaned for high-end international markets. We ensure a uniform seed size and high essential oil profile through precision sorting. Every shipment is vacuum-packed to avoid aroma loss during long sea voyages. Ideal for alcoholic beverages and premium confectionery." },
-            "Bay Leaf": { gst: 0.05, grades: {"Whole Leaf": 150}, desc: "Handpicked from the wild forests of Idukki, our bay leaves are sun-dried to retain their leathery texture and herbal scent. We ensure the leaves are free from stems and discoloration. Their deep green color is a testimony to our natural drying process. Essential for slow-cooked stews and aromatic rice dishes worldwide." },
-            "Coriander Seeds": { gst: 0.05, grades: {"Badami Premium": 135}, desc: "Sourced from the best harvest, our coriander seeds are crisp with a fresh citrusy note. We use Sortex machines to separate hollow seeds and impurities. The golden-brown color is naturally achieved without any bleaching. Widely used for grinding into pure coriander powder for global curry blends." },
-            "Cumin Seeds": { gst: 0.05, grades: {"99.5% Sortex": 390}, desc: "Premium Cumin seeds with a warm, earthy profile and high volatile oil content. Our processing plant ensures zero pesticide residue, complying with the strictest global regulations. Each seed is graded for size and density. A fundamental ingredient for authentic spice mixes in the Middle East and Europe." },
-            "Dill Seeds": { gst: 0.05, grades: {"Machine Cleaned": 170}, desc: "Our Dill seeds carry a pungent, grassy aroma, cleaned thoroughly for bulk export. Sourced from sustainable farms, we ensure a high germination-free standard for spice use. We pack them in heavy-duty liners to prevent moisture intake. Ideal for seasonings, pickling, and herbal formulations." },
-            "Fennel Seeds": { gst: 0.05, grades: {"Lucknowi Sweet": 230, "Bold": 200}, desc: "Harvested at peak maturity, our fennel seeds are known for their vibrant green color and refreshing sweetness. We use cool-drying techniques to prevent browning. These seeds are prized as post-meal digestives and flavorings in teas. Our Lucknowi variety is a benchmark in global quality." },
-            "Fenugreek Seeds": { gst: 0.05, grades: {"Bold Yellow": 120}, desc: "Rich and aromatic Fenugreek seeds, graded for consistent yellow-gold color. We remove all sand and stone particles through a triple-cleaning process. They are packed with natural nutrients and an intense bitter-sweet flavor. A key export for nutraceutical industries and traditional spice blending." },
-            "Mace (Javitri)": { gst: 0.05, grades: {"Whole Flower": 2100}, desc: "The delicate floral lace surrounding the nutmeg, our mace is hand-separated to keep the petals intact. It is sun-dried until it reaches a brilliant orange-red hue. It offers a more refined version of nutmeg flavor with high floral notes. We ship only 'Whole Flower' grade to ensure maximum quality and visual appeal." },
-            "Mustard Seeds": { gst: 0.05, grades: {"Bold Black": 105}, desc: "Sharp and pungent Mustard seeds, cleaned and graded for uniform size and high oil content. Our seeds are sourced from fertile plains and processed to meet international pungency standards. Every shipment is tested for moisture and purity. Essential for oil extraction and traditional food tempering." },
-            "Nigella Seeds": { gst: 0.05, grades: {"Kalonji Pure": 340}, desc: "Premium black Nigella seeds (Kalonji) with a unique peppery, onion-like aroma. We use advanced color-sorting to ensure only the deepest black seeds are selected. Sourced from organic belts, they are prized for their immense health benefits. Widely used in baking and holistic medicine across Europe and Asia." },
-            "Nutmeg": { gst: 0.05, grades: {"With Shell": 680, "Kernels": 890}, desc: "Freshly harvested Nutmeg from the high-range estates of Kerala. We offer kernels that are rich in natural oils, providing a warm, nutty aroma. Every batch is tested for Aflatoxin to meet strict EU import norms. Our nutmeg is sun-dried slowly to preserve the internal moisture balance and fragrance." },
-            "Poppy Seeds": { gst: 0.05, grades: {"Creamy White": 1500}, desc: "Cleaned and processed creamy white poppy seeds for premium bakery use. We ensure the seeds are free from any alkaloids or impurities through a multi-stage washing and drying process. Their rich, nutty texture is perfect for gourmet desserts. We provide vacuum-sealed packaging for maximum freshness." },
-            "Red Chilli Powder": { gst: 0.05, grades: {"Guntur Teja": 330, "Byadgi": 480}, desc: "Our Red Chilli powder is ground from stem-removed chillies in low-temperature mills to preserve the color and heat. We guarantee a lead-free, Sudan-dye free product. Whether it's the high-heat Teja or the vibrant Byadgi, we provide consistent SHU levels. Lab-tested for purity and international food safety standards." },
-            "Caraway Seeds": { gst: 0.05, grades: {"Premium": 400}, desc: "Aromatic Caraway seeds graded for international bakery and fine spice blends. We source them from cool-climate farms, ensuring a high Carvone oil content. Our seeds are machine-cleaned to achieve a 99.9% purity level. Their warm, anise-like flavor is a favorite for European artisan bread and spirits." }
+        // MASTER DATA - 21 PRODUCTS
+        const spiceMarket = {
+            "Cardamom": { gst: 0.05, grades: {"AGEB 8mm+": 3200, "AGB 7.5mm": 2900, "AGS 7mm": 2800}, desc: "Grown in the highlands of Vandanmedu, our Cardamom is known for its intense aroma and deep green color. Ideal for premium export." },
+            "Black Pepper": { gst: 0.05, grades: {"TGEB Bold": 750, "Standard": 680}, desc: "Malabar Pepper from Idukki vines. High piperine, obsidian black, and Sortex cleaned for zero impurities." },
+            "Turmeric": { gst: 0.05, grades: {"Salem Premium": 180, "Erode Curcumin": 210}, desc: "Naturally cured under the sun, our turmeric boasts 5-6% curcumin content, providing vibrant color and medicinal potency." },
+            "Star Anise": { gst: 0.05, grades: {"Whole A-Grade": 750}, desc: "Hand-picked whole pods with no broken pieces. Our star anise offers a signature licorice-like aroma for global kitchens." },
+            "Cloves": { gst: 0.05, grades: {"Lal Pari": 950}, desc: "Rich in Eugenol oil, our Cloves are hand-picked from Idukki's high-altitudes, ensuring that warm, numbing flavor profile." },
+            "Cinnamon": { gst: 0.05, grades: {"Alba Special": 550}, desc: "Sweet, woody, and hand-rolled quills. This is authentic cinnamon with low coumarin, compliant with European health standards." },
+            "Ajwain Seeds": { gst: 0.05, grades: {"Sortex Cleaned": 240}, desc: "Intensely aromatic seeds with high thymol. Perfect for the Middle Eastern markets, cleaned to 99.5% purity." },
+            "Anise Seeds": { gst: 0.05, grades: {"Premium Export": 260}, desc: "Sweet aromatic seeds, machine-cleaned for high-end spice blends and gourmet bakery requirements." },
+            "Bay Leaf": { gst: 0.05, grades: {"Handpicked Green": 140}, desc: "Sun-dried whole leaves that retain their natural green hue. Harvested carefully to preserve the leathery texture and scent." },
+            "Coriander Seeds": { gst: 0.05, grades: {"Badami Grade": 130}, desc: "Grown in nutrient-rich soil, our coriander has fresh citrus notes and consistent golden-brown color." },
+            "Cumin Seeds": { gst: 0.05, grades: {"Sortex 99.5%": 380}, desc: "Warm and earthy, our cumin is processed in state-of-the-art Sortex plants to ensure absolute purity for bulk exports." },
+            "Dill Seeds": { gst: 0.05, grades: {"Machine Cleaned": 160}, desc: "Pungent and grassy, these seeds are essential for pickling and seasoning in western markets." },
+            "Fennel Seeds": { gst: 0.05, grades: {"Lucknowi Sweet": 220}, desc: "Highly aromatic sweet fennel seeds, shade-dried to maintain their vibrant green color and high volatile oil content." },
+            "Fenugreek Seeds": { gst: 0.05, grades: {"Bold Yellow": 110}, desc: "Cleaned and graded seeds with uniform size, essential for traditional spice mixes across the globe." },
+            "Mace (Javitri)": { gst: 0.05, grades: {"Whole Flower": 1950}, desc: "The delicate floral lace of the nutmeg, hand-separated and sun-dried to a bright orange-red." },
+            "Mustard Seeds": { gst: 0.05, grades: {"Bold Black": 95}, desc: "Sharp, pungent, and rich in natural oils. We offer machine-cleaned bold seeds for condiments and industrial use." },
+           "Nigella Seeds": { gst: 0.05, grades: {"Sortex Kalonji": 320}, desc: "Premium black cumin (Kalonji) with high nutritional benefits, meticulously cleaned for premium bakery sectors." },
+            "Nutmeg": { gst: 0.05, grades: {"With Shell": 650, "Kernels": 850}, desc: "Freshly harvested from Kerala plantations, rich in essential oils and tested for zero aflatoxin." },
+            "Poppy Seeds": { gst: 0.05, grades: {"Creamy White": 1450}, desc: "Cleaned seeds that provide a rich texture. Our processing ensures 100% purity and food-grade safety." },
+            "Red Chilli Powder": { gst: 0.05, grades: {"Teja High Heat": 310, "Byadgi Color": 450}, desc: "Stem-removed, hygienically ground chillies. We guarantee zero artificial colors and balanced heat levels." },
+            "Caraway Seeds": { gst: 0.05, grades: {"Premium Export": 380}, desc: "Aromatic seeds graded for international spice blends, essential for artisanal bread and European culinary uses." }
         };
 
+        // RENDER GRID
         const grid = document.getElementById('mainGrid');
         Object.keys(spiceMarket).forEach(name => {
-            grid.innerHTML += `<div class="card" onclick="openProduct('${name}')"><img src="images/${name.toLowerCase().replace(' ', '-')}.jfif" onerror="this.src='images/${name.toLowerCase().replace(' ', '-')}.jpg'"> <div class="card-info"><h3>${name}</h3></div></div>`;
+            const imgPath = name === "Star Anise" ? "star-anise jfif" : name.toLowerCase().replace(' ', '-') + ".jfif";
+            grid.innerHTML += `
+            <div class="card" onclick="openProduct('${name}')">
+                <div class="img-container"><img src="images/${imgPath}" onerror="this.src='https://via.placeholder.com/450x400?text=${name}'"></div>
+                <h3>${name}</h3>
+            </div>`;
         });
 
-        let currentPrice = 0, currentProduct = "", negStage = 0, currentAns = 0;
+        // LIVE RESEARCH DATA (ExchangeRate-API)
+        const API_KEY = 'a7f7c4ace4ea219901553ec8'; //
+        let liveExchangeRate = 83.0;
+        async function fetchResearch() {
+            try {
+                const response = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`);
+                const data = await response.json();
+                liveExchangeRate = data.conversion_rates.INR;
+            } catch (e) { console.log("AI Research Error: Using fallback rate."); }
+        }
+        fetchResearch();
+
+        let currentProduct = null, currentAns = 0, currentQuoteUSD = 0, negStep = 0;
+        const managerBuffer = 55; // Logistics & Packing
+        const managerMargin = 1.25; // 25% Initial Margin
 
         function openProduct(name) {
             currentProduct = name; const p = spiceMarket[name];
             document.getElementById('mTitle').innerText = name;
-            document.getElementById('mImg').src = `images/${name.toLowerCase().replace(' ', '-')}.jfif`;
             document.getElementById('mDesc').innerText = p.desc;
+            document.getElementById('mImg').src = `images/${name.toLowerCase().replace(' ', '-')}.jfif`;
             document.getElementById('mGrade').innerHTML = Object.keys(p.grades).map(g => `<option value="${g}">${g}</option>`).join('');
+            
             document.getElementById('productModal').style.display = 'block';
             document.getElementById('initialForm').style.display = 'block';
-            document.getElementById('negPanel').style.display = 'none';
-            const n1 = Math.floor(Math.random()*10)+1, n2 = Math.floor(Math.random()*10)+1;
-            currentAns = n1+n2; document.getElementById('cap').innerText = `Verification: ${n1} + ${n2} = ?`;
-        }
+            document.getElementById('aiNegotiator').style.display = 'none';
+            document.body.style.overflow = 'hidden';
 
-        function initiateNegotiation() {
-            const qty = parseFloat(document.getElementById('mQty').value);
-            const userAns = parseInt(document.getElementById('capIn').value);
-            if(userAns !== currentAns || !qty) { alert("Please complete form!"); return; }
-
-            const p = spiceMarket[currentProduct];
-            const grade = document.getElementById('mGrade').value;
-            const ship = document.getElementById('mShipping').value;
-            
-            let base = p.grades[grade];
-            let cost = (base * (1+p.gst)) + 60; // Logistics buffer
-            if(ship === "CIF") cost += 25; // CIF buffer
-
-            currentPrice = (cost * 1.28 / liveUSD).toFixed(2); // Start at 28% margin
-            negStage = 0;
-            
-            document.getElementById('initialForm').style.display = 'none';
-            document.getElementById('negPanel').style.display = 'block';
-            document.getElementById('dynPrice').innerText = `$${currentPrice} / KG`;
-        }
-
-        function processBargain() {
-            const offer = document.getElementById('buyerOffer').value;
-            let bubble = document.getElementById('aiBubble');
-            negStage++;
-
-            if(negStage === 1) {
-                bubble.innerHTML = `<strong>Manager:</strong> I understand you are looking for a competitive rate. However, our <strong>Vandanmedu Premium Grade</strong> has zero admixture and is processed in a climate-controlled unit. <br><br> Because of your quantity, I can offer a special professional discount. <br><br> New Quote: <span style='color:var(--gold); font-size:20px;'>$${(currentPrice * 0.96).toFixed(2)}</span>`;
-                currentPrice = (currentPrice * 0.96).toFixed(2);
-            } else if(negStage === 2) {
-                bubble.innerHTML = `<strong>Manager:</strong> This is our absolute floor price. Our margin is now minimal, and we must protect the quality standards of Sun Spices India. <br><br> Final Best Price: <span style='color:var(--gold); font-size:20px;'>$${(currentPrice * 0.97).toFixed(2)}</span>`;
-                currentPrice = (currentPrice * 0.97).toFixed(2);
-                document.querySelector('.ai-input-group').style.display = 'none';
-                document.getElementById('finalizeBtn').style.display = 'block';
-            }
-            document.getElementById('buyerOffer').value = "";
-        }
-
-        function finalizeDeal() {
-            const body = `Sun Spices India Confirmed Deal:%0A%0AProduct: ${currentProduct}%0AFinal Negotiated Price: $${currentPrice}/KG%0AQuantity: ${document.getElementById('mQty').value}KG%0ADestination: ${document.getElementById('mDest').value}`;
-            window.location.href = `mailto:sunspices.exports.in@gmail.com?subject=Order Confirmation - ${currentProduct}&body=${body}`;
-            closeModal();
+            const n1 = Math.floor(Math.random() * 10) + 1, n2 = Math.floor(Math.random() * 10) + 1;
+            currentAns = n1 + n2; document.getElementById('cap').innerText = `Human Check: ${n1} + ${n2} = ?`;
         }
 
         function closeModal() { document.getElementById('productModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
+
+        // HIDDEN NEGOTIATION LOGIC
+        function startManagerChat() {
+            const userAns = parseInt(document.getElementById('capIn').value);
+            const qty = document.getElementById('mQty').value;
+            const email = document.getElementById('mEmail').value;
+            if (userAns !== currentAns || !qty || !email) { alert("Please solve Captcha & fill all details."); return; }
+
+            document.getElementById('initialForm').style.display = 'none';
+            document.getElementById('aiNegotiator').style.display = 'block';
+            
+            const p = spiceMarket[currentProduct];
+            const grade = document.getElementById('mGrade').value;
+            const shipping = document.getElementById('mShipping').value;
+            
+            // Initial AI Research & Price Logic
+            let basePrice = p.grades[grade];
+            let totalINR = (basePrice * (1 + p.gst)) + managerBuffer;
+            if(shipping === "CIF") totalINR += 20; // Avg Sea Freight
+            currentQuoteUSD = (totalINR * managerMargin / liveExchangeRate).toFixed(2);
+            negStep = 0;
+
+            addMsg("m-manager", `Greetings from Sun Spices India. I am the Export Manager handling the ${currentProduct} desk. Based on today's auction in Vandanmedu and current USD/INR trends, I can offer an initial ${shipping} quote of $${currentQuoteUSD}/KG.`);
+        }
+
+        function handleNegotiation() {
+            const input = document.getElementById('buyerMsg');
+            const msg = input.value.toLowerCase();
+            if(!msg) return;
+            addMsg("m-buyer", input.value);
+            input.value = "";
+
+            setTimeout(() => {
+                let response = "";
+                if (msg.includes("high") || msg.includes("discount") || msg.includes("negotiate")) {
+                    negStep++;
+                    if (negStep === 1) {
+                        currentQuoteUSD = (currentQuoteUSD * 0.98).toFixed(2); // 2% Discount
+                        response = `I understand. Considering this is our first potential collaboration, I have adjusted our internal margin. I can revise the offer to $${currentQuoteUSD}/KG. This reflects premium Export Quality (New Crop).`;
+                    } else if (negStep === 2) {
+                        currentQuoteUSD = (currentQuoteUSD * 0.97).toFixed(2); // Total ~5% Discount
+                        response = `This is my final floor price of $${currentQuoteUSD}/KG. Below this, we would compromise on the sorting quality, which Sun Spices never does. Does this work for you?`;
+                        document.getElementById('finalDealBtn').style.display = 'block';
+                    } else {
+                        response = "This is our absolute best offer. Our prices are protected by a 25% quality-assurance margin to ensure your shipment meets global standards.";
+                    }
+                } else {
+                    response = "We pride ourselves on the micro-climate of Vandanmedu which gives our spices a unique aroma. Is there anything specific about the shipment terms you'd like to discuss?";
+                }
+                addMsg("m-manager", response);
+            }, 1000);
+        }
+
+        function addMsg(cls, text) {
+            const box = document.getElementById('chatBox');
+            box.innerHTML += `<div class="msg ${cls}">${text}</div>`;
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function finalizeEnquiry() {
+            const prod = currentProduct;
+            const qty = document.getElementById('mQty').value;
+            const dest = document.getElementById('mDest').value;
+            const email = document.getElementById('mEmail').value;
+            const body = `Sun Spices India - Negotiated Deal:%0A%0AProduct: ${prod}%0AFinal Negotiated Price: $${currentQuoteUSD}/KG%0AQuantity: ${qty}%0ADestination: ${dest}%0ABuyer: ${email}`;
+            
+            window.location.href = `mailto:sunspices.exports.in@gmail.com?subject=Confirmed Deal: ${prod}&body=${body}`;
+            closeModal();
+            alert("Deal Confirmed! Redirecting to Professional Email Draft.");
+        }
+
+        function trackNow() {
+            const id = document.getElementById('trackID').value;
+            if(id) window.open(`https://www.hapag-lloyd.com/en/online-business/track/tracking-by-container.html?container=${id}`, '_blank');
+            else alert("Enter B/L or Container Number.");
+        }
     </script>
 </body>
 </html>
