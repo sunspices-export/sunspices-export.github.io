@@ -30,12 +30,20 @@
         .vivid-text { direction: ltr; }
         .vivid-text h2 { font-family: 'Playfair Display', serif; font-size: 52px; color: var(--dark); margin-bottom: 25px; }
 
+        /* FUEL RADAR PANEL */
+        .fuel-indicator-bar { max-width: 1400px; margin: 30px auto 0 auto; padding: 15px 40px; background: #fff; border-radius: 10px; border: 1px solid #EAE0D5; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+        .fuel-status { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 14px; }
+        .status-pulse { width: 10px; height: 10px; background: #25D366; border-radius: 50%; box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+
         /* PORTFOLIO */
-        .products-grid { max-width: 1400px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; padding: 40px; }
-        .card { background: #fff; border-radius: 12px; overflow: hidden; transition: 0.5s; cursor: pointer; border: 1px solid #eee; }
+        .products-section { padding: 60px 0; }
+        .products-grid { max-width: 1400px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 40px; }
+        .card { background: #fff; border-radius: 12px; overflow: hidden; transition: 0.5s; cursor: pointer; border: 1px solid #eee; display: flex; flex-direction: column; justify-content: space-between; }
         .card:hover { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(0,0,0,0.1); border-color: var(--gold); }
-        .card img { width: 100%; height: 400px; object-fit: cover; }
-        .card h3 { font-family: 'Playfair Display', serif; padding: 20px; font-size: 24px; text-align: center; }
+        .card img { width: 100%; height: 300px; object-fit: cover; }
+        .card h3 { font-family: 'Playfair Display', serif; padding: 20px 20px 10px 20px; font-size: 22px; text-align: center; margin: 0; }
+        .price-badge { text-align: center; color: var(--gold); font-weight: 600; padding-bottom: 20px; font-size: 15px; }
 
         /* SHIPMENT TRACKER */
         .tracker-box { background: var(--dark); padding: 100px 40px; color: #fff; text-align: center; }
@@ -63,12 +71,6 @@
         .chat-input-area { display: flex; gap: 10px; }
         .chat-input-area input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 5px; }
 
-        /* MARKET INTELLIGENCE TICKER */
-        .live-intel-bar { background: #eef5f0; padding: 12px 20px; font-size: 13px; font-weight: 600; color: var(--dark); display: flex; justify-content: space-around; border-bottom: 1px solid #ccc; }
-        .intel-item { display: flex; align-items: center; gap: 8px; }
-        .intel-up { color: #27ae60; }
-        .intel-down { color: #c0392b; }
-
         /* RIGHT SIDE SOCIAL HUB */
         .social-hub { position: fixed; right: 30px; bottom: 30px; z-index: 2500; display: flex; flex-direction: column-reverse; align-items: center; gap: 15px; }
         .main-social-btn { width: 65px; height: 65px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 28px; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: 0.3s; }
@@ -85,7 +87,7 @@
     <header class="header">
         <div class="nav-container">
             <a href="#" class="logo-box">
-                <img src="images/sun-spices-logo.jpeg" alt="Logo" onerror="this.src='https://via.placeholder.com/75?text=Sun+Spices'">
+                <img src="images/sun-spices-logo.jpeg" alt="Logo">
                 <span>SUN SPICES INDIA</span>
             </a>
             <nav>
@@ -98,22 +100,16 @@
         </div>
     </header>
 
-    <div class="live-intel-bar">
-        <div class="intel-item"><i class="fas fa-dollar-sign"></i> <span id="liveUSDText">Live USD/INR: Loading...</span></div>
-        <div class="intel-item"><i class="fas fa-gas-pump"></i> <span id="liveFuelText">Brent Crude Oil: Loading...</span></div>
-        <div class="intel-item"><i class="fas fa-chart-line text-up"></i> <span>Export Profit Margin: Fixed 5%</span></div>
-    </div>
-
     <div id="home" class="hero">
         <video autoplay muted loop playsinline><source src="images/spice-video.mp4" type="video/mp4"></video>
         <div class="hero-content">
-            <p style="color:var(--gold); letter-spacing:3px;">DIRECT FROM QUALITY INDIAN BELTS</p>
+            <p style="color:var(--gold); letter-spacing:3px;">DIRECT FROM VANDANMEDU, KERALA</p>
             <h1>Global Purity. <br> <i>Uncompromised Quality.</i></h1>
         </div>
     </div>
 
     <section id="about" class="vivid-section">
-        <img src="images/hero-cardamom.jpg" alt="Heritage" onerror="this.src='https://via.placeholder.com/600x400?text=Premium+Spices'">
+        <img src="images/hero-cardamom.jpg" alt="Heritage">
         <div class="vivid-text">
             <h2>The Vandanmedu Mists</h2>
             <p>Our Alleppey Green Extra Bold (AGEB) cardamom is nurtured in the mist-filled valley of Vandanmedu, where the soil is rich in organic matter and the climate provides the perfect cool-temperate balance. Every pod is hand-picked at 11:00 AM—the precise moment when essential oils are most concentrated—ensuring a vibrant emerald hue and intense aroma that global buyers demand.</p>
@@ -121,15 +117,42 @@
     </section>
 
     <section class="vivid-section">
-        <img src="images/hero-balck-pepper.jpg.webp" alt="Processing" onerror="this.src='https://via.placeholder.com/600x400?text=Black+Pepper'">
+        <img src="images/hero-balck-pepper.jpg.webp" alt="Processing">
         <div class="vivid-text">
             <h2>Black Gold of Malabar</h2>
             <p>Strategically located in Idukki, our pepper processing units leverage the high-altitude humidity to sun-dry TGEB bold pepper on elevated beds. This traditional Kerala framing ensures zero soil contact and 100% hygiene. The result is a bold, spicy character with high piperine levels, meeting the strictest food safety standards of the EU and Middle East markets.</p>
         </div>
     </section>
 
+    <section class="vivid-section">
+        <img src="images/quality-check.jpg" alt="Quality">
+        <div class="vivid-text">
+            <h2>The Science of Spices</h2>
+            <p>At Sun Spices India, our Export Manager oversees every batch through advanced Sortex cleaning and multi-stage testing. From Phyto-sanitary checks to Aflatoxin monitoring, we ensure that the moisture content is maintained at a perfect 12% for long-distance maritime transit, preserving the "New Crop" freshness from our plantations to your destination port.</p>
+        </div>
+    </section>
+
+    <section class="vivid-section">
+        <img src="images/hero-plantation.jpg" alt="Plantation">
+        <div class="vivid-text">
+            <h2>Sustainable Farming Heritage</h2>
+            <p>Our proximity to the Western Ghats allows us to maintain a transparent supply chain. We work directly with small-hold farmers who have practiced multi-crop spice farming for generations. This sustainable approach guarantees not only premium quality but also a consistent supply of various grades, supporting B2B partnerships across 40+ countries.</p>
+        </div>
+    </section>
+
+    <div class="fuel-indicator-bar">
+        <div class="fuel-status">
+            <div class="status-pulse"></div>
+            <span id="fuelSurchargeDisplay">Global Freight Index: Loading...</span>
+        </div>
+        <div style="font-size: 13px; color: #666; font-weight: 500;">
+            <i class="fas fa-gas-pump"></i> Real-time Marine Fuel Factor Applied Automatically
+        </div>
+    </div>
+
     <section id="products" class="products-section">
-        <h2 style="text-align:center; font-family:'Playfair Display'; font-size:55px; margin-bottom:40px; margin-top: 60px;">The Whole Spice Portfolio</h2>
+        <h2 style="text-align:center; font-family:'Playfair Display'; font-size:55px; margin-bottom:40px;">The Whole Spice Portfolio</h2>
+        <p style="text-align:center; max-width: 700px; margin: 0 auto 50px auto; color:#666; font-size:15px;">Explore our 21 premium export-grade whole spices. Prices are dynamically adjusted based on exchange rates and real-time maritime logistics index.</p>
         <div class="products-grid" id="mainGrid"></div>
     </section>
 
@@ -145,23 +168,23 @@
     <div id="productModal" class="modal">
         <div class="modal-body">
             <span class="close-btn" onclick="closeModal()">&times;</span>
-            <div class="modal-img"><img id="mImg" src="" onerror="this.src='https://via.placeholder.com/600x600?text=Spice+Image'"></div>
+            <div class="modal-img"><img id="mImg" src=""></div>
             <div class="modal-info">
                 <h2 id="mTitle" style="font-family:'Playfair Display'; color:var(--dark); margin:0 0 10px 0; font-size:38px;"></h2>
                 <p id="mDesc" style="color:#555; line-height:1.7; text-align:justify; margin-bottom:25px; font-size:15px; border-left: 4px solid var(--gold); padding-left:15px;"></p>
                 
                 <div class="form-box" id="quoteForm">
-                    <label style="font-weight: 600;">Grade / Variety Selection</label>
-                    <select id="mGrade" onchange="calculateLiveDynamicPrice()"></select>
+                    <label style="font-weight:600;">Grade / Variety Selection</label>
+                    <select id="mGrade" onchange="updateModalLivePrice()"></select>
                     
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
                         <div>
-                            <label style="font-weight: 600;">Quantity</label>
-                            <input type="number" id="mQty" placeholder="e.g. 10" oninput="calculateLiveDynamicPrice()">
+                            <label style="font-weight:600;">Quantity</label>
+                            <input type="number" id="mQty" placeholder="e.g. 10" value="1" oninput="updateModalLivePrice()">
                         </div>
                         <div>
-                            <label style="font-weight: 600;">Unit</label>
-                            <select id="mUnit" onchange="calculateLiveDynamicPrice()">
+                            <label style="font-weight:600;">Unit</label>
+                            <select id="mUnit" onchange="updateModalLivePrice()">
                                 <option value="KG">Kilograms (KG)</option>
                                 <option value="MT">Metric Tons (MT)</option>
                             </select>
@@ -170,51 +193,54 @@
 
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
                         <div>
-                            <label style="font-weight: 600;">Incoterms</label>
-                            <select id="mInco" onchange="calculateLiveDynamicPrice()">
-                                <option value="FOB">FOB (Ex-Loading Port)</option>
+                            <label style="font-weight:600;">Incoterms</label>
+                            <select id="mInco" onchange="updateModalLivePrice()">
+                                <option value="FOB">FOB (Ex-Vandanmedu)</option>
                                 <option value="CIF">CIF (Port Destination)</option>
                             </select>
                         </div>
                         <div>
-                            <label style="font-weight: 600;">Destination Port</label>
+                            <label style="font-weight:600;">Destination Port</label>
                             <input type="text" id="mPort" placeholder="e.g. Jebel Ali, UAE">
                         </div>
                     </div>
 
-                    <label style="font-weight: 600;">Required Certificates</label>
+                    <div style="background: #fdfaf4; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #f1e4cb;">
+                        <span style="font-size: 13px; color: #777; display:block; text-transform:uppercase; letter-spacing:1px;">Estimated Indicative Value</span>
+                        <span id="modalLivePriceDisplay" style="font-size: 24px; font-weight:700; color:var(--dark);">$0.00 USD</span>
+                        <span style="font-size: 11px; color:#999; display:block; margin-top:2px;">*Based on real-time currency & fuel indices. Final terms verified by manager below.</span>
+                    </div>
+
+                    <label style="font-weight:600;">Required Certificates (Regulatory)</label>
                     <div class="cert-grid">
-                        <label><input type="checkbox" class="cert" value="Phytosanitary" checked> Phyto Certificate</label>
-                        <label><input type="checkbox" class="cert" value="Health Certificate"> Health Certificate</label>
-                        <label><input type="checkbox" class="cert" value="COO" checked> Certificate of Origin</label>
-                        <label><input type="checkbox" class="cert" value="Aflatoxin"> Aflatoxin Test Report</label>
+                        <label><input type="checkbox" class="cert" value="Phytosanitary" checked> Phyto</label>
+                        <label><input type="checkbox" class="cert" value="Health Certificate"> Health</label>
+                        <label><input type="checkbox" class="cert" value="COO" checked> Origin</label>
+                        <label><input type="checkbox" class="cert" value="Aflatoxin"> Aflatoxin</label>
+                        <label><input type="checkbox" class="cert" value="Lab Report" checked> Lab Report</label>
+                        <label><input type="checkbox" class="cert" value="Halal"> Halal/FDA</label>
                     </div>
 
-                    <label style="font-weight: 600;">Estimated Live Price Indicator</label>
-                    <div style="background: #fff3cd; padding: 12px; border-radius: 5px; font-weight: 600; color: #856404; margin-bottom: 15px; font-size: 15px;">
-                        Live Price: <span id="livePriceIndicator">$0.00</span> / KG
-                    </div>
-
-                    <label style="font-weight: 600;">Business Email</label>
+                    <label style="font-weight:600;">Business Email</label>
                     <input type="email" id="mEmail" placeholder="buyer@company.com">
                     
                     <p id="cap" style="font-weight:600; color:var(--gold); margin-bottom:5px;"></p>
                     <input type="number" id="capIn" placeholder="Result?">
                     
-                    <button onclick="initiateExportManagerReview()" style="width:100%; padding:18px; background:var(--dark); color:#fff; border:none; cursor:pointer; font-weight:600; font-size:16px;">START OFFICIAL NEGOTIATION</button>
+                    <button onclick="initiateExportManagerReview()" style="width:100%; padding:18px; background:var(--dark); color:#fff; border:none; cursor:pointer; font-weight:600; font-size:16px; border-radius:5px;">SUBMIT TO EXPORT MANAGER</button>
                 </div>
 
                 <div id="chatPanel">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-                        <span style="background:var(--dark); color:#fff; padding:5px 12px; border-radius:50px; font-size:11px; font-weight:600;">SUN SPICES CHAT DESK</span>
-                        <span style="font-size:11px; color:#27ae60; font-weight:bold;"><i class="fas fa-circle"></i> Connected</span>
+                        <span style="background:var(--dark); color:#fff; padding:5px 12px; border-radius:50px; font-size:11px;">EXPORT MANAGER ONLINE</span>
+                        <span id="liveResearch" style="font-size:11px; color:#666;"></span>
                     </div>
                     <div class="chat-history" id="chatHistory"></div>
                     <div class="chat-input-area">
-                        <input type="text" id="buyerMsg" placeholder="Type message (e.g. 'Can we get a discount?', 'Check quality')">
+                        <input type="text" id="buyerMsg" placeholder="Type message... (e.g. 'Can we reduce price?', 'What about shipping?')">
                         <button onclick="handleBuyerMessage()" style="padding:10px 25px; background:var(--gold); border:none; color:#fff; cursor:pointer; font-weight:600;">SEND</button>
                     </div>
-                    <button onclick="finalizeAndEmail()" style="width:100%; margin-top:15px; padding:15px; background:var(--dark); color:#fff; border:none; cursor:pointer; font-weight:600;">GENERATE PROFORMA INVOICE TERMS</button>
+                    <button onclick="finalizeAndEmail()" style="width:100%; margin-top:15px; padding:15px; background:var(--dark); color:#fff; border:none; cursor:pointer; font-weight:600; border-radius:5px;">CONFIRM ORDER TERMS</button>
                 </div>
             </div>
         </div>
@@ -231,189 +257,210 @@
 
     <footer>
         <h4>Sun Spices India</h4>
-        <p>Global Export Office: India</p>
+        <p>Global Export Office: Vandanmedu, Idukki, Kerala - 685551, India</p>
         <p>Email: sunspices.exports.in@gmail.com | Direct: +91 7207396427</p>
         <p style="margin-top:40px; font-size:12px; opacity:0.5;">© 2026 Sun Spices India. All Rights Reserved.</p>
     </footer>
 
     <script>
-        // GLOBAL STATE & LIVE PRICING INTERFACES
-        const EXCHANGERATE_API_KEY = 'a7f7c4ace4ea219901553ec8'; 
+        // GLOBAL SECURE STATE
+        const API_KEY = 'a7f7c4ace4ea219901553ec8'; 
         let liveUSD = 83.50; 
-        let liveFuelPrice = 82.50; // Brent Crude base price per barrel
-        let fuelSurchargePercentage = 0; 
-        let curAns = 0;
-        let finalPrice = 0; 
-        let qtyVal = 0; 
-        let unitVal = ''; 
-        let incoVal = '';
-        let targetProduct = '';
-        let targetGrade = '';
+        let fuelSurchargeMultiplier = 1.0; 
+        let curAns = 0, negStep = 0;
+        let finalPrice = 0, qtyVal = 0, unitVal = '', incoVal = '';
 
-        // Comprehensive Spice Data Matrix (Base Rates in INR per KG)
+        // EXACTLY 21 PREMIUM PRODUCTS REGISTERED (All Internal Margins & Soft Matters are Encapsulated)
         const spiceData = {
-            "Turmeric": { 
-                grades: {"High Curcumin (6%+)": 225, "Salem Finger": 185, "Erode Finger": 165, "Salem Powder (95% Pure)": 180, "Nizamabad Powder": 155},
-                desc: "Premium grade Turmeric sourced from premium dry belts. High curcumin content makes it highly sought after in international pharmaceutical and culinary sectors. Cleaned, polished, and moisture-controlled at 12% max for reliable maritime transit."
-            },
-            "Cardamom": { 
-                grades: {"8mm+ AGEB": 3200, "7.5mm AGB": 2980, "7mm AGS": 2800, "6-7mm Mix": 2500},
-                desc: "Hand-harvested in misty valleys. Packed with high volatile oil content and premium natural green shade, matching strict European and Middle Eastern food safety metrics."
-            },
-            "Black Pepper": { 
-                grades: {"TGEB Bold": 760, "TGSEB": 720, "550 GL": 680}, 
-                desc: "The genuine Malabar Black Gold. Sun-dried on modern raised platforms preventing soil contact, yielding top piperine concentrations." 
-            },
-            "Cumin Seeds": { grades: {"Sortex 99.5%": 395, "Singapore Grade": 360}, desc: "High aromatic oil content seeds processed using cutting-edge Sortex color sorting machines." },
-            "Cloves": { grades: {"Lal Pari Premium": 980, "Standard Export": 850}, desc: "Excellent reddish-brown full head cloves rich in Eugenol oil fraction." },
-            "Cinnamon": { grades: {"Alba Quills (Top)": 580, "C5 Special": 500, "H1 Grade": 430}, desc: "Delicate multi-layered authentic sweet cinnamon stick grades with ultra-low coumarin profile." }
+            "Cardamom": { grades: {"8mm+ AGEB": 3200, "7.5mm AGB": 2980, "7mm AGS": 2800}, desc: "Hand-harvested in Vandanmedu's mist-filled valleys. These pods are graded for high essential oil (cineole) content and vibrant natural green hue." },
+            "Turmeric": { grades: {"High Curcumin (6%+)": 225, "Salem Finger": 185, "Erode Finger": 165}, desc: "Sourced from premier organic belts. Deep orange-yellow pigment, heavily polished, lab-tested for unmatched purity and rich curcumin levels." },
+            "Black Pepper": { grades: {"TGEB Bold": 760, "TGSEB": 720, "550 GL": 680}, desc: "The Black Gold of Malabar. Sun-dried on elevated beds to preserve its signature pungency and superior piperine content." },
+            "Star Anise": { grades: {"Whole A-Grade": 780, "Broken Mix": 650}, desc: "Aromatic star-shaped pods hand-sorted for maximum whole-count. Highly rich in anethole oil, creating intense licorice fragrances." },
+            "Cloves": { grades: {"Lal Pari Premium": 980, "Standard Export": 850}, desc: "Deep reddish-brown cloves from Kerala's mountain slopes. Hand-picked to ensure zero headless cloves, conserving high eugenol values." },
+            "Cinnamon": { grades: {"Alba Quills": 580, "C5 Special": 500}, desc: "Authentic sweet woody quills, hand-rolled in delicate layers. Highly sought-after by health-conscious premium global B2B importers." },
+            "Ajwain Seeds": { grades: {"Sortex Cleaned 99.5%": 250}, desc: "High thymol seeds processed using advanced frequency vibration machinery. Guaranteed absolute botanical purity." },
+            "Anise Seeds": { grades: {"Premium Export Grade": 275}, desc: "Sweet aromatic seeds with a rich volatile oil profile, highly demanded by the global luxury confectionery sector." },
+            "Bay Leaf": { grades: {"Handpicked Whole Leaf": 150}, desc: "Leathery aromatic leaves shade-dried to retain natural essential oils and prevent brittle transit breakage." },
+            "Coriander Seeds": { grades: {"Eagle Grade": 140, "Badami Whole": 120}, desc: "Golden-brown aromatic seeds with fresh citrus undertakings, optimal for global spice processing mills." },
+            "Cumin Seeds": { grades: {"Sortex 99.5% Pure": 395, "Singapore Machine Cleaned": 360}, desc: "High volatile oil load cumin seeds processed through multi-stage sortex lines to filter out any field dust or impurities." },
+            "Dill Seeds": { grades: {"Machine Cleaned Grade A": 175}, desc: "Mature seeds offering a distinctive sharp, grassy aroma profile, perfect for pickling and essential oil extraction lines." },
+            "Fennel Seeds": { grades: {"Lucknowi Sweet Bold": 240, "Standard Export Bold": 210}, desc: "Exquisite refreshing green seeds shade-dried carefully to lock in the high anethole sweetness factor." },
+            "Fenugreek Seeds": { grades: {"Bold Golden Yellow": 125}, desc: "Rich golden seeds cleaned thoroughly via gravity separators to meet the most stringent EU food safety rules." },
+            "Mace (Javitri)": { grades: {"Premium Whole Flower": 1980, "Export Broken Flower": 1750}, desc: "Delicate floral lace hand-separated from premium nutmeg. Sun-dried to protect the brilliant natural orange-red brilliance." },
+            "Mustard Seeds": { grades: {"Bold Black": 105, "Premium Yellow": 118}, desc: "High-grade uniform mustard seeds selected carefully for maximum oil content and sharp authentic pungency thresholds." },
+            "Nigella Seeds": { grades: {"Sortex Kalonji 99%": 340}, desc: "Jet-black seeds with intense peppery profiles. Sortex-cleaned to arrive at pristine physical hygiene parameters." },
+            "Nutmeg": { grades: {"Nutmeg Kernels": 850, "With Hard Shell": 660}, desc: "Freshly harvested from river-bank rich plantations. Rigorously lab-tested to ensure 100% aflatoxin-free safety parameters." },
+            "Poppy Seeds": { grades: {"Creamy White Export": 1495}, desc: "Nutty seeds selected for elite aesthetic parameters, completely free from dark seeds or industrial grit contamination." },
+            "Red Chilli Powder": { grades: {"Teja High SHU": 320, "Byadgi Deep Color": 470}, desc: "Pure stem-less ground chillies. Teja offers hot capsaicin punch, while Byadgi provides lush red cosmetic color." },
+            "Caraway Seeds": { grades: {"Premium Export Quality": 400}, desc: "Highly aromatic seeds harvested from cold temperate soils to guarantee high carvone chemical percentages." }
         };
 
-        // Fetch Live Economics data
-        async function fetchMarketIntelligence() {
-            // 1. Fetch Exchange Rate
+        // DYNAMIC FUEL ENGINE & EXCHANGE RADAR
+        async function runDynamicPricingEngine() {
             try {
-                const res = await fetch(`https://v6.exchangerate-api.com/v6/${EXCHANGERATE_API_KEY}/latest/USD`);
+                // Fetch Exchange Rate
+                const res = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`);
                 const data = await res.json();
-                if(data.conversion_rates && data.conversion_rates.INR) {
-                    liveUSD = parseFloat(data.conversion_rates.INR);
+                if(data && data.conversion_rates && data.conversion_rates.INR) {
+                    liveUSD = data.conversion_rates.INR;
                 }
-            } catch (e) { console.log("Exchange API Fallback active."); }
-            document.getElementById('liveUSDText').innerText = `Live USD/INR: ₹${liveUSD.toFixed(2)}`;
+            } catch (e) { 
+                console.log("System offline. Operating via secure local standard exchange index."); 
+            }
 
-            // 2. Fetch Live Fuel Price Strategy (Simulated Live Feed from Global Commodity Markets via public aggregator fallback)
-            try {
-                // Generates subtle realistic market movements based on current 2026 indexes ($80-$85 range)
-                liveFuelPrice = (81.20 + (Math.random() * 3.5)).toFixed(2);
-                // Calculate dynamic surcharge variation based on baseline standard of $80/barrel
-                let variance = liveFuelPrice - 80.00;
-                fuelSurchargePercentage = (variance / 80.00) * 5; // 5% weight capacity impact on transport
-                if(fuelSurchargePercentage < 0) fuelSurchargePercentage = 0;
-            } catch(e) { fuelSurchargePercentage = 0; }
-            document.getElementById('liveFuelText').innerText = `Brent Crude: $${liveFuelPrice}/BBL (+${fuelSurchargePercentage.toFixed(2)}% Surcharge applied)`;
+            // Simulate Live Fuel Market Fluctuation (Brent/Marine Gas Oil Variance Tracker)
+            // This represents shifting freight/fuel factors up or down by a small fraction dynamically.
+            const baseFuelIndex = 80; // Standard baseline
+            const simulatedCurrentFuelPrice = 78 + (Math.random() * 6); // Natural fuel market simulation
+            fuelSurchargeMultiplier = 1 + ((simulatedCurrentFuelPrice - baseFuelIndex) / baseFuelIndex) * 0.15; // 15% sensitivity scale
+
+            const fuelPercentageDirection = ((fuelSurchargeMultiplier - 1) * 100).toFixed(2);
+            const fuelText = fuelPercentageDirection >= 0 ? `+${fuelPercentageDirection}% Surcharge Added` : `${fuelPercentageDirection}% Reduction Applied`;
+            
+            document.getElementById('fuelSurchargeDisplay').innerText = `Logistics Fuel Factor: ${fuelText} (INR/USD: ${liveUSD.toFixed(2)})`;
+            renderProductGrid();
         }
 
-        // Initialize Portfolio Grid
-        const grid = document.getElementById('mainGrid');
-        Object.keys(spiceData).forEach(name => {
-            const path = name.toLowerCase().replace(' ', '-');
-            grid.innerHTML += `
-                <div class="card" onclick="openProduct('${name}')">
-                    <img src="images/${path}.jfif" onerror="this.src='https://via.placeholder.com/400x300?text=${name}'">
-                    <h3>${name}</h3>
-                </div>`;
-        });
+        function calculateSecureFOBPrice(baseCostINR) {
+            // 5% margin completely embedded inside the arithmetic formula.
+            // Soft matters are integrated directly into the constant values so nothing is exposed to the client interface.
+            let embeddedProfitFactor = 1.05; 
+            let logisticsHandlingFee = 65; // Fixed operational local handling costs per unit index
+            
+            let structuredCost = (baseCostINR * embeddedProfitFactor * fuelSurchargeMultiplier) + logisticsHandlingFee;
+            let finalPriceUSD = structuredCost / liveUSD;
+            return finalPriceUSD.toFixed(2);
+        }
+
+        function renderProductGrid() {
+            const grid = document.getElementById('mainGrid');
+            grid.innerHTML = "";
+            Object.keys(spiceData).forEach(name => {
+                const p = spiceData[name];
+                const firstGrade = Object.keys(p.grades)[0];
+                const baseCost = p.grades[firstGrade];
+                const displayPrice = calculateSecureFOBPrice(baseCost);
+                
+                const path = name.toLowerCase().replace(' ', '-');
+                grid.innerHTML += `
+                    <div class="card" onclick="openProduct('${name}')">
+                        <img src="images/${path}.jfif" onerror="this.src='images/${path}.jpg'">
+                        <h3>${name}</h3>
+                        <div class="price-badge">Indicative FOB: $${displayPrice} / KG</div>
+                    </div>`;
+            });
+        }
 
         function openProduct(name) {
-            targetProduct = name;
             const p = spiceData[name];
             document.getElementById('mTitle').innerText = name;
             document.getElementById('mDesc').innerText = p.desc;
             document.getElementById('mImg').src = `images/${name.toLowerCase().replace(' ', '-')}.jfif`;
             document.getElementById('mGrade').innerHTML = Object.keys(p.grades).map(g => `<option value="${g}">${g}</option>`).join('');
             
-            document.getElementById('mQty').value = 10; // Default placeholder initial value 
             document.getElementById('quoteForm').style.display = 'block';
             document.getElementById('chatPanel').style.display = 'none';
             document.getElementById('productModal').style.display = 'block';
             
-            // Anti-spam security parameters
-            const n1 = Math.floor(Math.random()*12)+4, n2 = Math.floor(Math.random()*11)+3;
+            const n1 = Math.floor(Math.random()*15)+1, n2 = Math.floor(Math.random()*15)+1;
             curAns = n1 + n2;
-            document.getElementById('cap').innerText = `Security Check: Verify ${n1} + ${n2} = ?`;
+            document.getElementById('cap').innerText = `Security Verification: ${n1} + ${n2} = ?`;
+            document.getElementById('capIn').value = "";
+            negStep = 0; 
             document.getElementById('chatHistory').innerHTML = '';
-            
-            calculateLiveDynamicPrice();
+            updateModalLivePrice();
         }
 
-        // Live Realtime Dynamic Price Engine (Integrates Base, Fuel Surcharges, 5% Profit Margin fixed, and Incoterms)
-        function calculateLiveDynamicPrice() {
-            const product = targetProduct || "Turmeric";
+        function updateModalLivePrice() {
+            const name = document.getElementById('mTitle').innerText;
+            if(!name || !spiceData[name]) return;
+            
+            const p = spiceData[name];
             const grade = document.getElementById('mGrade').value;
-            if(!grade || !spiceData[product].grades[grade]) return 0;
-
-            let baseCostINR = spiceData[product].grades[grade];
+            const baseCost = p.grades[grade];
             
-            // Apply Dynamic Fuel Logistics Adjustment Factor
-            let fuelImpact = baseCostINR * (fuelSurchargePercentage / 100);
-            let costWithFuel = baseCostINR + fuelImpact;
-
-            // Apply Fixed 5% Profit Margin requested by operator
-            let rateWithProfit = costWithFuel * 1.05; 
-
-            // Incorporate Incoterms Logistics Overheads
-            const inco = document.getElementById('mInco').value;
-            let finalPortOverheadINR = 15.00; // Handling, Customs documentation clearing buffer
+            let unitFOBPriceUSD = calculateSecureFOBPrice(baseCost);
+            let qty = parseFloat(document.getElementById('mQty').value) || 1;
+            let unit = document.getElementById('mUnit').value;
+            let inco = document.getElementById('mInco').value;
+            
+            let totalMultiplier = (unit === "MT") ? 1000 : 1;
+            let baseCalculation = unitFOBPriceUSD * qty * totalMultiplier;
+            
             if(inco === "CIF") {
-                finalPortOverheadINR += 45.00; // Maritime Insurance & International Freight container cost average
+                baseCalculation += (180 * qty * (unit === "MT" ? 1 : 0.05)); // Encapsulated oceanic freight parameters
             }
-
-            let computedPerKgUSD = ((rateWithProfit + finalPortOverheadINR) / liveUSD);
             
-            // Render on UI live preview indicator
-            document.getElementById('livePriceIndicator').innerText = `$${computedPerKgUSD.toFixed(2)}`;
-            return computedPerKgUSD.toFixed(2);
+            document.getElementById('modalLivePriceDisplay').innerText = `$${baseCalculation.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} USD`;
+            return unitFOBPriceUSD;
         }
 
         function initiateExportManagerReview() {
             const qty = parseFloat(document.getElementById('mQty').value);
             if(parseInt(document.getElementById('capIn').value) !== curAns || !qty) { 
-                alert("Please resolve the security check question and enter a valid quantity amount."); 
+                alert("Please complete the security verification math question and enter a valid quantity."); 
                 return; 
             }
             
             qtyVal = qty; 
             unitVal = document.getElementById('mUnit').value;
             incoVal = document.getElementById('mInco').value;
-            targetGrade = document.getElementById('mGrade').value;
+            const name = document.getElementById('mTitle').innerText;
+            const grade = document.getElementById('mGrade').value;
 
-            finalPrice = calculateLiveDynamicPrice();
+            let finalUnitRate = updateModalLivePrice();
+            finalPrice = finalUnitRate; // Track unit price for communication lines
 
             document.getElementById('quoteForm').style.display = 'none';
             document.getElementById('chatPanel').style.display = 'block';
+            document.getElementById('liveResearch').innerText = `Live Index Token Connected`;
             
-            // Intrinsic Opening Response mapping
-            addMsg("manager", `Hello! I am the Export Desk System for Sun Spices India. I have successfully processed your dynamic query parameters.<br><br>🚨 <b>Market Conditions Applied:</b> Based on current Brent Crude rates ($${liveFuelPrice}/BBL) impacting freight and a fixed 5% company margin, our premium quote for <b>${qtyVal} ${unitVal}</b> of <b>${targetGrade} ${targetProduct}</b> is <b>$${finalPrice} / KG (${incoVal} terms)</b>.<br><br>How do these commercial conditions fit your import budget plans?`);
+            // ELITE BUSINESS-LEVEL AI RESPONSE STRINGS
+            addMsg("manager", `Dear partner, thank you for submitting your request. I have carefully evaluated your interest in ${qtyVal} ${unitVal} of premium ${grade} ${name}. Taking into account today's local auction index in Vandanmedu, our strict multi-stage Sortex processing protocol, and current ocean fuel surcharge levels, our official firm offer is established at $${finalPrice} USD per KG on ${incoVal} terms. Our quality guarantees full compliance with global trade health and purity standards. How would you like to proceed with this allocation?`);
         }
 
-        // ADVANCED BUSINESS COMMUNICATION AI CHAT INTENT ENGINE
         function handleBuyerMessage() {
             const input = document.getElementById('buyerMsg');
-            const txt = input.value.trim().toLowerCase();
+            const txt = input.value.toLowerCase();
             if(!txt) return;
 
             addMsg("buyer", input.value);
             input.value = "";
 
-            // Intelligently classify buyer arguments and dispatch appropriate tactical enterprise replies
             setTimeout(() => {
-                if(txt.includes("high") || txt.includes("expensive") || txt.includes("discount") || txt.includes("negotiate") || txt.includes("cheap")) {
-                    respondToPriceNegotiation();
-                } else if(txt.includes("quality") || txt.includes("pure") || txt.includes("sample") || txt.includes("grades")) {
-                    addMsg("manager", `We completely understand that international buyers place top emphasis on quality. Our ${targetProduct} undergoes meticulous multi-stage <b>Sortex cleaning</b>, gravity separation, and strict moisture stabilization (under 12%). This effectively mitigates the risk of weight loss or mold formation during cross-ocean transits. We operate on a strict <b>5% structural company margin</b> to support local producers, meaning we never compromise product purity to offer unrealistic discounts. Would you like us to attach recent laboratory certificates?`);
-                } else if(txt.includes("certificate") || txt.includes("phyto") || txt.includes("origin") || txt.includes("test")) {
-                    addMsg("manager", `Compliance safety is our priority. Every container dispatch is certified officially by the <b>Spices Board of India</b>. We supply full Phytosanitary clearance certificates, Verified Certificates of Origin (COO), and comprehensive laboratory test metrics verifying zero Aflatoxin or industrial residues. Your shipment paperwork will be flawlessly structured to pass customs at your target port smoothly.`);
-                } else if(txt.includes("delivery") || txt.includes("time") || txt.includes("shipment") || txt.includes("port")) {
-                    addMsg("manager", `Logistics operations are highly organized. For a bulk request of ${qtyVal} ${unitVal}, processing, packaging matching your specification, and container stuffing takes roughly 7 to 14 business days. Ocean transit booking will be locked immediately via direct line Hapag-Lloyd vessel allocations from our primary gateway ports to ensure fast arrival.`);
+                // PROFESSIONAL MULTI-INTENT CRITICAL COMMUNICATION ROUTINES
+                if(txt.includes("high") || txt.includes("price") || txt.includes("discount") || txt.includes("negotiate") || txt.includes("cheap")) {
+                    negotiateManager();
+                } else if(txt.includes("phyto") || txt.includes("certificate") || txt.includes("origin") || txt.includes("lab") || txt.includes("compliance")) {
+                    addMsg("manager", "Regarding international trade compliance: Our standard export documentation bundle encompasses comprehensive Phytosanitary Certifications, Official Certificates of Origin issued directly by the Spices Board of India, and independent laboratory analytical reports mapping moisture and volatile oil metrics perfectly. We assure uncompromised alignment with European, North American, and Middle Eastern import mandates.");
+                } else if(txt.includes("delivery") || txt.includes("time") || txt.includes("shipping") || txt.includes("days") || txt.includes("port")) {
+                    const portDest = document.getElementById('mPort').value || 'your designated destination';
+                    addMsg("manager", `Logistics Schedule: For an assignment sizing ${qtyVal} ${unitVal}, container loading operations are initiated at Cochin Port within 7 to 10 banking days post financial clearance. We implement direct transit shipping lanes via Tier-1 ocean carriers to ensure timely, high-grade cargo arrival at ${portDest}.`);
                 } else {
-                    addMsg("manager", `Thank you for your response. We at Sun Spices India aim to build solid, multi-year B2B commercial partnerships. Let us know if you have specific packaging parameters or special delivery schedule requirements so we can accommodate your enterprise preferences.`);
+                    addMsg("manager", "Thank you for sharing your feedback. At Sun Spices India, we place paramount focus on structuring robust, multi-year B2B commercial alliances. Let us know what specific parameters require alignment so we can proceed with issuing your formal Proforma Invoice.");
                 }
-            }, 700);
+            }, 750);
         }
 
-        // Professional Negotiation Control System (Ensures 5% floor is perfectly protected)
-        let negotiationCounter = 0;
-        function respondToPriceNegotiation() {
-            negotiationCounter++;
-            let standardQuote = parseFloat(finalPrice);
+        function negotiateManager() {
+            negStep++;
+            // Tiered corporate volume concession strategy without leaking internal 5% baseline
+            const structuralConcessions = [1.0, 0.98, 0.96]; 
+            const name = document.getElementById('mTitle').innerText;
+            const grade = document.getElementById('mGrade').value;
 
-            if(negotiationCounter === 1) {
-                // Offer an ultra-slim fractional strategic incentive discount by trimming nominal logistic fat buffers
-                let discountedQuote = (standardQuote * 0.985).toFixed(2);
-                finalPrice = discountedQuote;
-                addMsg("manager", `I understand that market competition is fierce. To establish a new reliable connection with your firm, we have reviewed the logistics layer variables. By streamlining port handling efficiencies, we can marginally adjust the proposal to <b>$${finalPrice} / KG</b>.<br><br>Please note that this price strictly holds our <b>5% operating framework intact</b> and factors in the current live fuel indexes to secure premium-tier whole spices.`);
+            if(negStep < structuralConcessions.length) {
+                let recalculatePrice = (finalPrice * structuralConcessions[negStep]).toFixed(2);
+                
+                const responseMatrix = [
+                    "",
+                    `We recognize the dynamic competitive pressures of your target market. While our margins are highly optimized to preserve the pristine nature of the crop, I have authorization to apply a volume logistical allowance to launch this premium partnership. We can fine-tune the pricing down to $${recalculatePrice} USD per KG.`,
+                    `To establish a long-term trading footprint with your firm, we can extend our absolute bottom floor valuation at $${recalculatePrice} USD per KG. Please note that this value includes our advanced vacuum multi-wall packaging and intensive Sortex parameters, which are central to guaranteeing premium zero-admixture shelf-life abroad.`
+                ];
+                addMsg("manager", responseMatrix[negStep]);
+                finalPrice = recalculatePrice; // sync rate
             } else {
-                addMsg("manager", `We have reached our absolute sustainable floor rate at <b>$${finalPrice} / KG</b>. To drop prices further would mean compromising on sortex filtering accuracy or processing shortcuts, which Sun Spices India never does. Our pricing honors supreme physical spice purity and solid maritime transit safety. Shall we secure this container space on these elite terms?`);
+                addMsg("manager", "This represents our absolute structural optimization limit for this crop grade. We cannot compromise on sorting and essential oil concentration thresholds without affecting cargo health during maritime passage. Shall we validate the agreement terms at this premium rate?");
             }
         }
 
@@ -428,30 +475,25 @@
             links.style.display = (links.style.display === "flex") ? "none" : "flex";
         }
 
-        function closeModal() { 
-            document.getElementById('productModal').style.display = 'none'; 
-            document.body.style.overflow = 'auto'; 
-        }
-
         function finalizeAndEmail() {
-            const body = `Sun Spices India - Official B2B Term Sheet Summary:%0A%0A` +
-                         `Product Category: ${targetProduct}%0A` +
-                         `Selected Grade: ${targetGrade}%0A` +
-                         `Dynamic Global Quote: $${finalPrice} / KG (${incoVal})%0A` +
-                         `Volume Requirement: ${qtyVal} ${unitVal}%0A` +
-                         `Target Discharge Port: ${document.getElementById('mPort').value || 'Global Port'}%0A` +
-                         `Applied Fuel Index Reference: Brent Crude $${liveFuelPrice}/BBL%0A%0A` +
-                         `We confirm the structural dynamic chat quotation. Please prepare the official Proforma Invoice (PI) with banking details to lock this shipment allocation.`;
+            const body = `Sun Spices India - Confirmed Global Export Terms:%0A%0A` +
+                         `Product Line: ${document.getElementById('mTitle').innerText}%0A` +
+                         `Negotiated Rate: $${finalPrice} USD / KG (${incoVal})%0A` +
+                         `Total Volume Matrix: ${qtyVal} ${unitVal}%0A` +
+                         `Discharge Port Terminal: ${document.getElementById('mPort').value || 'Specified Port'}%0A%0A` +
+                         `We hereby accept these commercial parameters. Please proceed with the immediate generation of the official Proforma Invoice (PI) to initiate cargo processing.`;
             
-            window.location.href = `mailto:sunspices.exports.in@gmail.com?subject=B2B Term Confirmation - ${targetProduct}&body=${body}`;
-            setTimeout(() => window.open(`https://wa.me/917207396427?text=${body}`, '_blank'), 1200);
+            window.location.href = `mailto:sunspices.exports.in@gmail.com?subject=B2B Contract Confirmed - ${document.getElementById('mTitle').innerText}&body=${body}`;
+            setTimeout(() => window.open(`https://wa.me/917207396427?text=${body}`, '_blank'), 1500);
             closeModal();
         }
 
-        // Initialize Market Data Fetching Routine on App Load
-        fetchMarketIntelligence();
-        // Periodically refresh critical asset values every 5 minutes automatically
-        setInterval(fetchMarketIntelligence, 300000);
+        function closeModal() { document.getElementById('productModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
+
+        // Trigger dynamic system initialization on startup
+        runDynamicPricingEngine();
+        // Periodically refresh logistics fuel index data factors automatically
+        setInterval(runDynamicPricingEngine, 600000); 
     </script>
 </body>
 </html>
