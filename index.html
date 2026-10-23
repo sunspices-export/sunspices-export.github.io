@@ -15,6 +15,10 @@
       gtag('config', 'G-SUNSPICES2026', { 'send_page_view': true });
     </script>
 
+    <!-- Firebase Auth & App SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -368,6 +372,7 @@
                 font-size: 12px; font-weight: 700; letter-spacing: 2px;
                 text-transform: uppercase; cursor: pointer; transition: all .25s; }
     .f-submit:hover { background: var(--sage); transform: translateY(-2px); box-shadow: var(--sh-md); }
+    .f-submit:disabled { opacity: .7; cursor: not-allowed; transform: none; }
 
     /* ─── MODAL ──────────────────────────────────────────────── */
     .modal-ov { display: none; position: fixed; inset: 0;
@@ -604,9 +609,7 @@
         .m-form { padding: 22px; }
         .m-2col { grid-template-columns: 1fr; }
         .live-inner { padding: 10px 22px; }
-    <!-- Firebase Auth & App SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    }
     </style>
 </head>
 <body>
@@ -900,17 +903,17 @@
             <h3>Request a Quote</h3>
             <p>Fill out the form and our export manager will contact you within 24 hours.</p>
             <div class="f-row">
-                <div class="f-grp"><label>Your Name</label><input type="text" placeholder="John Smith"></div>
-                <div class="f-grp"><label>Company</label><input type="text" placeholder="Acme Trading Ltd."></div>
+                <div class="f-grp"><label>Your Name</label><input type="text" id="cName" placeholder="John Smith"></div>
+                <div class="f-grp"><label>Company</label><input type="text" id="cCompany" placeholder="Acme Trading Ltd."></div>
             </div>
             <div class="f-row">
-                <div class="f-grp"><label>Business Email</label><input type="email" placeholder="john@company.com"></div>
-                <div class="f-grp"><label>Phone / WhatsApp</label><input type="tel" placeholder="+1 234 567 8900"></div>
+                <div class="f-grp"><label>Business Email</label><input type="email" id="cEmail" placeholder="john@company.com"></div>
+                <div class="f-grp"><label>Phone / WhatsApp</label><input type="tel" id="cPhone" placeholder="+1 234 567 8900"></div>
             </div>
             <div class="f-row">
                 <div class="f-grp">
                     <label>Spice of Interest</label>
-                    <select>
+                    <select id="cSpice">
                         <option value="">Select Spice…</option>
                         <option>Cardamom (AGEB)</option>
                         <option>Black Pepper (TGEB)</option>
@@ -921,15 +924,16 @@
                         <option>Multiple / Mixed</option>
                     </select>
                 </div>
-                <div class="f-grp"><label>Destination Country</label><input type="text" placeholder="UAE, USA, Germany…"></div>
+                <div class="f-grp"><label>Destination Country</label><input type="text" id="cCountry" placeholder="UAE, USA, Germany…"></div>
             </div>
             <div class="f-grp">
                 <label>Message</label>
-                <textarea placeholder="Quantity, grade, incoterms, certifications needed…"></textarea>
+                <textarea id="cMsg" placeholder="Quantity, grade, incoterms, certifications needed…"></textarea>
             </div>
             <button class="f-submit" onclick="sendEnquiry()">
                 <i class="fas fa-paper-plane" style="margin-right:8px;"></i>Send Enquiry
             </button>
+            <p id="enquiryStatus" style="font-size:12px;margin-top:12px;color:var(--muted);text-align:center;"></p>
         </div>
     </div>
 </section>
@@ -1191,6 +1195,9 @@
 const API_KEY = 'a7f7c4ace4ea219901553ec8';
 let liveUSD = 83.50, fuelMult = 1.0;
 let curAns = 0, negStep = 0, finalPrice = 0, qtyVal = 0, unitVal = '', incoVal = '';
+
+/* ── GOOGLE APPS SCRIPT ENDPOINT ─────────────────────────────── */
+const GAS_ENQUIRY_URL = 'https://script.google.com/macros/s/AKfycbzdDw6R4BVd3kfd2EVbAkSGqKoO3mC4raA3fDx9FieWZVl7aDOvqd62tS843y3LEsDfVw/exec';
 
 /* ── PRODUCT DATA ────────────────────────────────────────────── */
 const spiceData = {
@@ -1543,13 +1550,71 @@ function toggleSoc() {
     document.getElementById('socLinks').classList.toggle('open');
 }
 
-/* ── CONTACT FORM ───────────────────────────────────────────── */
-function sendEnquiry() {
-    const btn = document.querySelector('.f-submit');
-    btn.innerHTML = '<i class="fas fa-check" style="margin-right:8px;"></i>Enquiry Sent!';
-    btn.style.background = '#34C759';
-    setTimeout(() => { btn.innerHTML = '<i class="fas fa-paper-plane" style="margin-right:8px;"></i>Send Enquiry'; btn.style.background = ''; }, 3500);
-    window.location.href = 'mailto:sunspices.exports.in@gmail.com?subject=New Website Enquiry – Sun Spices India';
+/* ── CONTACT FORM → GOOGLE APPS SCRIPT ───────────────────────── */
+async function sendEnquiry() {
+    const btn    = document.querySelector('.f-submit');
+    const status = document.getElementById('enquiryStatus');
+
+    const data = {
+        name:      document.getElementById('cName').value.trim(),
+        company:   document.getElementById('cCompany').value.trim(),
+        email:     document.getElementById('cEmail').value.trim(),
+        phone:     document.getElementById('cPhone').value.trim(),
+        spice:     document.getElementById('cSpice').value,
+        country:   document.getElementById('cCountry').value.trim(),
+        message:   document.getElementById('cMsg').value.trim(),
+        page:      window.location.href,
+        timestamp: new Date().toISOString()
+    };
+
+    // Basic validation
+    if (!data.name || !data.email) {
+        alert('Please enter your name and business email.');
+        return;
+    }
+    if (!/^\S+@\S+\.\S+$/.test(data.email)) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i>Sending…';
+    status.style.color = 'var(--muted)';
+    status.textContent = '';
+
+    try {
+        // no-cors: Apps Script CORS block avvakunda undadaniki.
+        // Response opaque ga vastundi, so success ni optimistic ga chupistham.
+        await fetch(GAS_ENQUIRY_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(data)
+        });
+
+        btn.innerHTML = '<i class="fas fa-check" style="margin-right:8px;"></i>Enquiry Sent!';
+        btn.style.background = '#34C759';
+        status.textContent = 'Thank you! Our export team will contact you within 24 hours.';
+
+        if (window.gtag) {
+            window.gtag('event', 'generate_lead', { spice: data.spice, country: data.country });
+        }
+
+        // Form clear
+        ['cName','cCompany','cEmail','cPhone','cCountry','cMsg'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('cSpice').value = '';
+    } catch (err) {
+        console.error('Enquiry submit failed:', err);
+        btn.innerHTML = '<i class="fas fa-paper-plane" style="margin-right:8px;"></i>Send Enquiry';
+        status.style.color = '#c0392b';
+        status.textContent = 'Submit avvaledu. Please WhatsApp +91 72073 96427.';
+    } finally {
+        setTimeout(() => {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-paper-plane" style="margin-right:8px;"></i>Send Enquiry';
+            btn.style.background = '';
+        }, 3500);
+    }
 }
 
 /* ─── AI CONVERSATIONAL SALES AGENT ENGINE ───────────────────────────── */
@@ -1888,4 +1953,3 @@ setInterval(initPricing, 600000);
 </script>
 </body>
 </html>
-
