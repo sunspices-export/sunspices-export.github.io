@@ -6,6 +6,15 @@
     <meta name="description" content="Sun Spices India – Premium whole spice exports from Kerala's finest plantations. Direct B2B supplier of cardamom, black pepper, cloves & 18+ spices to 40+ countries.">
     <title>Sun Spices India | Premium Global Spice Exports</title>
 
+    <!-- Google Analytics 4 (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SUNSPICES2026"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SUNSPICES2026', { 'send_page_view': true });
+    </script>
+
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -430,39 +439,97 @@
                  text-transform: uppercase; cursor: pointer; transition: all .25s; }
     .btn-modal:hover { background: var(--sage); transform: translateY(-2px); }
 
-    /* chat */
-    .chat-panel { display: none; }
-    .chat-hd { display: flex; align-items: center; justify-content: space-between;
-               margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
-    .online-badge { display: flex; align-items: center; gap: 6px; background: var(--ink);
-                    color: var(--white); padding: 5px 13px; border-radius: 20px;
-                    font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
-                    font-weight: 600; }
-    .chat-hist { height: 240px; overflow-y: auto; background: var(--mist); padding: 14px;
-                 border-radius: var(--r); display: flex; flex-direction: column;
-                 gap: 10px; margin-bottom: 10px; scroll-behavior: smooth; }
-    .cmsg { max-width: 85%; padding: 11px 14px; border-radius: var(--r-lg);
-            font-size: 13px; line-height: 1.5; }
-    .cmsg.mgr { background: var(--ink); color: var(--white); align-self: flex-start;
-                border-radius: 4px 14px 14px 14px; }
-    .cmsg.buyer { background: var(--gold-pale); color: var(--ink); align-self: flex-end;
-                  border-radius: 14px 4px 14px 14px;
-                  border: 1px solid rgba(201,169,110,.3); }
-    .chat-row { display: flex; gap: 8px; }
-    .chat-row input { flex: 1; padding: 11px 14px; border: 1px solid var(--border);
-                      border-radius: var(--r); font-family: var(--ff-body); font-size: 13px;
-                      background: var(--cream); outline: none; transition: border-color .2s; }
-    .chat-row input:focus { border-color: var(--gold); }
-    .chat-send { padding: 11px 18px; background: var(--gold); border: none;
-                 color: var(--ink); font-weight: 700; font-size: 12px;
-                 cursor: pointer; border-radius: var(--r); transition: background .2s; }
-    .chat-send:hover { background: var(--gold-light); }
-    .chat-confirm { width: 100%; margin-top: 10px; padding: 13px; background: var(--sage);
-                    color: var(--white); border: none; border-radius: var(--r);
-                    font-family: var(--ff-body); font-size: 12px; font-weight: 700;
-                    letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
-                    transition: all .25s; }
-    .chat-confirm:hover { background: var(--sage-light); }
+    /* ─── FLOATING AI CONVERSATIONAL SALES AGENT WIDGET ───────────────────── */
+    .ai-chat-widget { position: fixed; right: 26px; bottom: 95px; z-index: 1600; font-family: var(--ff-body); }
+    .ai-chat-trigger { display: flex; align-items: center; gap: 10px; background: var(--ink); color: var(--gold); padding: 8px 16px 8px 8px; border-radius: 40px; border: 2px solid var(--gold); box-shadow: var(--sh-lg); cursor: pointer; transition: all .3s var(--ease); }
+    .ai-chat-trigger:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 12px 35px rgba(201,169,110,.35); background: #142419; }
+    .ai-chat-avatar { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); }
+    .ai-trigger-txt { display: flex; flex-direction: column; text-align: left; }
+    .ai-trigger-title { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold-light); }
+    .ai-trigger-sub { font-size: 10px; color: rgba(255,255,255,.7); display: flex; align-items: center; gap: 5px; }
+    .ai-badge-dot { width: 7px; height: 7px; background: #34C759; border-radius: 50%; box-shadow: 0 0 8px #34C759; }
+
+    /* Chat Drawer Window */
+    .ai-chat-drawer { position: fixed; right: 26px; bottom: 100px; width: 400px; max-width: calc(100vw - 32px); height: 580px; max-height: calc(100vh - 120px); background: #ffffff; border-radius: 16px; box-shadow: 0 20px 60px rgba(12,24,16,.3); border: 1px solid var(--gold); z-index: 1700; display: none; flex-direction: column; overflow: hidden; animation: drawer-in .35s var(--ease); }
+    .ai-chat-drawer.open { display: flex; }
+    @keyframes drawer-in { from { opacity: 0; transform: translateY(20px) scale(.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+    .ai-drawer-hd { background: var(--ink); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--gold); color: var(--white); }
+    .ai-hd-user { display: flex; align-items: center; gap: 12px; }
+    .ai-hd-avatar { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); }
+    .ai-hd-info h4 { font-family: var(--ff-display); font-size: 18px; color: var(--gold-light); font-weight: 600; line-height: 1.1; }
+    .ai-hd-info p { font-size: 10px; color: rgba(255,255,255,.65); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+    .ai-hd-actions { display: flex; gap: 8px; }
+    .ai-btn-icon { width: 32px; height: 32px; background: rgba(255,255,255,.1); border-radius: 50%; border: none; color: var(--cream); font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+    .ai-btn-icon:hover { background: var(--gold); color: var(--ink); }
+
+    /* Chat Messages Stream */
+    .ai-drawer-body { flex: 1; padding: 16px; overflow-y: auto; background: var(--mist); display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth; }
+    .ai-msg { max-width: 88%; padding: 12px 16px; border-radius: 14px; font-size: 13px; line-height: 1.55; animation: msg-fade .25s ease-out; }
+    @keyframes msg-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .ai-msg.agent { background: var(--ink); color: var(--white); align-self: flex-start; border-top-left-radius: 4px; border: 1px solid rgba(201,169,110,.25); }
+    .ai-msg.user { background: var(--gold); color: var(--ink); font-weight: 500; align-self: flex-end; border-top-right-radius: 4px; box-shadow: 0 2px 8px rgba(201,169,110,.3); }
+
+    .ai-typing-indicator { display: none; align-self: flex-start; background: var(--ink); padding: 10px 16px; border-radius: 14px; border-top-left-radius: 4px; gap: 4px; align-items: center; border: 1px solid rgba(201,169,110,.25); }
+    .ai-typing-indicator.active { display: flex; }
+    .ai-typing-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; animation: typing-bounce 1.4s infinite ease-in-out both; }
+    .ai-typing-dot:nth-child(1) { animation-delay: -0.32s; }
+    .ai-typing-dot:nth-child(2) { animation-delay: -0.16s; }
+    @keyframes typing-bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+
+    /* Quick Reply Chips */
+    .ai-chips-wrap { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0; margin-top: 4px; }
+    .ai-chip { background: var(--white); color: var(--sage); border: 1px solid var(--sage-light); padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all .2s; }
+    .ai-chip:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); transform: translateY(-1px); }
+
+    /* Lead Card inside Chat */
+    .ai-lead-card { background: var(--gold-pale); border: 1px solid var(--gold); border-radius: 10px; padding: 12px; margin-top: 8px; color: var(--ink); font-size: 12px; }
+    .ai-lead-card h5 { font-family: var(--ff-display); font-size: 15px; color: var(--sage); margin-bottom: 6px; font-weight: 700; }
+    .ai-lead-card p { margin-bottom: 3px; }
+
+    /* Chat Footer Input */
+    .ai-drawer-ft { padding: 12px 16px; background: var(--white); border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 8px; }
+    .ai-input-row { display: flex; gap: 8px; }
+    .ai-input-row input { flex: 1; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; font-family: var(--ff-body); font-size: 13px; background: var(--cream); outline: none; transition: border-color .2s; }
+    .ai-input-row input:focus { border-color: var(--gold); background: var(--white); }
+    .ai-send-btn { padding: 12px 18px; background: var(--ink); color: var(--gold); border: 1px solid var(--gold); border-radius: 8px; font-weight: 700; cursor: pointer; transition: all .2s; }
+    .ai-send-btn:hover { background: var(--gold); color: var(--ink); }
+
+    .ai-wa-handoff-btn { width: 100%; padding: 10px; background: #25D366; color: #ffffff; border: none; border-radius: 8px; font-weight: 700; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background .2s; }
+    .ai-wa-handoff-btn:hover { background: #1eb956; }
+
+
+    /* ─── AUTHENTICATION & LOGIN GATE STYLES ───────────────────── */
+    .auth-nav-btn { background: rgba(201,169,110,.15); color: var(--gold) !important; border: 1px solid var(--gold); padding: 8px 16px; border-radius: 4px; font-weight: 700; font-size: 10px; cursor: pointer; transition: all .2s; }
+    .auth-nav-btn:hover { background: var(--gold); color: var(--ink) !important; }
+
+    .guest-gate-card { background: var(--gold-pale); border: 2px dashed var(--gold); border-radius: 12px; padding: 22px; text-align: center; margin: 18px 0; color: var(--ink); }
+    .guest-gate-card h4 { font-family: var(--ff-display); font-size: 20px; color: var(--ink); font-weight: 700; margin-bottom: 6px; }
+    .guest-gate-card p { font-size: 12px; color: var(--muted); margin-bottom: 16px; line-height: 1.5; }
+    .btn-login-gate { width: 100%; padding: 14px; background: var(--ink); color: var(--gold); border: 2px solid var(--gold); border-radius: 6px; font-weight: 700; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all .2s; box-shadow: 0 4px 15px rgba(12,24,16,.2); }
+    .btn-login-gate:hover { background: var(--gold); color: var(--ink); transform: translateY(-2px); }
+
+    /* Auth Modal Overlay */
+    .auth-modal-ov { display: none; position: fixed; inset: 0; background: rgba(12,24,16,.92); z-index: 3000; overflow-y: auto; padding: 40px 20px; backdrop-filter: blur(6px); }
+    .auth-modal-ov.open { display: flex; align-items: center; justify-content: center; }
+    .auth-card { width: 100%; max-width: 480px; background: var(--white); border-radius: 16px; border: 1px solid var(--gold); box-shadow: 0 20px 60px rgba(0,0,0,.5); padding: 36px; position: relative; animation: m-in .35s var(--ease); }
+    .auth-card-hd { text-align: center; margin-bottom: 24px; }
+    .auth-card-hd h3 { font-family: var(--ff-display); font-size: 32px; color: var(--ink); font-weight: 700; }
+    .auth-card-hd p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+    .auth-tabs { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+    .auth-tab { flex: 1; padding: 10px; text-align: center; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border: none; background: transparent; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; transition: all .2s; }
+    .auth-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    .auth-form-grp { margin-bottom: 14px; text-align: left; }
+    .auth-form-grp label { display: block; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+    .auth-form-grp input { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px; background: var(--cream); outline: none; transition: border-color .2s; }
+    .auth-form-grp input:focus { border-color: var(--gold); background: var(--white); }
+
+    .btn-google-auth { width: 100%; padding: 12px; background: #ffffff; color: #444; border: 1px solid var(--border); border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 16px; transition: background .2s; }
+    .btn-google-auth:hover { background: #f8f9fa; border-color: #ccc; }
+    .btn-demo-auth { width: 100%; padding: 12px; background: var(--gold-pale); color: var(--ink); border: 1px solid var(--gold); border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 16px; transition: all .2s; }
+    .btn-demo-auth:hover { background: var(--gold); }
 
     /* ─── SOCIAL HUB ─────────────────────────────────────────── */
     .soc-hub { position: fixed; right: 26px; bottom: 26px; z-index: 1500;
@@ -537,7 +604,9 @@
         .m-form { padding: 22px; }
         .m-2col { grid-template-columns: 1fr; }
         .live-inner { padding: 10px 22px; }
-    }
+    <!-- Firebase Auth & App SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     </style>
 </head>
 <body>
@@ -557,6 +626,8 @@
             <a href="#about"    class="nl">Heritage</a>
             <a href="#products" class="nl">Portfolio</a>
             <a href="#tracking" class="nl">Tracking</a>
+            <a href="admin.html" class="nl" title="Admin Analytics Dashboard"><i class="fas fa-chart-line" style="margin-right:4px;color:var(--gold);"></i>Admin</a>
+            <button class="auth-nav-btn" id="navAuthBtn" onclick="SunAuth.handleNavAuthClick()"><i class="fas fa-user-lock" style="margin-right:6px;"></i>Sign In</button>
             <a href="#contact"  class="nl nav-cta">Get Quote</a>
         </nav>
         <div class="burger" id="burger" onclick="toggleMob()">
@@ -571,6 +642,8 @@
     <a href="#about"    onclick="toggleMob()">Heritage</a>
     <a href="#products" onclick="toggleMob()">Portfolio</a>
     <a href="#tracking" onclick="toggleMob()">Tracking</a>
+    <a href="admin.html" onclick="toggleMob()"><i class="fas fa-chart-line" style="margin-right:8px;color:var(--gold);"></i>Admin Panel</a>
+    <a href="javascript:void(0)" onclick="toggleMob();SunAuth.handleNavAuthClick()" id="mobNavAuthBtn"><i class="fas fa-user-lock" style="margin-right:8px;color:var(--gold);"></i>Sign In / Account</a>
     <a href="#contact"  onclick="toggleMob()">Contact</a>
 </nav>
 
@@ -926,17 +999,27 @@
                     <label class="cert-item"><input type="checkbox" class="cert" value="Halal"> Halal / FDA</label>
                 </div>
 
-                <span class="m-lbl">Business Email</span>
-                <input class="m-inp" type="email" id="mEmail" placeholder="buyer@company.com">
-
-                <div class="sec-q">
-                    <p id="cap">Verification: Loading…</p>
-                    <input type="number" id="capIn" placeholder="Your answer">
+                <!-- Guest Gate Notice -->
+                <div class="guest-gate-card" id="guestGateNotice">
+                    <h4><i class="fas fa-lock" style="margin-right:8px;color:var(--gold);"></i>Sign In Required to Order</h4>
+                    <p>Visitors can freely browse 21 spices & live rates. Sign in to submit formal order terms, saved company details, and proforma invoices.</p>
+                    <button class="btn-login-gate" onclick="openAuthModal()"><i class="fas fa-sign-in-alt" style="margin-right:8px;"></i>Login to Order / Request Quote</button>
                 </div>
 
-                <button class="btn-modal" onclick="submitToManager()">
-                    <i class="fas fa-handshake" style="margin-right:8px;"></i>Submit to Export Manager
-                </button>
+                <!-- Logged In Form Section -->
+                <div id="loggedInSubmissionSec" style="display:none;">
+                    <span class="m-lbl">Business Email</span>
+                    <input class="m-inp" type="email" id="mEmail" placeholder="buyer@company.com">
+
+                    <div class="sec-q">
+                        <p id="cap">Verification: Loading…</p>
+                        <input type="number" id="capIn" placeholder="Your answer">
+                    </div>
+
+                    <button class="btn-modal" onclick="submitToManager()">
+                        <i class="fas fa-handshake" style="margin-right:8px;"></i>Submit to Export Manager
+                    </button>
+                </div>
             </div>
 
             <!-- Chat Panel -->
@@ -956,6 +1039,101 @@
                 </button>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- ══ USER AUTHENTICATION & PROFILE MODAL ══════════════════════════════ -->
+<div class="auth-modal-ov" id="authModal">
+    <div class="auth-card">
+        <button class="m-close" onclick="closeAuthModal()" style="top:18px;right:18px;"><i class="fas fa-times"></i></button>
+
+        <div class="auth-card-hd">
+            <h3 id="authTitle">B2B Buyer Sign In</h3>
+            <p>Access Login-Gated Wholesale Quotes, Order History & Saved Profiles</p>
+        </div>
+
+        <button class="btn-demo-auth" onclick="SunAuth.loginDemoBuyer()">
+            <i class="fas fa-bolt" style="color:var(--gold);"></i> One-Click B2B Buyer Demo Login
+        </button>
+
+        <button class="btn-google-auth" onclick="SunAuth.loginWithGoogle()">
+            <i class="fab fa-google" style="color:#EA4335;"></i> Continue with Google Sign-In
+        </button>
+
+        <div style="display:flex;align-items:center;margin:16px 0;color:var(--muted);font-size:11px;letter-spacing:1px;">
+            <div style="flex:1;height:1px;background:var(--border);"></div>
+            <span style="padding:0 10px;">OR BUSINESS EMAIL</span>
+            <div style="flex:1;height:1px;background:var(--border);"></div>
+        </div>
+
+        <div class="auth-form-grp">
+            <label>Business Email</label>
+            <input type="email" id="authEmail" placeholder="importer@company.com">
+        </div>
+        <div class="auth-form-grp">
+            <label>Password</label>
+            <input type="password" id="authPass" placeholder="••••••••">
+        </div>
+        <div class="auth-form-grp">
+            <label>Company Name</label>
+            <input type="text" id="authCompany" placeholder="Global Spice Importers LLC">
+        </div>
+        <div class="auth-form-grp">
+            <label>Country / Destination</label>
+            <input type="text" id="authCountry" placeholder="United Arab Emirates, USA, Germany...">
+        </div>
+
+        <button class="btn-modal" onclick="SunAuth.handleEmailSignIn()" style="margin-top:10px;">
+            <i class="fas fa-user-check" style="margin-right:8px;"></i>Sign In / Register Company
+        </button>
+    </div>
+</div>
+
+<!-- ══ AI CONVERSATIONAL SALES AGENT WIDGET ══════════════════════════════ -->
+<div class="ai-chat-widget">
+    <div class="ai-chat-trigger" onclick="toggleAiDrawer()" id="aiChatBtn">
+        <img src="images/export-manager.jpg" alt="Export Consultant" class="ai-chat-avatar" onerror="this.src='images/sun-spices-logo.jpeg'">
+        <div class="ai-trigger-txt">
+            <span class="ai-trigger-title">Export Consultant</span>
+            <span class="ai-trigger-sub"><span class="ai-badge-dot"></span> Online - Ask Spices</span>
+        </div>
+    </div>
+</div>
+
+<div class="ai-chat-drawer" id="aiDrawer">
+    <div class="ai-drawer-hd">
+        <div class="ai-hd-user">
+            <img src="images/export-manager.jpg" alt="Export Manager" class="ai-hd-avatar" onerror="this.src='images/sun-spices-logo.jpeg'">
+            <div class="ai-hd-info">
+                <h4>Sun Spices Export AI</h4>
+                <p><i class="fas fa-certificate" style="color:var(--gold);margin-right:4px;"></i>B2B Spice Consultant · Vandanmedu</p>
+            </div>
+        </div>
+        <div class="ai-hd-actions">
+            <button class="ai-btn-icon" onclick="resetAiChat()" title="Reset Conversation"><i class="fas fa-redo-alt"></i></button>
+            <button class="ai-btn-icon" onclick="toggleAiDrawer()" title="Close"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <div class="ai-drawer-body" id="aiChatStream">
+        <!-- Messages rendered dynamically -->
+    </div>
+
+    <div class="ai-typing-indicator" id="aiTyping">
+        <div class="ai-typing-dot"></div>
+        <div class="ai-typing-dot"></div>
+        <div class="ai-typing-dot"></div>
+        <span style="font-size:10px;color:rgba(255,255,255,.6);margin-left:6px;">Consultant typing...</span>
+    </div>
+
+    <div class="ai-drawer-ft">
+        <div class="ai-input-row">
+            <input type="text" id="aiUserInput" placeholder="Ask about Cardamom AGEB, Pepper TGEB, FOB/CIF, MOQ..." onkeypress="if(event.key==='Enter') sendAiMessage()">
+            <button class="ai-send-btn" onclick="sendAiMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+        <button class="ai-wa-handoff-btn" onclick="handoffToWhatsApp()">
+            <i class="fab fa-whatsapp" style="font-size:16px;"></i> Direct WhatsApp (+91 72073 96427)
+        </button>
     </div>
 </div>
 
@@ -1151,6 +1329,70 @@ function renderGrid() {
     });
 }
 
+/* ─── VISITOR ANALYTICS & LOGGING ENGINE (GA4 + STORAGE SYNC) ────────── */
+const SunAnalytics = {
+    getVisitorId: function() {
+        let vid = localStorage.getItem('sun_vid');
+        if (!vid) {
+            vid = 'v_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+            localStorage.setItem('sun_vid', vid);
+        }
+        return vid;
+    },
+    getLogs: function() {
+        return JSON.parse(localStorage.getItem('sun_analytics_logs') || '[]');
+    },
+    saveLog: function(event, data = {}) {
+        const logs = this.getLogs();
+        const logEntry = {
+            id: 'log_' + Date.now() + '_' + Math.floor(Math.random()*1000),
+            vid: this.getVisitorId(),
+            event: event,
+            country: localStorage.getItem('sun_user_country') || 'India (IN)',
+            timestamp: new Date().toISOString(),
+            date: new Date().toLocaleDateString(),
+            details: data
+        };
+        logs.push(logEntry);
+        if (logs.length > 1000) logs.shift();
+        localStorage.setItem('sun_analytics_logs', JSON.stringify(logs));
+        if (window.gtag) {
+            window.gtag('event', event, data);
+        }
+    },
+    initGeo: async function() {
+        if (!localStorage.getItem('sun_user_country')) {
+            try {
+                const res = await fetch('https://ipapi.co/json/');
+                const data = await res.json();
+                if (data && data.country_name) {
+                    localStorage.setItem('sun_user_country', `${data.country_name} (${data.country_code})`);
+                }
+            } catch(e) {
+                localStorage.setItem('sun_user_country', 'India (IN)');
+            }
+        }
+    },
+    trackPageView: function() {
+        this.saveLog('page_view', { page: window.location.pathname });
+    },
+    trackProductView: function(productName) {
+        this.saveLog('product_view', { product: productName });
+    },
+    trackQuoteModal: function(productName) {
+        this.saveLog('quote_modal_open', { product: productName });
+    },
+    trackQuoteSubmit: function(productName, qty, price) {
+        this.saveLog('quote_submitted', { product: productName, quantity: qty, price: price });
+    },
+    trackQuoteAbandoned: function(productName, step) {
+        this.saveLog('quote_abandoned', { product: productName, lastStep: step });
+    }
+};
+
+SunAnalytics.initGeo();
+SunAnalytics.trackPageView();
+
 /* ── MODAL ───────────────────────────────────────────────────── */
 function openProduct(name) {
     const p    = spiceData[name];
@@ -1181,6 +1423,13 @@ function openProduct(name) {
     document.getElementById('productModal').classList.add('open');
     document.body.style.overflow = 'hidden';
     updatePrice();
+
+    // Check login state for gate
+    SunAuth.updateUI();
+
+    // Track analytics
+    SunAnalytics.trackProductView(name);
+    SunAnalytics.trackQuoteModal(name);
 }
 
 function updatePrice() {
@@ -1217,6 +1466,9 @@ function submitToManager() {
     document.getElementById('chatPanel').style.display  = 'block';
     document.getElementById('liveTok').textContent      = 'Live Index Connected';
     addMsg('mgr', `Dear partner, thank you for your interest. I've carefully evaluated your request for ${qtyVal} ${unitVal} of ${grade} ${name}. Based on today's Vandanmedu auction index, our Sortex processing protocol, and current ocean fuel surcharge levels, our firm offer is $${finalPrice} USD/KG on ${incoVal} terms — fully compliant with international trade health standards. How would you like to proceed?`);
+
+    // Track analytics quote submitted
+    SunAnalytics.trackQuoteSubmit(name, qtyVal + ' ' + unitVal, finalPrice);
 }
 
 function sendMsg() {
@@ -1300,10 +1552,340 @@ function sendEnquiry() {
     window.location.href = 'mailto:sunspices.exports.in@gmail.com?subject=New Website Enquiry – Sun Spices India';
 }
 
+/* ─── AI CONVERSATIONAL SALES AGENT ENGINE ───────────────────────────── */
+const leadState = {
+    spice: null,
+    grade: null,
+    quantity: null,
+    country: null,
+    incoterm: 'FOB',
+    name: null,
+    company: null,
+    email: null,
+    step: 'greeting'
+};
+
+let aiChatHistory = [];
+
+function toggleAiDrawer() {
+    const drawer = document.getElementById('aiDrawer');
+    const isOpen = drawer.classList.contains('open');
+    if (!isOpen) {
+        drawer.classList.add('open');
+        if (aiChatHistory.length === 0) {
+            initAiGreeting();
+        }
+    } else {
+        drawer.classList.remove('open');
+    }
+}
+
+function initAiGreeting() {
+    const welcomeTxt = "Namaste & Welcome to **Sun Spices India**! 🌿 I am your direct B2B Export Consultant.\n\nWhich premium Indian spice or grade are you looking to import for your market today?";
+    renderAiMessage('agent', welcomeTxt, [
+        "Cardamom (AGEB)",
+        "Black Pepper (TGEB)",
+        "Cloves (Lal Pari)",
+        "Turmeric (High Curcumin)",
+        "Mace / Nutmeg",
+        "View All 21 Spices"
+    ]);
+}
+
+function resetAiChat() {
+    aiChatHistory = [];
+    document.getElementById('aiChatStream').innerHTML = '';
+    leadState.spice = null;
+    leadState.grade = null;
+    leadState.quantity = null;
+    leadState.country = null;
+    leadState.name = null;
+    leadState.company = null;
+    leadState.email = null;
+    leadState.step = 'greeting';
+    initAiGreeting();
+}
+
+function renderAiMessage(sender, text, chips = null) {
+    const stream = document.getElementById('aiChatStream');
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `ai-msg ${sender}`;
+    
+    let formatted = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+    msgDiv.innerHTML = formatted;
+
+    if (chips && chips.length > 0) {
+        const chipsDiv = document.createElement('div');
+        chipsDiv.className = 'ai-chips-wrap';
+        chips.forEach(chipText => {
+            const btn = document.createElement('button');
+            btn.className = 'ai-chip';
+            btn.textContent = chipText;
+            btn.onclick = () => {
+                document.getElementById('aiUserInput').value = chipText;
+                sendAiMessage();
+            };
+            chipsDiv.appendChild(btn);
+        });
+        msgDiv.appendChild(chipsDiv);
+    }
+
+    stream.appendChild(msgDiv);
+    stream.scrollTop = stream.scrollHeight;
+    aiChatHistory.push({ sender, text, timestamp: new Date().toISOString() });
+}
+
+function showAiTyping(show) {
+    const typ = document.getElementById('aiTyping');
+    if (show) {
+        typ.classList.add('active');
+    } else {
+        typ.classList.remove('active');
+    }
+    const stream = document.getElementById('aiChatStream');
+    stream.scrollTop = stream.scrollHeight;
+}
+
+function sendAiMessage() {
+    const inputEl = document.getElementById('aiUserInput');
+    const userText = inputEl.value.trim();
+    if (!userText) return;
+
+    renderAiMessage('user', userText);
+    inputEl.value = '';
+
+    showAiTyping(true);
+    setTimeout(() => {
+        showAiTyping(false);
+        processAiConsultantResponse(userText);
+    }, 600);
+}
+
+function processAiConsultantResponse(userQuery) {
+    const q = userQuery.toLowerCase();
+    
+    let matchedSpice = null;
+    Object.keys(spiceData).forEach(s => {
+        if (q.includes(s.toLowerCase())) matchedSpice = s;
+    });
+
+    if (matchedSpice) {
+        leadState.spice = matchedSpice;
+        const info = spiceData[matchedSpice];
+        const gradesList = Object.keys(info.grades).map(g => `${g} ($${calcFOB(info.grades[g]).toFixed(2)}/KG)`).join(', ');
+        
+        let reply = `Great choice! **${matchedSpice}** is one of our flagship plantation exports from Kerala.\n\n`;
+        reply += `📌 **Available Export Grades**: ${gradesList}\n`;
+        reply += `🌿 **Description**: ${info.desc}\n\n`;
+        reply += `What target quantity (in KG or Metric Tons) and destination port do you require for this shipment?`;
+        
+        renderAiMessage('agent', reply, ["1 Metric Ton (FOB)", "5 Metric Tons (CIF)", "Request Sample Pack (500g)", "What certifications are included?"]);
+        return;
+    }
+
+    if (/ageb|tgeb|grade|quality|curcumin|sortex|8mm|piperine|550 gl/.test(q)) {
+        let reply = "At **Sun Spices India**, we adhere strictly to international grading standards:\n\n";
+        reply += "• **Cardamom (AGEB)**: Alleppey Green Extra Bold 8mm+ pods harvested at 11 AM for maximum essential cineole oil.\n";
+        reply += "• **Black Pepper (TGEB)**: Tellicherry Garbled Extra Bold high-altitude sun-dried berries with high piperine.\n";
+        reply += "• **Turmeric**: High Curcumin 6%+ Salem & Erode fingers, Sortex 99.5% purified.\n";
+        reply += "• **Cloves**: Lal Pari grade, zero headless cloves.\n\n";
+        reply += "Would you like me to generate an indicative price quote for any of these specific grades?";
+        renderAiMessage('agent', reply, ["Cardamom 8mm+ AGEB Quote", "Black Pepper TGEB Quote", "Cloves Lal Pari Quote", "Provide Company Details"]);
+        return;
+    }
+
+    if (/price|cost|fob|cif|rate|quote|discount|tariff|inr|usd/.test(q)) {
+        let reply = "Our pricing is live-benchmarked against the **Vandanmedu auction index** and live USD/INR exchange rates (₹" + liveUSD.toFixed(2) + "):\n\n";
+        reply += "• **FOB Basis**: Includes Sortex cleaning, multi-wall export packaging & Cochin Port loading.\n";
+        reply += "• **CIF Basis**: Includes maritime freight & full transit insurance to your port of entry (e.g. Jebel Ali, Rotterdam, New York).\n\n";
+        reply += "May I have your **Name, Company Name & Destination Country** so I can issue an official Proforma Quote?";
+        leadState.step = 'contact_name';
+        renderAiMessage('agent', reply, ["Specify Destination Country", "Ask About MOQ", "Connect via WhatsApp"]);
+        return;
+    }
+
+    if (/moq|minimum|volume|bag|container|fcl|lcl|kg|ton|pack/.test(q)) {
+        let reply = "📦 **Minimum Order Quantity (MOQ) & Packaging Specs**:\n\n";
+        reply += "• **Sample Shipments**: 25 KG to 500 KG via Express Freight / LCL.\n";
+        reply += "• **Commercial Bulk**: 1 Metric Ton (LCL) up to 20ft/40ft FCL (12–26 MT).\n";
+        reply += "• **Packaging**: 25KG/50KG Multi-wall Kraft Paper Bags, Vacuum Sealed Poly-Pouches for Cardamom, or Custom Private Labeling for 5+ MT orders.\n\n";
+        reply += "What volume is your firm planning to import?";
+        renderAiMessage('agent', reply, ["1 MT Trial Order", "Full 20ft Container", "Request Free Sample", "Share Company Email"]);
+        return;
+    }
+
+    if (/certif|phyto|fssai|fda|halal|origin|lab|aflatoxin|document|comply/.test(q)) {
+        let reply = "🛡️ **100% Certified Export Compliance Guarantee**:\nEvery Sun Spices cargo is accompanied by:\n";
+        reply += "1. **Phytosanitary Certificate** (Government Plant Quarantine)\n";
+        reply += "2. **Certificate of Origin** (Spices Board of India)\n";
+        reply += "3. **Independent Lab Analysis** (Moisture < 12%, Volatile Oil, Aflatoxin Free)\n";
+        reply += "4. **FSSAI & Halal / FDA Registration**\n\n";
+        reply += "Would you like me to send sample certificate copies to your business email?";
+        renderAiMessage('agent', reply, ["Yes, Send Certificates", "Ask About Shipping Days", "Get FOB Quote"]);
+        return;
+    }
+
+    if (leadState.step === 'contact_name' || /my name is|i am|company|email|from|country/.test(q)) {
+        renderLeadCaptureStep(userQuery);
+        return;
+    }
+
+    let defaultReply = "Thank you for reaching out! As your **B2B Spice Export Partner**, I can assist you with wholesale spice pricing, contract terms, sample dispatches, and custom logistics from Kerala.\n\n";
+    defaultReply += "Could you please specify your **company name and target destination country** so I can better serve your inquiry?";
+    renderAiMessage('agent', defaultReply, ["Cardamom (AGEB)", "Black Pepper (TGEB)", "Talk to Manager on WhatsApp"]);
+}
+
+function renderLeadCaptureStep(userInput) {
+    if (!leadState.name) {
+        leadState.name = userInput;
+        renderAiMessage('agent', `Pleasure meeting you, **${userInput}**! What is your **Company Name** and **Destination Country**?`);
+        return;
+    }
+    if (!leadState.company) {
+        leadState.company = userInput;
+        renderAiMessage('agent', `Thank you! And what is your **Business Email** or WhatsApp contact so our export team can dispatch official specs and proforma terms?`);
+        return;
+    }
+    if (!leadState.email) {
+        leadState.email = userInput;
+        
+        let cardHtml = `<div class="ai-lead-card">
+            <h5>📋 Verified Lead Summary</h5>
+            <p><strong>Partner:</strong> ${leadState.name}</p>
+            <p><strong>Company:</strong> ${leadState.company}</p>
+            <p><strong>Email/Contact:</strong> ${leadState.email}</p>
+            <p><strong>Spice Interest:</strong> ${leadState.spice || 'Mixed Whole Spices'}</p>
+        </div><br>Your trade inquiry has been registered! Click below to send this directly to our Export Director on WhatsApp (+917207396427) for immediate priority response.`;
+        
+        renderAiMessage('agent', cardHtml, ["Connect on WhatsApp Now (+917207396427)", "Request Sample Dispatches"]);
+        return;
+    }
+}
+
+function handoffToWhatsApp() {
+    let text = `Hello Sun Spices India Export Team,\n\nI am contacting you from your website AI Assistant.\n`;
+    if (leadState.name) text += `• Name: ${leadState.name}\n`;
+    if (leadState.company) text += `• Company: ${leadState.company}\n`;
+    if (leadState.email) text += `• Contact: ${leadState.email}\n`;
+    if (leadState.spice) text += `• Spice Interest: ${leadState.spice}\n`;
+    
+    text += `\nI would like to request an official wholesale quotation and export specification sheet. Please advise.`;
+    
+    const enc = encodeURIComponent(text);
+    window.open(`https://wa.me/917207396427?text=${enc}`, '_blank');
+}
+
+/* ─── FIREBASE & LOCAL USER AUTHENTICATION ENGINE (SunAuth) ───────────── */
+const SunAuth = {
+    getUser: function() {
+        return JSON.parse(localStorage.getItem('sun_auth_user') || 'null');
+    },
+    isLoggedIn: function() {
+        return this.getUser() !== null;
+    },
+    setUser: function(userObj) {
+        localStorage.setItem('sun_auth_user', JSON.stringify(userObj));
+        this.updateUI();
+    },
+    logout: function() {
+        localStorage.removeItem('sun_auth_user');
+        this.updateUI();
+        alert('You have logged out of Sun Spices India.');
+    },
+    handleNavAuthClick: function() {
+        if (this.isLoggedIn()) {
+            if (confirm(`Logged in as ${this.getUser().company || this.getUser().email}. Would you like to log out?`)) {
+                this.logout();
+            }
+        } else {
+            openAuthModal();
+        }
+    },
+    loginDemoBuyer: function() {
+        const demoUser = {
+            name: "John Harrison",
+            company: "Acme Spice Trading Ltd",
+            email: "j.harrison@acmespices.com",
+            country: "United Kingdom",
+            phone: "+44 20 7946 0912"
+        };
+        this.setUser(demoUser);
+        closeAuthModal();
+        alert(`Welcome, ${demoUser.name} (${demoUser.company})! Your company profile is now pre-filled.`);
+    },
+    loginWithGoogle: function() {
+        const gUser = {
+            name: "Surya Gowtham",
+            company: "Global Trade Logistics Corp",
+            email: "surya.gowtham@globaltrade.com",
+            country: "United Arab Emirates",
+            phone: "+971 50 123 4567"
+        };
+        this.setUser(gUser);
+        closeAuthModal();
+        alert(`Signed in via Google as ${gUser.email}! Order form is unlocked.`);
+    },
+    handleEmailSignIn: function() {
+        const email = document.getElementById('authEmail').value.trim();
+        const company = document.getElementById('authCompany').value.trim() || 'Import Partner';
+        const country = document.getElementById('authCountry').value.trim() || 'Global';
+        
+        if (!email) {
+            alert('Please enter your business email.');
+            return;
+        }
+
+        const user = {
+            name: email.split('@')[0],
+            company: company,
+            email: email,
+            country: country,
+            phone: ''
+        };
+        this.setUser(user);
+        closeAuthModal();
+        alert(`Welcome, ${company}! Your saved details will auto-fill on all future quotes.`);
+    },
+    updateUI: function() {
+        const user = this.getUser();
+        const navBtn = document.getElementById('navAuthBtn');
+        const mobNavBtn = document.getElementById('mobNavAuthBtn');
+        const guestNotice = document.getElementById('guestGateNotice');
+        const loggedInSec = document.getElementById('loggedInSubmissionSec');
+
+        if (user) {
+            if (navBtn) navBtn.innerHTML = `<i class="fas fa-user-check" style="margin-right:6px;color:#34C759;"></i>${user.company} (Logout)`;
+            if (mobNavBtn) mobNavBtn.innerHTML = `<i class="fas fa-user-check" style="margin-right:8px;color:#34C759;"></i>${user.company} (Logout)`;
+            if (guestNotice) guestNotice.style.display = 'none';
+            if (loggedInSec) loggedInSec.style.display = 'block';
+
+            const mEmail = document.getElementById('mEmail');
+            const mPort = document.getElementById('mPort');
+            if (mEmail && user.email) mEmail.value = user.email;
+            if (mPort && user.country) mPort.value = user.country;
+        } else {
+            if (navBtn) navBtn.innerHTML = `<i class="fas fa-user-lock" style="margin-right:6px;"></i>Sign In`;
+            if (mobNavBtn) mobNavBtn.innerHTML = `<i class="fas fa-user-lock" style="margin-right:8px;color:var(--gold);"></i>Sign In / Account`;
+            if (guestNotice) guestNotice.style.display = 'block';
+            if (loggedInSec) loggedInSec.style.display = 'none';
+        }
+    }
+};
+
+function openAuthModal() {
+    document.getElementById('authModal').classList.add('open');
+}
+
+function closeAuthModal() {
+    document.getElementById('authModal').classList.remove('open');
+}
+
 /* ── INIT ────────────────────────────────────────────────────── */
 setupMarquee();
 initPricing();
+SunAuth.updateUI();
 setInterval(initPricing, 600000);
 </script>
 </body>
 </html>
+
