@@ -957,7 +957,7 @@
                 <div class="guest-gate-card" id="guestGateNotice">
                     <h4><i class="fas fa-lock" style="margin-right:8px;color:var(--gold);"></i>Sign in required to order</h4>
                     <p>Browse all 21 spices and live rates freely. Sign in to submit formal order terms, save company details and keep your proforma history.</p>
-                    <button class="btn-login-gate" onclick="openAuthModal()"><i class="fas fa-sign-in-alt" style="margin-right:8px;"></i>Sign in to order / request quote</button>
+                    <button class="btn-login-gate" onclick="openSignIn()"><i class="fas fa-sign-in-alt" style="margin-right:8px;"></i>Sign in to order / request quote</button>
                 </div>
 
                 <!-- Shown after sign-in -->
@@ -1105,6 +1105,15 @@ function toggleMob() {
     nav.classList.toggle('open');
     brg.classList.toggle('open');
     document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+}
+
+/* ── SIGN-IN BUTTON (safe wrapper: explains itself if sun-portal.js did not load) ── */
+function openSignIn() {
+    if (typeof window.openAuthModal === 'function') {
+        window.openAuthModal();
+    } else {
+        alert('Sign-in load avvaledu. Page ni Ctrl+Shift+R tho refresh cheyyandi. Repo lo sun-portal.js file name check cheyyandi.');
+    }
 }
 
 /* ── SCROLL ANIMATIONS ──────────────────────────────────────── */
