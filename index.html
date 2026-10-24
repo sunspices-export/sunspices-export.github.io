@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sun Spices India – Premium whole spice exports from Kerala's finest plantations. Direct B2B supplier of cardamom, black pepper, cloves & 18+ spices to 40+ countries.">
+    <meta name="description" content="Sun Spices India – Premium whole spice exports from Kerala's finest plantations. Direct B2B supplier of cardamom, black pepper, cloves & 18+ spices to 40+ countries. Headquartered in Visakhapatnam, Andhra Pradesh.">
     <title>Sun Spices India | Premium Global Spice Exports</title>
 
     <!-- Google Analytics 4 (GA4) -->
@@ -54,18 +54,12 @@
     body  { font-family: var(--ff-body); background: var(--cream); color: var(--text);
             overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-   <div class="gate" id="gate" hidden><div class="card">
-  <h1>Admin Login</h1>
-  <p>Sun Spices staff only.</p>
-  <div style="text-align:left">
-    <label style="font-size:11px;color:var(--mut)">USER ID</label>
-    <input id="adUser" autocomplete="username" style="width:100%;padding:10px;margin:6px 0 12px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--tx)">
-    <label style="font-size:11px;color:var(--mut)">PASSWORD</label>
-    <input id="adPass" type="password" autocomplete="current-password" style="width:100%;padding:10px;margin:6px 0 12px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--tx)">
-    <p id="adErr" style="color:var(--bad);min-height:18px;margin:0 0 10px;font-size:12px"></p>
-    <button class="btn gold" id="adLogin" style="width:100%">Sign in</button>
-  </div>
-</div></div>
+    /* ─── SCROLL REVEAL ─────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(44px);
+              transition: opacity .85s var(--ease), transform .85s var(--ease); }
+    .reveal.left  { transform: translateX(-44px); }
+    .reveal.right { transform: translateX(44px); }
+    .reveal.visible { opacity: 1; transform: translate(0); }
     .d1 { transition-delay: .1s; }
     .d2 { transition-delay: .2s; }
     .d3 { transition-delay: .3s; }
@@ -101,7 +95,7 @@
     .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
     .hdr.scrolled .nav-links a.active { color: var(--gold); }
 
-    .nav-cta { background: var(--gold) !important; color: var--ink !important;
+    .nav-cta { background: var(--gold) !important; color: var(--ink) !important;
                padding: 10px 22px; border-radius: 2px; }
     .nav-cta::after { display: none !important; }
     .nav-cta:hover { background: var(--gold-light) !important; }
@@ -145,28 +139,10 @@
                  color: var(--white); max-width: 900px; padding: 0 24px; }
     .hero-tag { display: inline-flex; align-items: center; gap: 10px;
                 font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
-         const ADMIN_ID = 'Admin';
-const ADMIN_PASS = 'Surya@7207';
-const ADMIN_KEY = 'sun_admin_session';
-
-function isAdmin(){ return sessionStorage.getItem(ADMIN_KEY) === '1'; }
-function guard(){
-  const ok = isAdmin();
-  $('#gate').hidden = ok;
-  $('#app').hidden = !ok;
-  if (ok) { setMode(mode()); go(cur); }
-}
-$('#adLogin').onclick = () => {
-  if ($('#adUser').value.trim() === ADMIN_ID && $('#adPass').value === ADMIN_PASS) {
-    sessionStorage.setItem(ADMIN_KEY, '1');
-    $('#adErr').textContent = '';
-    guard();
-  } else {
-    $('#adErr').textContent = 'Invalid User ID or Password';
-  }
-};
-$('#adPass').onkeydown = e => { if (e.key === 'Enter') $('#adLogin').click(); };
-$('#logout').onclick = () => { sessionStorage.removeItem(ADMIN_KEY); guard(); };
+                color: var(--gold-light); margin-bottom: 28px; font-weight: 500; }
+    .hero-tag::before, .hero-tag::after { content: ''; width: 36px; height: 1px;
+                                          background: var(--gold); opacity: .6; }
+    .hero h1 { font-family: var(--ff-display); font-size: clamp(52px,8.5vw,96px);
                font-weight: 600; line-height: 1.05; margin-bottom: 22px; letter-spacing: -1px; }
     .hero h1 em { font-style: italic; color: var(--gold-light); }
     .hero-sub { font-size: 15px; line-height: 1.75; color: rgba(255,255,255,.72);
@@ -846,8 +822,15 @@ $('#logout').onclick = () => { sessionStorage.removeItem(ADMIN_KEY); guard(); };
                 <div class="c-item">
                     <div class="c-ico"><i class="fas fa-map-marker-alt"></i></div>
                     <div class="c-txt">
-                        <strong>Export Office</strong>
-                        <span>Vandanmedu, Idukki, Kerala – 685551, India</span>
+                        <strong>Headquarters</strong>
+                        <span>Visakhapatnam, Andhra Pradesh, India</span>
+                    </div>
+                </div>
+                <div class="c-item">
+                    <div class="c-ico"><i class="fas fa-seedling"></i></div>
+                    <div class="c-txt">
+                        <strong>Sourcing Belts</strong>
+                        <span>Vandanmedu (Kerala) · Duggirala (Andhra Pradesh)</span>
                     </div>
                 </div>
                 <div class="c-item">
@@ -927,7 +910,7 @@ $('#logout').onclick = () => { sessionStorage.removeItem(ADMIN_KEY); guard(); };
         </div>
 
         <div class="m-form">
-            <!-- Quote Form -->
+            <!-- Quote form -->
             <div id="quoteForm">
                 <p class="m-desc" id="mDesc"></p>
 
@@ -1064,7 +1047,7 @@ $('#logout').onclick = () => { sessionStorage.removeItem(ADMIN_KEY); guard(); };
     </div>
     <div class="ft-bottom">
         <p>© 2026 Sun Spices India. All Rights Reserved.</p>
-        <p>Vandanmedu, Idukki, Kerala – 685551, India</p>
+        <p>Headquarters: Visakhapatnam, Andhra Pradesh, India</p>
     </div>
 </footer>
 
@@ -1496,7 +1479,10 @@ function syncAdminLink() {
     const isAdmin = !!(u && u.role === 'admin');
     document.querySelectorAll('.js-admin-link').forEach(el => el.style.display = isAdmin ? '' : 'none');
 }
+// 'storage' fires only in OTHER tabs; 'sun-auth-changed' is dispatched by sun-portal.js
+// in the same tab after sign-in / sign-out.
 window.addEventListener('storage', syncAdminLink);
+window.addEventListener('sun-auth-changed', syncAdminLink);
 
 /* ── INIT ────────────────────────────────────────────────────── */
 setupMarquee();
