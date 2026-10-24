@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sun Spices India – Premium whole spice exports from Kerala's finest plantations. Direct B2B supplier of cardamom, black pepper, cloves & 18+ spices to 40+ countries. Headquartered in Visakhapatnam, Andhra Pradesh.">
+    <meta name="description" content="Sun Spices India – Premium whole spice exports from Kerala's finest plantations. Direct B2B supplier of cardamom, black pepper, cloves & 18+ spices to 40+ countries.">
     <title>Sun Spices India | Premium Global Spice Exports</title>
 
     <!-- Google Analytics 4 (GA4) -->
@@ -822,15 +822,8 @@
                 <div class="c-item">
                     <div class="c-ico"><i class="fas fa-map-marker-alt"></i></div>
                     <div class="c-txt">
-                        <strong>Headquarters</strong>
-                        <span>Visakhapatnam, Andhra Pradesh, India</span>
-                    </div>
-                </div>
-                <div class="c-item">
-                    <div class="c-ico"><i class="fas fa-seedling"></i></div>
-                    <div class="c-txt">
-                        <strong>Sourcing Belts</strong>
-                        <span>Vandanmedu (Kerala) · Duggirala (Andhra Pradesh)</span>
+                        <strong>Export Office</strong>
+                        <span>Vandanmedu, Idukki, Kerala – 685551, India</span>
                     </div>
                 </div>
                 <div class="c-item">
@@ -910,7 +903,7 @@
         </div>
 
         <div class="m-form">
-            <!-- Quote form -->
+            <!-- Quote Form -->
             <div id="quoteForm">
                 <p class="m-desc" id="mDesc"></p>
 
@@ -1058,8 +1051,8 @@ const API_KEY = 'a7f7c4ace4ea219901553ec8';
 let liveUSD = 83.50, fuelMult = 1.0;
 let curAns = 0, negStep = 0, finalPrice = 0, qtyVal = 0, unitVal = '', incoVal = '';
 
-/* ── GOOGLE APPS SCRIPT ENDPOINT ─────────────────────────────── */
-const GAS_ENQUIRY_URL = 'https://script.google.com/macros/s/AKfycbzdDw6R4BVd3kfd2EVbAkSGqKoO3mC4raA3fDx9FieWZVl7aDOvqd62tS843y3LEsDfVw/exec';
+/* ── GOOGLE APPS SCRIPT ENDPOINT (CRM web app) ───────────────── */
+const GAS_ENQUIRY_URL = 'https://script.google.com/macros/s/AKfycbwjsksepxnAjgXog213p3avLmyty1uSovSds3esK6qyo-GMLV60600yt_fn2HIRH21b-Q/exec';
 
 /* ── PRODUCT DATA ────────────────────────────────────────────── */
 const spiceData = {
@@ -1479,10 +1472,7 @@ function syncAdminLink() {
     const isAdmin = !!(u && u.role === 'admin');
     document.querySelectorAll('.js-admin-link').forEach(el => el.style.display = isAdmin ? '' : 'none');
 }
-// 'storage' fires only in OTHER tabs; 'sun-auth-changed' is dispatched by sun-portal.js
-// in the same tab after sign-in / sign-out.
 window.addEventListener('storage', syncAdminLink);
-window.addEventListener('sun-auth-changed', syncAdminLink);
 
 /* ── INIT ────────────────────────────────────────────────────── */
 setupMarquee();
