@@ -822,8 +822,8 @@
                 <div class="c-item">
                     <div class="c-ico"><i class="fas fa-map-marker-alt"></i></div>
                     <div class="c-txt">
-                        <strong>Export Office</strong>
-                        <span>Vandanmedu, Idukki, Kerala – 685551, India</span>
+                        <strong>Head Office</strong>
+                        <span>Visakhapatnam, Andhra Pradesh, India</span>
                     </div>
                 </div>
                 <div class="c-item">
@@ -1040,19 +1040,16 @@
     </div>
     <div class="ft-bottom">
         <p>© 2026 Sun Spices India. All Rights Reserved.</p>
-        <p>Headquarters: Visakhapatnam, Andhra Pradesh, India</p>
+        <p>Head Office: Visakhapatnam, Andhra Pradesh, India</p>
     </div>
 </footer>
 
 <script>
-/* ── CONFIG ──────────────────────────────────────────────────── */
-// NOTE: For production, proxy the exchange-rate API key server-side to keep it private.
-const API_KEY = 'a7f7c4ace4ea219901553ec8';
+/* ── GOOGLE APPS SCRIPT ENDPOINT (CRM web app: enquiries, quotes, samples, AI chat, live rates) ── */
+const GAS_ENQUIRY_URL = 'https://script.google.com/macros/s/AKfycbwjsksepxnAjgXog213p3avLmyty1uSovSds3esK6qyo-GMLV60600yt_fn2HIRH21b-Q/exec';
+
 let liveUSD = 83.50, fuelMult = 1.0;
 let curAns = 0, negStep = 0, finalPrice = 0, qtyVal = 0, unitVal = '', incoVal = '';
-
-/* ── GOOGLE APPS SCRIPT ENDPOINT (CRM web app) ───────────────── */
-const GAS_ENQUIRY_URL = 'https://script.google.com/macros/s/AKfycbwjsksepxnAjgXog213p3avLmyty1uSovSds3esK6qyo-GMLV60600yt_fn2HIRH21b-Q/exec';
 
 /* ── PRODUCT DATA ────────────────────────────────────────────── */
 const spiceData = {
@@ -1134,13 +1131,13 @@ const ctrObs = new IntersectionObserver((entries) => {
 }, { threshold: .5 });
 document.querySelectorAll('.ctr').forEach(el => ctrObs.observe(el));
 
-/* ── PRICING ENGINE ─────────────────────────────────────────── */
+/* ── PRICING ENGINE (live USD/INR from the server, cached hourly) ── */
 async function initPricing() {
     try {
-        const r = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`);
+        const r = await fetch(`${GAS_ENQUIRY_URL}?action=rates`);
         const d = await r.json();
-        if (d?.conversion_rates?.INR) liveUSD = d.conversion_rates.INR;
-    } catch { /* use cached rate */ }
+        if (d && d.usdInr) liveUSD = Number(d.usdInr);
+    } catch { /* keep the last known rate */ }
 
     const simFuel = 78 + Math.random() * 6;
     fuelMult = 1 + ((simFuel - 80) / 80) * 0.15;
@@ -1407,6 +1404,7 @@ async function sendEnquiry() {
     const status = document.getElementById('enquiryStatus');
 
     const data = {
+        event:     'ENQUIRY',
         name:      document.getElementById('cName').value.trim(),
         company:   document.getElementById('cCompany').value.trim(),
         email:     document.getElementById('cEmail').value.trim(),
@@ -1480,6 +1478,9 @@ initPricing();
 syncAdminLink();
 setInterval(initPricing, 600000);
 </script>
+
+<!-- Export AI assistant widget (chat + sample request). Requires the Gateway web app. -->
+<script src="ai-agent.js"></script>
 
 <!-- Buyer portal: sign-in modal, buyer dashboard, quote history.
      Must load AFTER the main inline script above. -->
