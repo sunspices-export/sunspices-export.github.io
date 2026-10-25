@@ -15,10 +15,6 @@
       gtag('config', 'G-SUNSPICES2026', { 'send_page_view': true });
     </script>
 
-    <!-- Firebase SDKs (used by sun-portal.js only when CFG.firebase is set) -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -100,12 +96,6 @@
     .nav-cta::after { display: none !important; }
     .nav-cta:hover { background: var(--gold-light) !important; }
 
-    .auth-nav-btn { background: rgba(201,169,110,.15); color: var(--gold); border: 1px solid var(--gold);
-                    padding: 8px 16px; border-radius: 4px; font: 700 10px/1 'DM Sans', sans-serif;
-                    letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all .2s; }
-    .hdr.scrolled .auth-nav-btn { color: var(--ink); }
-    .auth-nav-btn:hover { background: var(--gold); color: var(--ink); }
-
     /* hamburger */
     .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
     .burger span { display: block; width: 26px; height: 2px;
@@ -124,9 +114,6 @@
                  transition: color .2s; }
     .mob-nav a:hover { color: var(--gold); }
     @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
-
-    /* admin link: hidden unless the signed-in user is an admin */
-    .js-admin-link { display: none; }
 
     /* ─── HERO ───────────────────────────────────────────────── */
     .hero { height: 100vh; position: relative; overflow: hidden;
@@ -428,7 +415,11 @@
                      border-radius: var(--r); font-family: var(--ff-body); font-size: 14px;
                      background: var(--cream); color: var(--text);
                      transition: border-color .2s; outline: none; margin-bottom: 14px; }
-    .m-sel:focus, .m-inp:focus { border-color: var(--gold); background: var(--white); }
+    .m-sel:focus, .m-inp:focus, .m-textarea:focus { border-color: var(--gold); background: var(--white); }
+    .m-textarea { width: 100%; padding: 11px 14px; border: 1px solid var(--border);
+                  border-radius: var(--r); font-family: var(--ff-body); font-size: 14px;
+                  background: var(--cream); color: var(--text); resize: vertical;
+                  min-height: 70px; outline: none; margin-bottom: 14px; }
     .m-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .m-2col .m-sel, .m-2col .m-inp { margin-bottom: 0; }
     .m-2col > div { margin-bottom: 14px; }
@@ -439,17 +430,6 @@
     .cert-item { display: flex; align-items: center; gap: 7px; font-size: 12px;
                  cursor: pointer; color: var(--text); }
     .cert-item input { accent-color: var(--gold); }
-
-    .guest-gate-card { background: var(--gold-pale); border: 2px dashed var(--gold); border-radius: 12px;
-                       padding: 22px; text-align: center; margin: 18px 0; color: var(--ink); }
-    .guest-gate-card h4 { font-family: var(--ff-display); font-size: 20px; color: var(--ink);
-                          font-weight: 700; margin-bottom: 6px; }
-    .guest-gate-card p { font-size: 12px; color: var(--muted); margin-bottom: 16px; line-height: 1.5; }
-    .btn-login-gate { width: 100%; padding: 14px; background: var(--ink); color: var(--gold);
-                      border: 2px solid var(--gold); border-radius: 6px; font-weight: 700; font-size: 12px;
-                      letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all .2s;
-                      box-shadow: 0 4px 15px rgba(12,24,16,.2); }
-    .btn-login-gate:hover { background: var(--gold); color: var(--ink); transform: translateY(-2px); }
 
     .sec-q { background: var(--gold-pale); border: 1px solid rgba(201,169,110,.3);
              padding: 14px; border-radius: var(--r); margin-bottom: 14px; }
@@ -463,28 +443,10 @@
                  font-size: 12px; font-weight: 700; letter-spacing: 2px;
                  text-transform: uppercase; cursor: pointer; transition: all .25s; }
     .btn-modal:hover { background: var(--sage); transform: translateY(-2px); }
-
-    /* quote-chat panel (shown after "Submit to Export Manager") */
-    .chat-panel { display: none; }
-    .chat-hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .online-badge { display: flex; align-items: center; gap: 8px; font-size: 12px;
-                    font-weight: 600; color: var(--sage); }
-    .chat-hist { height: 220px; overflow-y: auto; background: var(--cream);
-                 border: 1px solid var(--border); border-radius: var(--r); padding: 12px;
-                 display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
-    .cmsg { max-width: 88%; padding: 10px 13px; border-radius: 10px; font-size: 13px; line-height: 1.55;
-            white-space: pre-line; }
-    .cmsg.mgr { background: var(--white); border: 1px solid var(--border); align-self: flex-start; }
-    .cmsg.buyer { background: var(--ink); color: var(--white); align-self: flex-end; }
-    .chat-row { display: flex; gap: 8px; margin-bottom: 10px; }
-    .chat-row input { flex: 1; padding: 11px 13px; border: 1px solid var(--border); border-radius: var(--r);
-                      font-size: 13px; background: var(--cream); outline: none; }
-    .chat-row input:focus { border-color: var(--gold); background: var(--white); }
-    .chat-send { width: 44px; border: 0; border-radius: var(--r); background: var(--ink); color: var(--gold); cursor: pointer; }
-    .chat-confirm { width: 100%; padding: 13px; background: var(--gold); color: var(--ink); border: 0;
-                    border-radius: var(--r); font-weight: 700; font-size: 12px; letter-spacing: 2px;
-                    text-transform: uppercase; cursor: pointer; transition: background .2s; }
-    .chat-confirm:hover { background: var(--gold-light); }
+    .btn-modal:disabled { opacity: .7; cursor: not-allowed; transform: none; }
+    .m-status { font-size: 13px; margin-top: 12px; color: #2D7D46; text-align: center;
+                min-height: 18px; line-height: 1.5; }
+    .m-status.err { color: #B3261E; }
 
     /* ─── SOCIAL HUB ─────────────────────────────────────────── */
     .soc-hub { position: fixed; right: 26px; bottom: 26px; z-index: 1500;
@@ -579,8 +541,6 @@
             <a href="#about"    class="nl">Heritage</a>
             <a href="#products" class="nl">Portfolio</a>
             <a href="#tracking" class="nl">Tracking</a>
-            <a href="admin.html" class="nl js-admin-link" title="Admin console"><i class="fas fa-chart-line" style="margin-right:4px;color:var(--gold);"></i>Admin</a>
-            <button class="auth-nav-btn" id="navAuthBtn" onclick="SunAuth.handleNavAuthClick()"><i class="fas fa-user-lock" style="margin-right:6px;"></i>Sign in</button>
             <a href="#contact"  class="nl nav-cta">Get Quote</a>
         </nav>
         <div class="burger" id="burger" onclick="toggleMob()">
@@ -595,8 +555,6 @@
     <a href="#about"    onclick="toggleMob()">Heritage</a>
     <a href="#products" onclick="toggleMob()">Portfolio</a>
     <a href="#tracking" onclick="toggleMob()">Tracking</a>
-    <a href="admin.html" class="js-admin-link" onclick="toggleMob()"><i class="fas fa-chart-line" style="margin-right:8px;color:var(--gold);"></i>Admin Panel</a>
-    <a href="javascript:void(0)" onclick="toggleMob();SunAuth.handleNavAuthClick()" id="mobNavAuthBtn"><i class="fas fa-user-lock" style="margin-right:8px;color:var(--gold);"></i>Sign in / Account</a>
     <a href="#contact"  onclick="toggleMob()">Contact</a>
 </nav>
 
@@ -880,7 +838,7 @@
                 <label>Message</label>
                 <textarea id="cMsg" placeholder="Quantity, grade, incoterms, certifications needed…"></textarea>
             </div>
-            <button class="f-submit" onclick="sendEnquiry()">
+            <button class="f-submit" id="cSubmit" onclick="sendEnquiry()">
                 <i class="fas fa-paper-plane" style="margin-right:8px;"></i>Send Enquiry
             </button>
             <p id="enquiryStatus" style="font-size:12px;margin-top:12px;color:var(--muted);text-align:center;"></p>
@@ -888,7 +846,7 @@
     </div>
 </section>
 
-<!-- ══ PRODUCT MODAL ══════════════════════════════════════════════ -->
+<!-- ══ PRODUCT MODAL (quote request, no login) ══════════════════════ -->
 <div class="modal-ov" id="productModal">
     <div class="modal-box">
         <button class="m-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
@@ -903,95 +861,89 @@
         </div>
 
         <div class="m-form">
-            <!-- Quote Form -->
-            <div id="quoteForm">
-                <p class="m-desc" id="mDesc"></p>
+            <p class="m-desc" id="mDesc"></p>
 
-                <span class="m-lbl">Grade / Variety</span>
-                <select class="m-sel" id="mGrade" onchange="updatePrice()"></select>
+            <span class="m-lbl">Grade / Variety</span>
+            <select class="m-sel" id="mGrade" onchange="updatePrice()"></select>
 
-                <div class="m-2col">
-                    <div>
-                        <span class="m-lbl">Quantity</span>
-                        <input class="m-inp" type="number" id="mQty" value="1" min="1" oninput="updatePrice()">
-                    </div>
-                    <div>
-                        <span class="m-lbl">Unit</span>
-                        <select class="m-sel" id="mUnit" onchange="updatePrice()" style="margin-bottom:0;">
-                            <option value="KG">Kilograms (KG)</option>
-                            <option value="MT">Metric Tons (MT)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <span class="m-lbl">Incoterms</span>
-                        <select class="m-sel" id="mInco" onchange="updatePrice()" style="margin-bottom:0;">
-                            <option value="FOB">FOB – Ex Vandanmedu</option>
-                            <option value="CIF">CIF – Destination Port</option>
-                        </select>
-                    </div>
-                    <div>
-                        <span class="m-lbl">Destination Port</span>
-                        <input class="m-inp" type="text" id="mPort" placeholder="e.g. Jebel Ali, UAE" style="margin-bottom:0;">
-                    </div>
+            <div class="m-2col">
+                <div>
+                    <span class="m-lbl">Quantity</span>
+                    <input class="m-inp" type="number" id="mQty" value="1" min="1" oninput="updatePrice()" style="margin-bottom:0;">
                 </div>
-
-                <div class="price-box">
-                    <div>
-                        <span class="p-lbl">Indicative Value</span>
-                        <span class="p-amt" id="livePrice">$0.00 USD</span>
-                    </div>
-                    <span class="p-note">Live currency &amp; fuel index. Final terms by manager.</span>
+                <div>
+                    <span class="m-lbl">Unit</span>
+                    <select class="m-sel" id="mUnit" onchange="updatePrice()" style="margin-bottom:0;">
+                        <option value="KG">Kilograms (KG)</option>
+                        <option value="MT">Metric Tons (MT)</option>
+                    </select>
                 </div>
-
-                <span class="m-lbl">Required Certificates</span>
-                <div class="cert-grid">
-                    <label class="cert-item"><input type="checkbox" class="cert" value="Phytosanitary" checked> Phytosanitary</label>
-                    <label class="cert-item"><input type="checkbox" class="cert" value="Health Certificate"> Health Certificate</label>
-                    <label class="cert-item"><input type="checkbox" class="cert" value="COO" checked> Certificate of Origin</label>
-                    <label class="cert-item"><input type="checkbox" class="cert" value="Aflatoxin"> Aflatoxin Report</label>
-                    <label class="cert-item"><input type="checkbox" class="cert" value="Lab Report" checked> Lab Report</label>
-                    <label class="cert-item"><input type="checkbox" class="cert" value="Halal"> Halal / FDA</label>
+                <div>
+                    <span class="m-lbl">Incoterms</span>
+                    <select class="m-sel" id="mInco" onchange="updatePrice()" style="margin-bottom:0;">
+                        <option value="FOB">FOB – Ex Vandanmedu</option>
+                        <option value="CIF">CIF – Destination Port</option>
+                    </select>
                 </div>
-
-                <!-- Guest gate: shown until a buyer signs in -->
-                <div class="guest-gate-card" id="guestGateNotice">
-                    <h4><i class="fas fa-lock" style="margin-right:8px;color:var(--gold);"></i>Sign in required to order</h4>
-                    <p>Browse all 21 spices and live rates freely. Sign in to submit formal order terms, save company details and keep your proforma history.</p>
-                    <button class="btn-login-gate" onclick="openSignIn()"><i class="fas fa-sign-in-alt" style="margin-right:8px;"></i>Sign in to order / request quote</button>
-                </div>
-
-                <!-- Shown after sign-in -->
-                <div id="loggedInSubmissionSec" style="display:none;">
-                    <span class="m-lbl">Business Email</span>
-                    <input class="m-inp" type="email" id="mEmail" placeholder="buyer@company.com">
-
-                    <div class="sec-q">
-                        <p id="cap">Verification: Loading…</p>
-                        <input type="number" id="capIn" placeholder="Your answer">
-                    </div>
-
-                    <button class="btn-modal" onclick="submitToManager()">
-                        <i class="fas fa-handshake" style="margin-right:8px;"></i>Submit to Export Manager
-                    </button>
+                <div>
+                    <span class="m-lbl">Destination Port</span>
+                    <input class="m-inp" type="text" id="mPort" placeholder="e.g. Jebel Ali, UAE" style="margin-bottom:0;">
                 </div>
             </div>
 
-            <!-- Chat panel (after submit) -->
-            <div class="chat-panel" id="chatPanel">
-                <div class="chat-hd">
-                    <div class="online-badge"><div class="pulse"></div>Export Manager Online</div>
-                    <span style="font-size:11px;color:var(--muted);" id="liveTok"></span>
+            <div class="price-box" style="margin-top:14px;">
+                <div>
+                    <span class="p-lbl">Indicative Value</span>
+                    <span class="p-amt" id="livePrice">$0.00 USD</span>
                 </div>
-                <div class="chat-hist" id="chatHist"></div>
-                <div class="chat-row">
-                    <input type="text" id="buyerMsg" placeholder="Ask about price, shipping, certificates…"
-                           onkeypress="if(event.key==='Enter') sendMsg()">
-                    <button class="chat-send" onclick="sendMsg()"><i class="fas fa-paper-plane"></i></button>
-                </div>
-                <button class="chat-confirm" onclick="finalizeOrder()">
-                    <i class="fas fa-check-circle" style="margin-right:8px;"></i>Confirm Order Terms
-                </button>
+                <span class="p-note">Live currency &amp; fuel index. Final terms by manager.</span>
             </div>
+
+            <span class="m-lbl">Required Certificates</span>
+            <div class="cert-grid">
+                <label class="cert-item"><input type="checkbox" class="cert" value="Phytosanitary" checked> Phytosanitary</label>
+                <label class="cert-item"><input type="checkbox" class="cert" value="Health Certificate"> Health Certificate</label>
+                <label class="cert-item"><input type="checkbox" class="cert" value="Certificate of Origin" checked> Certificate of Origin</label>
+                <label class="cert-item"><input type="checkbox" class="cert" value="Aflatoxin Report"> Aflatoxin Report</label>
+                <label class="cert-item"><input type="checkbox" class="cert" value="Lab Report" checked> Lab Report</label>
+                <label class="cert-item"><input type="checkbox" class="cert" value="Halal / FDA"> Halal / FDA</label>
+            </div>
+
+            <span class="m-lbl">Your Details</span>
+            <div class="m-2col">
+                <div>
+                    <span class="m-lbl">Name *</span>
+                    <input class="m-inp" type="text" id="mName" maxlength="120" placeholder="John Smith" style="margin-bottom:0;">
+                </div>
+                <div>
+                    <span class="m-lbl">Company</span>
+                    <input class="m-inp" type="text" id="mCompany" maxlength="160" placeholder="Acme Trading Ltd." style="margin-bottom:0;">
+                </div>
+                <div>
+                    <span class="m-lbl">Business Email *</span>
+                    <input class="m-inp" type="email" id="mEmail" maxlength="200" placeholder="buyer@company.com" style="margin-bottom:0;">
+                </div>
+                <div>
+                    <span class="m-lbl">Phone / WhatsApp</span>
+                    <input class="m-inp" type="tel" id="mPhone" maxlength="40" placeholder="+1 234 567 8900" style="margin-bottom:0;">
+                </div>
+            </div>
+            <div style="margin-top:14px;">
+                <span class="m-lbl">Destination Country *</span>
+                <input class="m-inp" type="text" id="mCountry" maxlength="80" placeholder="UAE, USA, Germany…">
+            </div>
+            <span class="m-lbl">Notes (optional)</span>
+            <textarea class="m-textarea" id="mNotes" maxlength="1500" placeholder="Packing, delivery timeline, any specific requirement…"></textarea>
+
+            <div class="sec-q">
+                <p id="cap">Security check</p>
+                <input type="number" id="capIn" placeholder="Your answer">
+            </div>
+
+            <button class="btn-modal" id="mSubmit" onclick="submitToManager()">
+                <i class="fas fa-handshake" style="margin-right:8px;"></i>Request quote
+            </button>
+            <p class="m-status" id="mStatus"></p>
         </div>
     </div>
 </div>
@@ -1045,11 +997,12 @@
 </footer>
 
 <script>
-/* ── GOOGLE APPS SCRIPT ENDPOINT (CRM web app: enquiries, quotes, samples, AI chat, live rates) ── */
+/* ── GOOGLE APPS SCRIPT ENDPOINT (enquiries, quote requests, samples, AI chat, live rates) ── */
 const GAS_ENQUIRY_URL = 'https://script.google.com/macros/s/AKfycbwjsksepxnAjgXog213p3avLmyty1uSovSds3esK6qyo-GMLV60600yt_fn2HIRH21b-Q/exec';
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 let liveUSD = 83.50, fuelMult = 1.0;
-let curAns = 0, negStep = 0, finalPrice = 0, qtyVal = 0, unitVal = '', incoVal = '';
+let curAns = 0, submitting = false;
 
 /* ── PRODUCT DATA ────────────────────────────────────────────── */
 const spiceData = {
@@ -1105,15 +1058,6 @@ function toggleMob() {
     nav.classList.toggle('open');
     brg.classList.toggle('open');
     document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
-}
-
-/* ── SIGN-IN BUTTON (safe wrapper: explains itself if sun-portal.js did not load) ── */
-function openSignIn() {
-    if (typeof window.openAuthModal === 'function') {
-        window.openAuthModal();
-    } else {
-        alert('Sign-in load avvaledu. Page ni Ctrl+Shift+R tho refresh cheyyandi. Repo lo sun-portal.js file name check cheyyandi.');
-    }
 }
 
 /* ── SCROLL ANIMATIONS ──────────────────────────────────────── */
@@ -1195,7 +1139,7 @@ function renderGrid() {
     });
 }
 
-/* ─── VISITOR ANALYTICS & LOGGING ENGINE (GA4 + STORAGE SYNC) ────────── */
+/* ─── VISITOR ANALYTICS (GA4 + local log) ────────────────────── */
 const SunAnalytics = {
     getVisitorId: function() {
         let vid = localStorage.getItem('sun_vid');
@@ -1205,61 +1149,36 @@ const SunAnalytics = {
         }
         return vid;
     },
-    getLogs: function() {
-        return JSON.parse(localStorage.getItem('sun_analytics_logs') || '[]');
-    },
     saveLog: function(event, data = {}) {
-        const logs = this.getLogs();
-        const logEntry = {
-            id: 'log_' + Date.now() + '_' + Math.floor(Math.random()*1000),
+        let logs = [];
+        try { logs = JSON.parse(localStorage.getItem('sun_analytics_logs') || '[]'); } catch { logs = []; }
+        logs.push({
+            id: 'log_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
             vid: this.getVisitorId(),
             event: event,
-            country: localStorage.getItem('sun_user_country') || 'India (IN)',
             timestamp: new Date().toISOString(),
-            date: new Date().toLocaleDateString(),
             details: data
-        };
-        logs.push(logEntry);
+        });
         if (logs.length > 1000) logs.shift();
         localStorage.setItem('sun_analytics_logs', JSON.stringify(logs));
-        if (window.gtag) {
-            window.gtag('event', event, data);
-        }
+        if (window.gtag) window.gtag('event', event, data);
     },
-    initGeo: async function() {
-        if (!localStorage.getItem('sun_user_country')) {
-            try {
-                const res = await fetch('https://ipapi.co/json/');
-                const data = await res.json();
-                if (data && data.country_name) {
-                    localStorage.setItem('sun_user_country', `${data.country_name} (${data.country_code})`);
-                }
-            } catch(e) {
-                localStorage.setItem('sun_user_country', 'India (IN)');
-            }
-        }
-    },
-    trackPageView: function() {
-        this.saveLog('page_view', { page: window.location.pathname });
-    },
-    trackProductView: function(productName) {
-        this.saveLog('product_view', { product: productName });
-    },
-    trackQuoteModal: function(productName) {
-        this.saveLog('quote_modal_open', { product: productName });
-    },
-    trackQuoteSubmit: function(productName, qty, price) {
-        this.saveLog('quote_submitted', { product: productName, quantity: qty, price: price });
-    },
-    trackQuoteAbandoned: function(productName, step) {
-        this.saveLog('quote_abandoned', { product: productName, lastStep: step });
-    }
+    trackPageView: function() { this.saveLog('page_view', { page: window.location.pathname }); },
+    trackProductView: function(p) { this.saveLog('product_view', { product: p }); },
+    trackQuoteModal: function(p) { this.saveLog('quote_modal_open', { product: p }); },
+    trackQuoteSubmit: function(p, qty, price) { this.saveLog('quote_submitted', { product: p, quantity: qty, price: price }); }
 };
-
-SunAnalytics.initGeo();
 SunAnalytics.trackPageView();
 
-/* ── MODAL ───────────────────────────────────────────────────── */
+/* ── QUOTE MODAL ─────────────────────────────────────────────── */
+function refreshCaptcha() {
+    const n1 = Math.floor(Math.random() * 15) + 1;
+    const n2 = Math.floor(Math.random() * 15) + 1;
+    curAns = n1 + n2;
+    document.getElementById('cap').textContent = `Security check: what is ${n1} + ${n2}?`;
+    document.getElementById('capIn').value = '';
+}
+
 function openProduct(name) {
     const p    = spiceData[name];
     const slug = name.toLowerCase().replaceAll(' ', '-').replace(/[()]/g, '');
@@ -1275,31 +1194,30 @@ function openProduct(name) {
     document.getElementById('mGrade').innerHTML   =
         Object.keys(p.grades).map(g => `<option>${g}</option>`).join('');
     document.getElementById('mGradeTag').textContent = Object.keys(p.grades)[0];
-
-    const n1 = Math.floor(Math.random() * 15) + 1;
-    const n2 = Math.floor(Math.random() * 15) + 1;
-    curAns = n1 + n2;
-    document.getElementById('cap').textContent  = `Security check: what is ${n1} + ${n2}?`;
-    document.getElementById('capIn').value      = '';
-    document.getElementById('quoteForm').style.display = 'block';
-    document.getElementById('chatPanel').style.display = 'none';
-    document.getElementById('chatHist').innerHTML = '';
-    negStep = 0;
+    document.getElementById('mQty').value = 1;
+    document.getElementById('mStatus').textContent = '';
+    document.getElementById('mStatus').className = 'm-status';
+    refreshCaptcha();
+    updatePrice();
 
     document.getElementById('productModal').classList.add('open');
     document.body.style.overflow = 'hidden';
-    updatePrice();
-
-    // sun-portal.js provides SunAuth; refresh the sign-in gate for this modal
-    if (window.SunAuth) SunAuth.updateUI();
 
     SunAnalytics.trackProductView(name);
     SunAnalytics.trackQuoteModal(name);
 }
 
+function closeModal() {
+    document.getElementById('productModal').classList.remove('open');
+    document.body.style.overflow = '';
+}
+document.getElementById('productModal').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeModal();
+});
+
 function updatePrice() {
     const name = document.getElementById('mTitle').textContent;
-    if (!name || !spiceData[name]) return;
+    if (!name || !spiceData[name]) return 0;
     const grade = document.getElementById('mGrade').value;
     document.getElementById('mGradeTag').textContent = grade;
     const base  = spiceData[name].grades[grade];
@@ -1314,91 +1232,85 @@ function updatePrice() {
     return uFOB;
 }
 
-function submitToManager() {
-    const qty = parseFloat(document.getElementById('mQty').value);
-    if (parseInt(document.getElementById('capIn').value) !== curAns || !qty) {
-        alert('Please complete the security question and enter a valid quantity.');
-        return;
+/* Quote request: validated in the browser, then sent straight to the CRM (no login) */
+async function submitToManager() {
+    if (submitting) return;
+    const st  = document.getElementById('mStatus');
+    const btn = document.getElementById('mSubmit');
+    const v   = id => document.getElementById(id).value.trim();
+    const fail = msg => { st.className = 'm-status err'; st.textContent = msg; };
+    st.className = 'm-status';
+    st.textContent = '';
+
+    const name    = v('mName');
+    const company = v('mCompany');
+    const email   = v('mEmail');
+    const phone   = v('mPhone');
+    const country = v('mCountry');
+    const notes   = v('mNotes');
+    const qty     = parseFloat(document.getElementById('mQty').value);
+
+    if (!name || !EMAIL_RE.test(email) || !country) {
+        return fail('Name, valid business email and destination country are required.');
     }
-    qtyVal   = qty;
-    unitVal  = document.getElementById('mUnit').value;
-    incoVal  = document.getElementById('mInco').value;
-    const name  = document.getElementById('mTitle').textContent;
-    const grade = document.getElementById('mGrade').value;
-    finalPrice  = parseFloat(updatePrice()).toFixed(2);
+    if (!(qty > 0)) return fail('Please enter a valid quantity.');
+    if (parseInt(v('capIn'), 10) !== curAns) return fail('Security answer is incorrect. Please try again.');
 
-    document.getElementById('quoteForm').style.display  = 'none';
-    document.getElementById('chatPanel').style.display  = 'block';
-    document.getElementById('liveTok').textContent      = 'Live index connected';
-    addMsg('mgr', `Dear partner, thank you for your interest. I've evaluated your request for ${qtyVal} ${unitVal} of ${grade} ${name}. Based on today's Vandanmedu auction index, our Sortex processing protocol and current ocean fuel surcharge, our indicative offer is $${finalPrice} USD/KG on ${incoVal} terms. How would you like to proceed?`);
+    const product = document.getElementById('mTitle').textContent;
+    const grade   = document.getElementById('mGrade').value;
+    const unit    = document.getElementById('mUnit').value;
+    const inco    = document.getElementById('mInco').value;
+    const port    = v('mPort');
+    const price   = updatePrice() || 0;
+    const total   = document.getElementById('livePrice').textContent;
+    const certs   = [...document.querySelectorAll('#productModal .cert:checked')].map(c => c.value).join(', ');
 
-    SunAnalytics.trackQuoteSubmit(name, qtyVal + ' ' + unitVal, finalPrice);
-}
+    const message = [
+        'WEBSITE QUOTE REQUEST',
+        'Product: ' + product + ' – ' + grade,
+        'Quantity: ' + qty + ' ' + unit,
+        'Incoterm: ' + inco + (port ? ' · Port: ' + port : ''),
+        'Indicative price: USD ' + price.toFixed(2) + ' / KG (' + total + ' total)',
+        'Certificates requested: ' + (certs || 'None selected'),
+        notes ? 'Notes: ' + notes : ''
+    ].filter(Boolean).join('\n');
 
-function sendMsg() {
-    const inp  = document.getElementById('buyerMsg');
-    const txt  = inp.value.trim();
-    if (!txt) return;
-    addMsg('buyer', txt);
-    inp.value = '';
-    const low = txt.toLowerCase();
-    setTimeout(() => {
-        if (/price|high|discount|negotiat|cheap|reduc|expens/.test(low)) {
-            negotiateStep();
-        } else if (/phyto|certif|origin|lab|comply|document|standard/.test(low)) {
-            addMsg('mgr', 'Our standard export documentation includes: Phytosanitary Certificate, Certificate of Origin (Spices Board of India), independent lab analytical reports covering moisture, volatile oil and aflatoxin parameters, in line with EU, North American and Middle Eastern import requirements.');
-        } else if (/deliv|time|ship|days|port|transit|when|arrival/.test(low)) {
-            const dest = document.getElementById('mPort').value || 'your designated port';
-            addMsg('mgr', `For ${qtyVal} ${unitVal}, container loading begins at Cochin Port within 7–10 banking days of payment clearance. We ship via Tier-1 ocean carriers to ${dest}.`);
-        } else if (/pack|bag|packag|wrap/.test(low)) {
-            addMsg('mgr', 'We offer multi-wall kraft paper bags (5 / 10 / 25 / 50 KG), vacuum-sealed poly pouches for premium cardamom, and standard FCL/LCL options. Custom branding is available for orders above 5 MT.');
-        } else {
-            addMsg('mgr', 'Thank you for your query. Let us know which specific parameters need alignment and we will prepare your formal Proforma Invoice.');
-        }
-    }, 700);
-}
-
-function negotiateStep() {
-    negStep++;
-    const concessions = [1.0, 0.98, 0.96];
-    if (negStep < concessions.length) {
-        const np = (finalPrice * concessions[negStep]).toFixed(2);
-        const responses = [
-            '',
-            `We understand the competitive pressure in your market. While our margins are tightly managed, I can offer a volume logistics allowance on this order: $${np} USD/KG.`,
-            `To build a lasting trading relationship, the best I can offer is $${np} USD/KG. This includes multi-wall vacuum packaging and intensive Sortex cleaning to protect shelf life during transit.`
-        ];
-        addMsg('mgr', responses[negStep]);
-        finalPrice = np;
-    } else {
-        addMsg('mgr', 'This is our floor price for this grade. Going lower would compromise essential oil standards during transit. Shall we confirm the terms at this rate?');
+    submitting = true;
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    try {
+        // no-cors: response is opaque, so success is assumed once the request is sent
+        await fetch(GAS_ENQUIRY_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({
+                event: 'ENQUIRY',
+                name: name,
+                company: company,
+                email: email,
+                phone: phone,
+                spice: product + ' – ' + grade,
+                country: country,
+                message: message,
+                page: window.location.href,
+                timestamp: new Date().toISOString()
+            })
+        });
+        st.className = 'm-status';
+        st.textContent = 'Request received. Our export manager will reply within 24 hours.';
+        SunAnalytics.trackQuoteSubmit(product, qty + ' ' + unit, price.toFixed(2));
+        if (window.gtag) window.gtag('event', 'generate_lead', { spice: product, country: country });
+        document.getElementById('mNotes').value = '';
+        refreshCaptcha();
+    } catch (err) {
+        console.error('Quote submit failed:', err);
+        fail('Could not send. Please WhatsApp +91 72073 96427.');
+    } finally {
+        submitting = false;
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-handshake" style="margin-right:8px;"></i>Request quote';
     }
-}
-
-function addMsg(who, txt) {
-    const hist = document.getElementById('chatHist');
-    const el   = document.createElement('div');
-    el.className = `cmsg ${who}`;
-    el.textContent = txt;
-    hist.appendChild(el);
-    hist.scrollTop = hist.scrollHeight;
-}
-
-function closeModal() {
-    document.getElementById('productModal').classList.remove('open');
-    document.body.style.overflow = '';
-}
-document.getElementById('productModal').addEventListener('click', e => {
-    if (e.target === e.currentTarget) closeModal();
-});
-
-function finalizeOrder() {
-    const name = document.getElementById('mTitle').textContent;
-    const body = `Sun Spices India — Confirmed Export Terms\n\nProduct: ${name}\nRate: $${finalPrice} USD/KG (${incoVal})\nVolume: ${qtyVal} ${unitVal}\nDestination: ${document.getElementById('mPort').value || 'To be specified'}\n\nWe confirm these commercial parameters. Please issue the Proforma Invoice to initiate cargo processing.`;
-    const enc = encodeURIComponent(body);
-    window.location.href = `mailto:sunspices.exports.in@gmail.com?subject=B2B Contract – ${name}&body=${enc}`;
-    setTimeout(() => window.open(`https://wa.me/917207396427?text=${enc}`, '_blank'), 1500);
-    closeModal();
 }
 
 /* ── SOCIAL TOGGLE ──────────────────────────────────────────── */
@@ -1409,7 +1321,7 @@ function toggleSoc() {
 
 /* ── CONTACT FORM → GOOGLE APPS SCRIPT ───────────────────────── */
 async function sendEnquiry() {
-    const btn    = document.querySelector('.f-submit');
+    const btn    = document.getElementById('cSubmit');
     const status = document.getElementById('enquiryStatus');
 
     const data = {
@@ -1429,7 +1341,7 @@ async function sendEnquiry() {
         alert('Please enter your name and business email.');
         return;
     }
-    if (!/^\S+@\S+\.\S+$/.test(data.email)) {
+    if (!EMAIL_RE.test(data.email)) {
         alert('Please enter a valid email address.');
         return;
     }
@@ -1472,27 +1384,13 @@ async function sendEnquiry() {
     }
 }
 
-/* ── ADMIN LINK: shown only when the signed-in user has the admin role ── */
-function syncAdminLink() {
-    let u = null;
-    try { u = JSON.parse(localStorage.getItem('sun_auth_user')); } catch { u = null; }
-    const isAdmin = !!(u && u.role === 'admin');
-    document.querySelectorAll('.js-admin-link').forEach(el => el.style.display = isAdmin ? '' : 'none');
-}
-window.addEventListener('storage', syncAdminLink);
-
 /* ── INIT ────────────────────────────────────────────────────── */
 setupMarquee();
 initPricing();
-syncAdminLink();
 setInterval(initPricing, 600000);
 </script>
 
 <!-- Export AI assistant widget (chat + sample request). Requires the Gateway web app. -->
 <script src="ai-agent.js"></script>
-
-<!-- Buyer portal: sign-in modal, buyer dashboard, quote history.
-     Must load AFTER the main inline script above. -->
-<script src="sun-portal.js"></script>
 </body>
 </html>
